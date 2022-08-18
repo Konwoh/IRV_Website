@@ -12,6 +12,9 @@ type Model
   | Loading
   | Success String
 
+type Msg
+  = GotText (Result Http.Error String)
+
 
 init : () -> (Model, Cmd Msg)
 init _ =

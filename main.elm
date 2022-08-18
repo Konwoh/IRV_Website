@@ -5,11 +5,12 @@ import Html exposing (Html, text, pre)
 import Http
 
 main =
-    Browser.sandbox
-        { init = init
-        , view = view
-        , update = update
-        }
+  Browser.element
+    { init = init
+    , update = update
+    , subscriptions = subscriptions
+    , view = view
+    }
 
 type Model
   = Failure

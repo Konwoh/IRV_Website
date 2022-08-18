@@ -3,6 +3,7 @@ module Main exposing (..)
 import Browser
 import Html exposing (Html, text, pre)
 import Http
+import Csv.Decode exposing(Decoder, pipeline, string, float, column, int, into)
 
 main =
   Browser.element
@@ -62,7 +63,16 @@ view model =
       text "Loading..."
 
     Success fullText ->
-      pre [] [ text fullText ]
+          let 
+              salesData =  Result.withDefault [] (Csv.Decode.decodeCsv  Csv.Decode.FieldNamesFromFirstRow salesDecoder fullText)
+          in 
+              List.map
+                (\data ->
+                    Html.li []
+                        [ Html.text data.gender]
+                )
+                salesData
+                |> Html.ul []
 
 subscriptions : Model -> Sub Msg
 subscriptions model =

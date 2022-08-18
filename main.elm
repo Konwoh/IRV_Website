@@ -39,6 +39,10 @@ view model =
     Success fullText ->
       pre [] [ text fullText ]
 
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
+
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =

@@ -27,9 +27,17 @@ init _ =
 
 
 
-view : Model -> Html.Html Msg
+view : Model -> Html Msg
 view model =
-    Html.div [] []
+  case model of
+    Failure ->
+      text "I was unable to load your book."
+
+    Loading ->
+      text "Loading..."
+
+    Success fullText ->
+      pre [] [ text fullText ]
 
 
 update : Msg -> Model -> (Model, Cmd Msg)

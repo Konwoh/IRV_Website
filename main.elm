@@ -79,3 +79,24 @@ update msg model =
 
         Err _ ->
           (Failure, Cmd.none)
+
+salesDecoder : Decoder Sale
+salesDecoder =
+    into Sale
+        |> pipeline (column 0 string)
+        |> pipeline (column 1 string)
+        |> pipeline (column 2 string)
+        |> pipeline (column 3 string)
+        |> pipeline (column 4 string)
+        |> pipeline (column 5 string)
+        |> pipeline (column 6 float)
+        |> pipeline (column 7 int)
+        |> pipeline (column 8 float)
+        |> pipeline (column 9 float)
+        |> pipeline (column 10 string)
+        |> pipeline (column 11 string)
+        |> pipeline (column 12 string)
+        |> pipeline (column 13 float)
+        |> pipeline (column 14 float)
+        |> pipeline (column 15 float)
+        |> pipeline (column 16 float)

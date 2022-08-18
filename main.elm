@@ -1,5 +1,9 @@
 module Main exposing (..)
 
+import Browser
+import Html exposing (Html, text, pre)
+import Http
+
 main =
     Browser.sandbox
         { init = init

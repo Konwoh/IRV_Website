@@ -7,6 +7,11 @@ main =
         , update = update
         }
 
+type Model
+  = Failure
+  | Loading
+  | Success String
+
 
 init : () -> (Model, Cmd Msg)
 init _ =

@@ -64,12 +64,13 @@ view model =
 
     Success fullText ->
           let 
+              salesData: List Sale
               salesData =  Result.withDefault [] (Csv.Decode.decodeCsv  Csv.Decode.FieldNamesFromFirstRow salesDecoder fullText)
           in 
               List.map
                 (\data ->
                     Html.li []
-                        [ Html.text data.gender]
+                        [ Html.text data.invoice_ID]
                 )
                 salesData
                 |> Html.ul []

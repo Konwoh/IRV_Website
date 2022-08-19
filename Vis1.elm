@@ -7,3 +7,15 @@ import TypedSvg.Attributes exposing (class, fontFamily, fontSize, textAnchor, tr
 import TypedSvg.Attributes.InPx exposing (cx, cy, height, r, width, x, y)
 import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Transform(..), px)
+
+
+scatterplot: List Point -> Svg msg
+scatterplot model = 
+
+    xValues: List Float
+    xValues =
+        List.map .x model
+
+    yValues: List Float
+    yValues =
+        List.map .y model

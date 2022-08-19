@@ -87,3 +87,9 @@ xAxis values =
 yAxis : List Float -> Svg msg
 yAxis values =
     Axis.left [ Axis.tickCount tickCount ] (yScale values)
+
+
+main: Html msg
+main=
+    Html.div[]
+            [scatterplot]

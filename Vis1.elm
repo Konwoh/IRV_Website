@@ -43,6 +43,10 @@ scatterplot model =
         ySkalierung : ContinuousScale Float
         ySkalierung =
             yScale yValues
+    
+    in 
+        svg [viewBox 0 0 w h, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ] 
+            []
 
 
 wideExtent : List Float -> ( Float, Float )

@@ -8,6 +8,8 @@ import TypedSvg.Attributes.InPx exposing (cx, cy, height, r, width, x, y)
 import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Transform(..), px)
 
+tickCount: Int
+tickCount = 5
 
 scatterplot: List Point -> Svg msg
 scatterplot model = 
@@ -19,3 +21,21 @@ scatterplot model =
     yValues: List Float
     yValues =
         List.map .y model
+
+
+wideExtent : List Float -> ( Float, Float )
+wideExtent values =
+    let res1 = Maybe.withDefault (0,0)
+                    (Statistics.extent values)
+        max2 = Maybe.withDefault 0
+                    (List.maximum values)
+        min2 = Maybe.withDefault 0
+                    (List.minimum values)
+        res2 = abstand res1 ((max2 - min2)/(2*(toFloat tickCount)))
+    in res2 
+
+abstand : (Float, Float) -> Float -> (Float, Float)
+abstand (min, max) s =
+    if min < 0 || min < s then 
+        (0, max + s)
+    else (min - s, max + s)

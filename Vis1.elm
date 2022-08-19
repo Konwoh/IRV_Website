@@ -27,14 +27,22 @@ h =
 
 scatterplot: List Point -> Svg msg
 scatterplot model = 
+    let
+        xValues: List Float
+        xValues =
+            List.map .x model
 
-    xValues: List Float
-    xValues =
-        List.map .x model
+        yValues: List Float
+        yValues =
+            List.map .y model
+        
+        xSkalierung : ContinuousScale Float
+        xSkalierung =
+            xScale xValues
 
-    yValues: List Float
-    yValues =
-        List.map .y model
+        ySkalierung : ContinuousScale Float
+        ySkalierung =
+            yScale yValues
 
 
 wideExtent : List Float -> ( Float, Float )

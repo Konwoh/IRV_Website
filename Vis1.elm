@@ -25,6 +25,9 @@ h : Float
 h =
     450
 
+type alias Point =
+    { pointName : String, x : Float, y : Float }
+
 scatterplot: List Point -> Svg msg
 scatterplot model = 
     let

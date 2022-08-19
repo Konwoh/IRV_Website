@@ -64,3 +64,11 @@ yScale : List Float -> ContinuousScale Float
 yScale values =
     Scale.linear ( h - 2 * padding, 0 ) ( wideExtent values )
 
+xAxis : List Float -> Svg msg
+xAxis values =
+    Axis.bottom [ Axis.tickCount tickCount ] (xScale values)
+
+
+yAxis : List Float -> Svg msg
+yAxis values =
+    Axis.left [ Axis.tickCount tickCount ] (yScale values)

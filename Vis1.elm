@@ -16,6 +16,15 @@ padding: Float
 padding =
     60
 
+w : Float
+w =
+    900
+
+
+h : Float
+h =
+    450
+
 scatterplot: List Point -> Svg msg
 scatterplot model = 
 

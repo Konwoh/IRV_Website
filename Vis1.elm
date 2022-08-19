@@ -9,7 +9,12 @@ import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Transform(..), px)
 
 tickCount: Int
-tickCount = 5
+tickCount = 
+    5
+
+padding: Float
+padding =
+    60
 
 scatterplot: List Point -> Svg msg
 scatterplot model = 
@@ -39,3 +44,14 @@ abstand (min, max) s =
     if min < 0 || min < s then 
         (0, max + s)
     else (min - s, max + s)
+
+
+xScale : List Float -> ContinuousScale Float
+xScale values =
+    Scale.linear ( 0, w - 2 * padding ) ( wideExtent values )
+
+
+yScale : List Float -> ContinuousScale Float
+yScale values =
+    Scale.linear ( h - 2 * padding, 0 ) ( wideExtent values )
+

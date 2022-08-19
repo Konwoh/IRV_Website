@@ -43,6 +43,23 @@ scatterplot model =
         ySkalierung : ContinuousScale Float
         ySkalierung =
             yScale yValues
+        
+        point : ContinuousScale Float -> ContinuousScale Float -> Point -> Svg msg
+        point scaleX scaleY dataPoint =
+            g [  fontSize <| Px 10.0
+               , fontFamily [ "sans-serif" ]
+               , transform
+                    [ Translate
+                        (Scale.convert scaleX dataPoint.x)
+                        (Scale.convert scaleY dataPoint.y)
+                    ]
+              ]
+                [ circle
+                    [ cx 0
+                    , cy 0
+                    , r radius
+                    ] []
+                ]
     
     in 
         svg [viewBox 0 0 w h, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ] 

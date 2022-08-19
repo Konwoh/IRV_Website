@@ -47,7 +47,10 @@ scatterplot model =
     in 
         svg [viewBox 0 0 w h, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ] 
             []
-
+            , g [transform [ Translate (padding - 1) (h - padding) ]]
+                [xAxis xValues]
+            , g [ transform [ Translate (padding - 1) padding ] ]
+                [yAxis yValues]
 
 wideExtent : List Float -> ( Float, Float )
 wideExtent values =

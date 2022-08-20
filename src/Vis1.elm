@@ -75,7 +75,8 @@ scatterplot model =
         
         point : ContinuousScale Float -> ContinuousScale Float -> Point -> Svg msg
         point scaleX scaleY dataPoint =
-            g [  fontSize <| Px 10.0
+            g [class ["point"]  
+               , fontSize <| Px 10.0
                , fontFamily [ "sans-serif" ]
                , transform
                     [ Translate
@@ -92,7 +93,9 @@ scatterplot model =
     
     in 
         svg [viewBox 0 0 w h, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ] 
-            [ g [transform [ Translate (padding - 1) (h - padding) ]]
+            [style [] [ TypedSvg.Core.text """
+            .point circle { stroke: rgba(0, 0, 0,0.4); fill: rgba(255, 255, 255,0.3); }""" ]
+            , g [transform [ Translate (padding - 1) (h - padding) ]]
                 [xAxis xValues]
             , g [ transform [ Translate (padding - 1) padding ] ]
                 [yAxis yValues]

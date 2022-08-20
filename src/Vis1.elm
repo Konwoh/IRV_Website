@@ -17,22 +17,24 @@ tickCount =
 padding: Float
 padding =
     60
-
+-- Breite --
 w : Float
 w =
     900
 
-
+-- Höhe --
 h : Float
 h =
     450
-
+-- Datenstruktur für Punkt im scatterplot --
 type alias Point =
     { pointName : String, x : Float, y : Float }
 
+--Datenstruktur für XYdatapoint --
 type alias XYdatapoint =
     {xAxisName : String, yAxisName : String, data : List Point}
 
+-- Dtaenstruktur Sale--
 type alias Sale =
   { invoice_ID : String
   , branch : String
@@ -53,7 +55,7 @@ type alias Sale =
   , rating : Float
   }
 
-
+-- scatterplot Funktion --
 scatterplot: XYdatapoint -> Svg msg
 scatterplot model = 
     let
@@ -72,7 +74,7 @@ scatterplot model =
         ySkalierung : ContinuousScale Float
         ySkalierung =
             yScale yValues
-        
+        -- Festlegung für Aussehen der Kreise im scatterplot --
         point : ContinuousScale Float -> ContinuousScale Float -> Point -> Svg msg
         point scaleX scaleY dataPoint =
             g [class ["point"]  
@@ -96,13 +98,18 @@ scatterplot model =
             [style [] [ TypedSvg.Core.text """
             .point circle { stroke: rgba(0, 0, 0,0.4); fill: rgba(255, 255, 255,0.3); }
             .point:hover circle { stroke: rgba(0, 0, 0,1.0); fill: rgb(118, 214, 78); }""" ]
+            -- x-Achse zeichnen --
             , g [transform [ Translate (padding - 1) (h - padding) ]]
                 [xAxis xValues]
+            -- y-Achse zeichnen --
             , g [ transform [ Translate (padding - 1) padding ] ]
                 [yAxis yValues]
+            -- anwenden der point Funktion und die Skalierung auf die Datenpunkte
             , g [ transform [ Translate padding padding ] ]
             (List.map (point xSkalierung ySkalierung) model.data)
             ]
+
+-- größter und kleinster Wert einer Liste berechnen für den Datenbereich --            
 wideExtent : List Float -> ( Float, Float )
 wideExtent values =
     let res1 = Maybe.withDefault (0,0)
@@ -114,39 +121,46 @@ wideExtent values =
         res2 = abstand res1 ((max2 - min2)/(2*(toFloat tickCount)))
     in res2 
 
+-- abstands algorithmus berechnen --
 abstand : (Float, Float) -> Float -> (Float, Float)
 abstand (min, max) s =
     if min < 0 || min < s then 
         (0, max + s)
     else (min - s, max + s)
 
-
+-- Skalierung der x-Werte --
 xScale : List Float -> ContinuousScale Float
 xScale values =
     Scale.linear ( 0, w - 2 * padding ) ( wideExtent values )
 
-
+-- Skalierung der y-Werte --
 yScale : List Float -> ContinuousScale Float
 yScale values =
     Scale.linear ( h - 2 * padding, 0 ) ( wideExtent values )
+
+-- zeichnen der x - Achse --
 
 xAxis : List Float -> Svg msg
 xAxis values =
     Axis.bottom [ Axis.tickCount tickCount ] (xScale values)
 
+-- zeichnen der y - Achse --
 
 yAxis : List Float -> Svg msg
 yAxis values =
     Axis.left [ Axis.tickCount tickCount ] (yScale values)
 
+-- Point Datenstrukutr Grundgerüst --
 toPoint : String -> Float -> Int -> Point
 toPoint invoiceID unitPrice quantity=
     Point invoiceID unitPrice (toFloat quantity)
 
+-- toPoint Funktion die wählbaren Parameter übergeben --
 salesPoint: Sale -> Point
 salesPoint sale =
     toPoint sale.invoice_ID sale.unit_price sale.quantity 
 
+-- XYdatapoint Datenstrukutr erstellt mit anwennden der salespointFunktion auf den sales Parameter --
 filterSales: List Sale -> XYdatapoint
 filterSales sales =
     XYdatapoint "Unit price" "quantity" (List.map salesPoint sales)

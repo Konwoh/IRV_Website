@@ -73,14 +73,6 @@ scatterplot model =
         ySkalierung =
             yScale yValues
         
-        toPoint : String -> Float -> Int -> Point
-        toPoint invoiceID unitPrice quantity=
-            Point invoiceID unitPrice (toFloat quantity)
-        
-        salesPoint: Sale -> Point
-        salesPoint sale =
-            toPoint sale.invoice_ID sale.unit_price sale.quantity 
-        
         point : ContinuousScale Float -> ContinuousScale Float -> Point -> Svg msg
         point scaleX scaleY dataPoint =
             g [  fontSize <| Px 10.0
@@ -142,6 +134,18 @@ xAxis values =
 yAxis : List Float -> Svg msg
 yAxis values =
     Axis.left [ Axis.tickCount tickCount ] (yScale values)
+
+toPoint : String -> Float -> Int -> Point
+toPoint invoiceID unitPrice quantity=
+    Point invoiceID unitPrice (toFloat quantity)
+
+salesPoint: Sale -> Point
+salesPoint sale =
+    toPoint sale.invoice_ID sale.unit_price sale.quantity 
+
+filterSales: List Sale -> List XYdatapoint
+filterSales sales =
+    XYdatapoint "Unit price" "quantity" (List.map salesPoint sales)
 
 
 --main: Html msg

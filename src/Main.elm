@@ -48,14 +48,11 @@ view model =
           let 
               salesData: List Sale
               salesData =  Result.withDefault [] (Csv.Decode.decodeCsv  Csv.Decode.FieldNamesFromFirstRow salesDecoder fullText)
+
+              filteredSales = filterSales salesData
           in 
-              List.map
-                (\data ->
-                    Html.li []
-                        [ Html.text data.invoice_ID]
-                )
-                salesData
-                |> Html.ul []
+              Html.div []
+                  [scatterplot filteredSales]
 
 subscriptions : Model -> Sub Msg
 subscriptions model =

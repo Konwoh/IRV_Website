@@ -54,16 +54,16 @@ type alias Sale =
   }
 
 
-scatterplot: List Point -> Svg msg
+scatterplot: XYdatapoint -> Svg msg
 scatterplot model = 
     let
         xValues: List Float
         xValues =
-            List.map .x model
+            List.map .x model.data
 
         yValues: List Float
         yValues =
-            List.map .y model
+            List.map .y model.data
         
         xSkalierung : ContinuousScale Float
         xSkalierung =
@@ -97,7 +97,7 @@ scatterplot model =
             , g [ transform [ Translate (padding - 1) padding ] ]
                 [yAxis yValues]
             , g [ transform [ Translate padding padding ] ]
-            (List.map (point xSkalierung ySkalierung) model)
+            (List.map (point xSkalierung ySkalierung) model.data)
             ]
 wideExtent : List Float -> ( Float, Float )
 wideExtent values =
@@ -143,7 +143,7 @@ salesPoint: Sale -> Point
 salesPoint sale =
     toPoint sale.invoice_ID sale.unit_price sale.quantity 
 
-filterSales: List Sale -> List XYdatapoint
+filterSales: List Sale -> XYdatapoint
 filterSales sales =
     XYdatapoint "Unit price" "quantity" (List.map salesPoint sales)
 

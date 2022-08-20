@@ -107,10 +107,20 @@ scatterplot model =
             .point:hover text { display: inline; }""" ]
             -- x-Achse zeichnen --
             , g [transform [ Translate (padding - 1) (h - padding) ]]
-                [xAxis xValues]
+                [ xAxis xValues
+                , text_ [x 750
+                        , y 30
+                        , fontSize (px 15)]
+                        [text model.xAxisName]
+                ]
             -- y-Achse zeichnen --
             , g [ transform [ Translate (padding - 1) padding ] ]
-                [yAxis yValues]
+                [yAxis yValues
+                , text_ [ x -25
+                        , y -10
+                        , fontSize (px 15)]
+                        [text model.yAxisName]
+                ]
             -- anwenden der point Funktion und die Skalierung auf die Datenpunkte
             , g [ transform [ Translate padding padding ] ]
             (List.map (point xSkalierung ySkalierung) model.data)

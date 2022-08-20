@@ -52,7 +52,11 @@ scatterplot model =
         
         toPoint : String -> Float -> Int -> Point
         toPoint invoiceID unitPrice quantity=
-            Point invoice_ID unit_price quantity
+            Point invoiceID unitPrice (toFloat quantity)
+        
+        salesPoint: Sale -> Point
+        salesPoint sale =
+            toPoint sale.invoice_ID sale.unit_price sale.quantity 
         
         point : ContinuousScale Float -> ContinuousScale Float -> Point -> Svg msg
         point scaleX scaleY dataPoint =
@@ -67,14 +71,13 @@ scatterplot model =
                 [ circle
                     [ cx 0
                     , cy 0
-                    , r radius
+                    , r 5
                     ] []
                 ]
     
     in 
         svg [viewBox 0 0 w h, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ] 
-            [
-            , g [transform [ Translate (padding - 1) (h - padding) ]]
+            [ g [transform [ Translate (padding - 1) (h - padding) ]]
                 [xAxis xValues]
             , g [ transform [ Translate (padding - 1) padding ] ]
                 [yAxis yValues]

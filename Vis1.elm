@@ -50,6 +50,10 @@ scatterplot model =
         ySkalierung =
             yScale yValues
         
+        toPoint : String -> Float -> Int -> Point
+        toPoint invoiceID unitPrice quantity=
+            Point invoice_ID unit_price quantity
+        
         point : ContinuousScale Float -> ContinuousScale Float -> Point -> Svg msg
         point scaleX scaleY dataPoint =
             g [  fontSize <| Px 10.0

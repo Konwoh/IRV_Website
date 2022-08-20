@@ -4,6 +4,7 @@ import Browser
 import Html exposing (Html, text, pre)
 import Http
 import Csv.Decode exposing(Decoder, pipeline, string, float, column, int, into)
+import Vis1 exposing (..)
 
 main =
   Browser.element
@@ -18,25 +19,6 @@ type Model
   | Loading
   | Success String
 
-type alias Sale =
-  { invoice_ID : String
-  , branch : String
-  , city : String
-  , customer_type : String
-  , gender : String
-  , product_line : String
-  , unit_price : Float
-  , quantity : Int
-  , tax : Float
-  , total : Float
-  , date : String
-  , time : String
-  , payment : String
-  , cogs : Float
-  , gross_margin_percentage : Float
-  , gross_income : Float
-  , rating : Float
-  }
 
 type Msg
   = GotText (Result Http.Error String)

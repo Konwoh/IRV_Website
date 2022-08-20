@@ -1,3 +1,5 @@
+module Vis1 exposing (..)
+
 import Axis
 import Html exposing (Html, text)
 import Scale exposing (ContinuousScale)
@@ -30,6 +32,27 @@ type alias Point =
 
 type alias XYdatapoint =
     {xAxisName : String, yAxisName : String, data : List Point}
+
+type alias Sale =
+  { invoice_ID : String
+  , branch : String
+  , city : String
+  , customer_type : String
+  , gender : String
+  , product_line : String
+  , unit_price : Float
+  , quantity : Int
+  , tax : Float
+  , total : Float
+  , date : String
+  , time : String
+  , payment : String
+  , cogs : Float
+  , gross_margin_percentage : Float
+  , gross_income : Float
+  , rating : Float
+  }
+
 
 scatterplot: List Point -> Svg msg
 scatterplot model = 
@@ -121,7 +144,7 @@ yAxis values =
     Axis.left [ Axis.tickCount tickCount ] (yScale values)
 
 
-main: Html msg
-main=
-    Html.div[]
-            [scatterplot]
+--main: Html msg
+--main=
+    --Html.div[]
+            --[scatterplot]

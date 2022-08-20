@@ -91,13 +91,20 @@ scatterplot model =
                     , cy 0
                     , r 5
                     ] []
+                , text_
+                [ x 0
+                , y -10
+                , textAnchor AnchorMiddle
                 ]
-    
+                [ text dataPoint.pointName ]
+                ]
     in 
         svg [viewBox 0 0 w h, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ] 
             [style [] [ TypedSvg.Core.text """
             .point circle { stroke: rgba(0, 0, 0,0.4); fill: rgba(255, 255, 255,0.3); }
-            .point:hover circle { stroke: rgba(0, 0, 0,1.0); fill: rgb(118, 214, 78); }""" ]
+            .point:hover circle { stroke: rgba(0, 0, 0,1.0); fill: rgb(118, 214, 78); }
+            .point text { display: none; }
+            .point:hover text { display: inline; }""" ]
             -- x-Achse zeichnen --
             , g [transform [ Translate (padding - 1) (h - padding) ]]
                 [xAxis xValues]

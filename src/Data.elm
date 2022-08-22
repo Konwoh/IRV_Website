@@ -5,7 +5,7 @@ import Browser
 import Html exposing (Html, text, pre)
 import Http
 import Csv.Decode exposing(Decoder, pipeline, string, float, column, int, into)
-import Vis1 exposing (..)
+
 
 
 main =
@@ -45,6 +45,50 @@ type alias Sale =
   , rating : Float
   }
 
+type Branch
+    = A
+    | B
+    | C
+
+
+type City
+    = Yangon
+    | Naypyitaw
+    | Mandalay
+
+type Customer_type
+    = Normal
+    | Member
+
+type Gender 
+    = Male
+    | Female
+
+type Product_line
+    = Health_and_beauty
+    | Electronic_accessories
+    | Home_and_lifestyle
+    | Sports_and_travel
+    | Food_and_beverages
+
+type Payment 
+    = Ewallet
+    | Cash
+    | Credit_card
+
+type Attributes
+    = Unit_pric
+    | Quantity
+    | Tax
+    | Total_price
+    | Cogs
+    | Gross_margin_percentage
+    | Gross_income
+    | Rating
+
+type AttributeSelector
+    = Attribute1
+    | Attribute2
 
 init : () -> (Model, Cmd Msg)
 init _ =
@@ -71,10 +115,14 @@ view model =
               salesData: List Sale
               salesData =  Result.withDefault [] (Csv.Decode.decodeCsv  Csv.Decode.FieldNamesFromFirstRow salesDecoder fullText)
 
-              filteredSales = filterSales salesData
           in 
-              Html.div []
-                  [scatterplot filteredSales]
+              List.map
+                (\data ->
+                    Html.li []
+                        [ Html.text data.invoice_ID]
+                )
+                salesData
+                |> Html.ul []
 
 subscriptions : Model -> Sub Msg
 subscriptions model =

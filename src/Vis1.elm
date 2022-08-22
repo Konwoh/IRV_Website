@@ -104,6 +104,19 @@ type Attributes
     | Gross_margin_percentage
     | Gross_income
     | Rating
+
+type AttributeSelector
+    = Attribute1
+    | Attribute2
+
+type Msg
+    = SelectBranch Branch
+    | SelectCity City
+    | SelectCustomerType Customer_type
+    | SelectGender Gender
+    | SelectProdutctLine Product_line
+    | SelectPayment Payment
+    | SelectAttribute Attributes
 -- scatterplot Funktion --
 scatterplot: XYdatapoint -> Svg msg
 scatterplot model = 

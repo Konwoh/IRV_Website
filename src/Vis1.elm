@@ -56,15 +56,7 @@ type Msg
     | SelectPayment Data.Payment
     | SelectAttribute Data.AttributeSelector Data.Attributes
 
-branchetoString: Data.Branch -> String
-branchetoString branch =
-    case branch of
-        Data.A ->
-            "A"
-        Data.B ->
-            "B"
-        Data.C -> 
-            "C"
+
 update: Msg -> Model -> Model
 update msg model =
     case msg of

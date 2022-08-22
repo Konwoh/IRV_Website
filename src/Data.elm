@@ -142,21 +142,24 @@ update msg model =
 
 salesDecoder : Decoder Sale
 salesDecoder =
-    into Sale
-        |> pipeline (column 0 string)
-        |> pipeline (column 1 string)
-        |> pipeline (column 2 string)
-        |> pipeline (column 3 string)
-        |> pipeline (column 4 string)
-        |> pipeline (column 5 string)
-        |> pipeline (column 6 float)
-        |> pipeline (column 7 int)
-        |> pipeline (column 8 float)
-        |> pipeline (column 9 float)
-        |> pipeline (column 10 string)
-        |> pipeline (column 11 string)
-        |> pipeline (column 12 string)
-        |> pipeline (column 13 float)
-        |> pipeline (column 14 float)
-        |> pipeline (column 15 float)
-        |> pipeline (column 16 float)
+    Decode.into Sale
+        |> Decode.pipeline (Decode.field "Invoice_ID" Decode.string)
+        |> Decode.pipeline (Decode.field "Branch" (Decode.map (\i -> case i of  "A" -> A 
+                                                                                "B" -> B
+                                                                                "C" -> C 
+                                                                                _ -> Nope) Decode.string))
+        |> Decode.pipeline (Decode.field "City" Decode.string)
+        |> Decode.pipeline (Decode.field "Customer Type" Decode.string)
+        |> Decode.pipeline (Decode.field "Gender" Decode.string)
+        |> Decode.pipeline (Decode.field "Product line" Decode.string)
+        |> Decode.pipeline (Decode.field "Unit price" Decode.float)
+        |> Decode.pipeline (Decode.field "quantity" Decode.int)
+        |> Decode.pipeline (Decode.field "tax" Decode.float)
+        |> Decode.pipeline (Decode.field "Total" Decode.float)
+        |> Decode.pipeline (Decode.field "date" Decode.string)
+        |> Decode.pipeline (Decode.field "time" Decode.string)
+        |> Decode.pipeline (Decode.field "payment" Decode.string)
+        |> Decode.pipeline (Decode.field "cogs" Decode.float)
+        |> Decode.pipeline (Decode.field "gross margin percentage" Decode.float)
+        |> Decode.pipeline (Decode.field "gross income" Decode.float)
+        |> Decode.pipeline (Decode.field "rating" Decode.float)

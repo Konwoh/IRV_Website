@@ -55,6 +55,55 @@ type alias Sale =
   , rating : Float
   }
 
+type alias Model = 
+    { branch: Branch
+    , city: City
+    , customer_type: Customer_type
+    , gender: Gender
+    , product_line: Product_line
+    , payment: Payment
+    , attribute1: Attributes
+    , attribute2: Attributes}
+
+type Branch
+    = A
+    | B
+    | C
+
+type City
+    = Yangon
+    | Naypyitaw
+    | Mandalay
+
+type Customer_type
+    = Normal
+    | Member
+
+type Gender 
+    = Male
+    | Female
+
+type Product_line
+    = Health_and_beauty
+    | Electronic_accessories
+    | Home_and_lifestyle
+    | Sports_and_travel
+    | Food_and_beverages
+
+type Payment 
+    = Ewallet
+    | Cash
+    | Credit_card
+
+type Attributes
+    = Unit_pric
+    | Quantity
+    | Tax
+    | Total_price
+    | Cogs
+    | Gross_margin_percentage
+    | Gross_income
+    | Rating
 -- scatterplot Funktion --
 scatterplot: XYdatapoint -> Svg msg
 scatterplot model = 

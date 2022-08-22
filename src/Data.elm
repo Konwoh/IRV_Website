@@ -27,18 +27,18 @@ type Msg
 
 type alias Sale =
   { invoice_ID : String
-  , branch : Branch
-  , city : City
-  , customer_type : Customer_type
-  , gender : Gender
-  , product_line : Product_line
+  , branch : String
+  , city : String
+  , customer_type : String
+  , gender : String
+  , product_line : String
   , unit_price : Float
   , quantity : Int
   , tax : Float
   , total : Float
   , date : String
   , time : String
-  , payment : Payment
+  , payment : String
   , cogs : Float
   , gross_margin_percentage : Float
   , gross_income : Float

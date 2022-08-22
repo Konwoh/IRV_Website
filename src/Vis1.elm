@@ -37,18 +37,18 @@ type alias XYdatapoint =
 -- Dtaenstruktur Sale--
 type alias Sale =
   { invoice_ID : String
-  , branch : String
-  , city : String
-  , customer_type : String
-  , gender : String
-  , product_line : String
+  , branch : Branch
+  , city : City
+  , customer_type : Customer_type
+  , gender : Gender
+  , product_line : Product_line
   , unit_price : Float
   , quantity : Int
   , tax : Float
   , total : Float
   , date : String
   , time : String
-  , payment : String
+  , payment : Payment
   , cogs : Float
   , gross_margin_percentage : Float
   , gross_income : Float
@@ -69,6 +69,7 @@ type Branch
     = A
     | B
     | C
+
 
 type City
     = Yangon
@@ -114,7 +115,7 @@ type Msg
     | SelectCity City
     | SelectCustomerType Customer_type
     | SelectGender Gender
-    | SelectProdutctLine Product_line
+    | SelectProductLine Product_line
     | SelectPayment Payment
     | SelectAttribute AttributeSelector Attributes
 

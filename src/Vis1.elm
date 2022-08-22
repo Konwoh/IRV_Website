@@ -119,6 +119,15 @@ type Msg
     | SelectPayment Payment
     | SelectAttribute AttributeSelector Attributes
 
+branchetoString: Branch -> String
+branchetoString branch =
+    case branch of
+        A ->
+            "A"
+        B ->
+            "B"
+        C -> 
+            "C"
 update: Msg -> Model -> Model
 update msg model =
     case msg of

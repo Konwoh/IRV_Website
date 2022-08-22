@@ -38,32 +38,32 @@ type alias XYdatapoint =
 -- Dtaenstruktur Sale--
 
 type alias Model = 
-    { branch: Branch
-    , city: City
-    , customer_type: Customer_type
-    , gender: Gender
-    , product_line: Product_line
-    , payment: Payment
-    , attribute1: Attributes
-    , attribute2: Attributes}
+    { branch: Data.Branch
+    , city: Data.City
+    , customer_type: Data.Customer_type
+    , gender: Data.Gender
+    , product_line: Data.Product_line
+    , payment: Data.Payment
+    , attribute1: Data.Attributes
+    , attribute2: Data.Attributes}
 
 type Msg
-    = SelectBranch Branch
-    | SelectCity City
-    | SelectCustomerType Customer_type
-    | SelectGender Gender
-    | SelectProductLine Product_line
-    | SelectPayment Payment
-    | SelectAttribute AttributeSelector Attributes
+    = SelectBranch Data.Branch
+    | SelectCity Data.City
+    | SelectCustomerType Data.Customer_type
+    | SelectGender Data.Gender
+    | SelectProductLine Data.Product_line
+    | SelectPayment Data.Payment
+    | SelectAttribute Data.AttributeSelector Data.Attributes
 
-branchetoString: Branch -> String
+branchetoString: Data.Branch -> String
 branchetoString branch =
     case branch of
-        A ->
+        Data.A ->
             "A"
-        B ->
+        Data.B ->
             "B"
-        C -> 
+        Data.C -> 
             "C"
 update: Msg -> Model -> Model
 update msg model =
@@ -82,9 +82,9 @@ update msg model =
             Model model.branch model.city model.customer_type model.gender model.product_line payment model.attribute1 model.attribute2
         SelectAttribute attributeSelector attribute ->
             case attributeSelector of
-                Attribute1 ->
+                Data.Attribute1 ->
                     Model model.branch model.city model.customer_type model.gender model.product_line model.payment attribute model.attribute2
-                Attribute2 ->
+                Data.Attribute2 ->
                     Model model.branch model.city model.customer_type model.gender model.product_line model.payment model.attribute1 attribute
 
 view: Model -> Html msg
@@ -212,12 +212,12 @@ toPoint invoiceID unitPrice quantity=
     Point invoiceID unitPrice (toFloat quantity)
 
 -- toPoint Funktion die wählbaren Parameter übergeben --
-salesPoint: Sale -> Point
+salesPoint: Data.Sale -> Point
 salesPoint sale =
     toPoint sale.invoice_ID sale.unit_price sale.quantity 
 
 -- XYdatapoint Datenstrukutr erstellt mit anwennden der salespointFunktion auf den sales Parameter --
-filterSales: List Sale -> XYdatapoint
+filterSales: List Data.Sale -> XYdatapoint
 filterSales sales =
     XYdatapoint "Unit price" "quantity" (List.map salesPoint sales)
 
@@ -228,6 +228,6 @@ filterSales sales =
             --[scatterplot]
 
 
-filterBranch: List Sale -> Branch -> List Sale
+filterBranch: List Data.Sale -> Data.Branch -> List Data.Sale
 filterBranch salesList branch=
     List.filter (\a -> a.branch == branch) salesList

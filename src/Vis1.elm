@@ -9,6 +9,7 @@ import TypedSvg.Attributes exposing (class, fontFamily, fontSize, textAnchor, tr
 import TypedSvg.Attributes.InPx exposing (cx, cy, height, r, width, x, y)
 import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Transform(..), px)
+import Data
 
 tickCount: Int
 tickCount = 
@@ -35,25 +36,6 @@ type alias XYdatapoint =
     {xAxisName : String, yAxisName : String, data : List Point}
 
 -- Dtaenstruktur Sale--
-type alias Sale =
-  { invoice_ID : String
-  , branch : Branch
-  , city : City
-  , customer_type : Customer_type
-  , gender : Gender
-  , product_line : Product_line
-  , unit_price : Float
-  , quantity : Int
-  , tax : Float
-  , total : Float
-  , date : String
-  , time : String
-  , payment : Payment
-  , cogs : Float
-  , gross_margin_percentage : Float
-  , gross_income : Float
-  , rating : Float
-  }
 
 type alias Model = 
     { branch: Branch
@@ -64,51 +46,6 @@ type alias Model =
     , payment: Payment
     , attribute1: Attributes
     , attribute2: Attributes}
-
-type Branch
-    = A
-    | B
-    | C
-
-
-type City
-    = Yangon
-    | Naypyitaw
-    | Mandalay
-
-type Customer_type
-    = Normal
-    | Member
-
-type Gender 
-    = Male
-    | Female
-
-type Product_line
-    = Health_and_beauty
-    | Electronic_accessories
-    | Home_and_lifestyle
-    | Sports_and_travel
-    | Food_and_beverages
-
-type Payment 
-    = Ewallet
-    | Cash
-    | Credit_card
-
-type Attributes
-    = Unit_pric
-    | Quantity
-    | Tax
-    | Total_price
-    | Cogs
-    | Gross_margin_percentage
-    | Gross_income
-    | Rating
-
-type AttributeSelector
-    = Attribute1
-    | Attribute2
 
 type Msg
     = SelectBranch Branch

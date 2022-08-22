@@ -141,6 +141,13 @@ update msg model =
                 Attribute2 ->
                     Model model.branch model.city model.customer_type model.gender model.product_line model.payment model.attribute1 attribute
 
+view: Model -> Html msg
+view model =
+    Html.div []
+        [ 
+
+        ]
+
 -- scatterplot Funktion --
 scatterplot: XYdatapoint -> Svg msg
 scatterplot model = 

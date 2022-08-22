@@ -289,3 +289,8 @@ filterSales sales =
 --main=
     --Html.div[]
             --[scatterplot]
+
+
+filterBranch: List Sale -> Branch -> List Sale
+filterBranch salesList branch=
+    List.filter (\a -> a.branch == branch) salesList

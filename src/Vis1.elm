@@ -116,7 +116,30 @@ type Msg
     | SelectGender Gender
     | SelectProdutctLine Product_line
     | SelectPayment Payment
-    | SelectAttribute Attributes
+    | SelectAttribute AttributeSelector Attributes
+
+update: Msg -> Model -> Model
+update msg model =
+    case msg of
+        SelectBranch branch ->
+            Model branch model.city model.customer_type model.gender model.product_line model.payment model.attribute1 model.attribute2
+        SelectCity city ->
+            Model model.branch city model.customer_type model.gender model.product_line model.payment model.attribute1 model.attribute2
+        SelectCustomerType customer_type ->
+            Model model.branch model.city customer_type model.gender model.product_line model.payment model.attribute1 model.attribute2
+        SelectGender gender -> 
+            Model model.branch model.city model.customer_type gender model.product_line model.payment model.attribute1 model.attribute2
+        SelectProductLine product_line -> 
+            Model model.branch model.city model.customer_type model.gender product_line model.payment model.attribute1 model.attribute2
+        SelectPayment payment ->
+            Model model.branch model.city model.customer_type model.gender model.product_line payment model.attribute1 model.attribute2
+        SelectAttribute attributeSelector attribute ->
+            case attributeSelector of
+                Attribute1 ->
+                    Model model.branch model.city model.customer_type model.gender model.product_line model.payment attribute model.attribute2
+                Attribute2 ->
+                    Model model.branch model.city model.customer_type model.gender model.product_line model.payment model.attribute1 attribute
+
 -- scatterplot Funktion --
 scatterplot: XYdatapoint -> Svg msg
 scatterplot model = 

@@ -4,7 +4,7 @@ module Data exposing (..)
 import Browser
 import Html exposing (Html, text, pre)
 import Http
-import Csv.Decode exposing(Decoder, pipeline, string, float, column, int, into)
+import Csv.Decode as Decode exposing (Decoder)
 
 
 
@@ -27,7 +27,7 @@ type Msg
 
 type alias Sale =
   { invoice_ID : String
-  , branch : String
+  , branch : Branch
   , city : String
   , customer_type : String
   , gender : String
@@ -49,6 +49,7 @@ type Branch
     = A
     | B
     | C
+    | Nope
 
 
 type City
@@ -113,7 +114,7 @@ view model =
     Success fullText ->
           let 
               salesData: List Sale
-              salesData =  Result.withDefault [] (Csv.Decode.decodeCsv  Csv.Decode.FieldNamesFromFirstRow salesDecoder fullText)
+              salesData =  Result.withDefault [] (Decode.decodeCsv  Decode.FieldNamesFromFirstRow salesDecoder fullText)
 
           in 
               List.map

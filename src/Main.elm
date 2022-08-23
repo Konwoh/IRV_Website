@@ -72,7 +72,7 @@ view model =
       text "Loading..."
 
     Success ->
-          div [] []
+          div [] [scatterplot (filterSales model.data)]
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =

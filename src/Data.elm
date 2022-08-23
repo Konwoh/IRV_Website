@@ -79,7 +79,7 @@ salesDecoder =
         |> Decode.pipeline (Decode.field "Invoice_ID" Decode.string)
         |> Decode.pipeline (Decode.field "Branch" (Decode.map (\i -> case i of "A" -> A 
                                                                                "B" -> B
-                                                                               "C" -> C 
+                                                                               "C" -> C
                                                                                _ -> None) Decode.string))
         |> Decode.pipeline (Decode.field "City" (Decode.map (\i -> case i of "Yangon" -> Yangon
                                                                              "Naypyitaw" -> Naypyitaw 

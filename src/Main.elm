@@ -1,12 +1,13 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, text, pre)
+import Html exposing (Html, text)
 import Http
-import Csv.Decode as Decode exposing(Decoder, pipeline, string, float, column, int, into)
+import Csv.Decode as Decode
 import Vis1 exposing (..)
-import Data exposing(Sale, salesDecoder, AttributeSelector, Branch)
+import Data exposing(Sale, salesDecoder)
 import Html exposing (div)
+
 
 type LoadingState
   = Failure
@@ -34,6 +35,7 @@ type alias Model =
     , payment: Data.Payment
     , attribute1: Data.Attributes
     , attribute2: Data.Attributes}--}}
+main : Program () Model Msg
 main =
   Browser.element
     { init = init
@@ -73,7 +75,7 @@ view model =
           div [] []
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
   Sub.none
 
 

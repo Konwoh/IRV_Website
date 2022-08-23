@@ -85,8 +85,7 @@ update msg model =
     GotText result ->
       case result of
         Ok fullText ->
-          ({model | loadingState = Success, data = (Result.withDefault [] (Decode.decodeCsv  Decode.FieldNamesFromFirstRow salesDecoder fullText))}, Cmd.none)
-
+          ({model | loadingState = Success, data = (Result.withDefault [] (Decode.decodeCsv  Decode.FieldNamesFromFirstRow Data.salesDecoder fullText))}, Cmd.none)
         Err _ ->
           ({model | loadingState = Failure}, Cmd.none)
     SelectBranch branch ->

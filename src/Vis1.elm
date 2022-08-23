@@ -37,16 +37,6 @@ type alias XYdatapoint =
 
 -- Dtaenstruktur Sale--
 
-type Msg
-    = SelectBranch Data.Branch
-    | SelectCity Data.City
-    | SelectCustomerType Data.Customer_type
-    | SelectGender Data.Gender
-    | SelectProductLine Data.Product_line
-    | SelectPayment Data.Payment
-    | SelectAttribute Data.AttributeSelector Data.Attributes
-
-
 -- scatterplot Funktion --
 scatterplot: XYdatapoint -> Svg msg
 scatterplot model = 

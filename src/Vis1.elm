@@ -37,16 +37,6 @@ type alias XYdatapoint =
 
 -- Dtaenstruktur Sale--
 
-type alias Model = 
-    { branch: Data.Branch
-    , city: Data.City
-    , customer_type: Data.Customer_type
-    , gender: Data.Gender
-    , product_line: Data.Product_line
-    , payment: Data.Payment
-    , attribute1: Data.Attributes
-    , attribute2: Data.Attributes}
-
 type Msg
     = SelectBranch Data.Branch
     | SelectCity Data.City
@@ -56,35 +46,6 @@ type Msg
     | SelectPayment Data.Payment
     | SelectAttribute Data.AttributeSelector Data.Attributes
 
-
-update: Msg -> Model -> Model
-update msg model =
-    case msg of
-        SelectBranch branch ->
-            Model branch model.city model.customer_type model.gender model.product_line model.payment model.attribute1 model.attribute2
-        SelectCity city ->
-            Model model.branch city model.customer_type model.gender model.product_line model.payment model.attribute1 model.attribute2
-        SelectCustomerType customer_type ->
-            Model model.branch model.city customer_type model.gender model.product_line model.payment model.attribute1 model.attribute2
-        SelectGender gender -> 
-            Model model.branch model.city model.customer_type gender model.product_line model.payment model.attribute1 model.attribute2
-        SelectProductLine product_line -> 
-            Model model.branch model.city model.customer_type model.gender product_line model.payment model.attribute1 model.attribute2
-        SelectPayment payment ->
-            Model model.branch model.city model.customer_type model.gender model.product_line payment model.attribute1 model.attribute2
-        SelectAttribute attributeSelector attribute ->
-            case attributeSelector of
-                Data.Attribute1 ->
-                    Model model.branch model.city model.customer_type model.gender model.product_line model.payment attribute model.attribute2
-                Data.Attribute2 ->
-                    Model model.branch model.city model.customer_type model.gender model.product_line model.payment model.attribute1 attribute
-
-view: Model -> Html msg
-view model =
-    Html.div []
-        [ 
-
-        ]
 
 -- scatterplot Funktion --
 scatterplot: XYdatapoint -> Svg msg

@@ -1,29 +1,7 @@
 
 module Data exposing (..)
 
-import Browser
-import Html exposing (Html, text, pre)
-import Http
 import Csv.Decode as Decode exposing (Decoder)
-
-
-
-main =
-  Browser.element
-    { init = init
-    , update = update
-    , subscriptions = subscriptions
-    , view = view
-    }
-
-type Model
-  = Failure
-  | Loading
-  | Success String
-
-
-type Msg
-  = GotText (Result Http.Error String)
 
 type alias Sale =
   { invoice_ID : String
@@ -82,7 +60,7 @@ type Payment
     | NoPayment
 
 type Attributes
-    = Unit_pric
+    = Unit_price
     | Quantity
     | Tax
     | Total_price
@@ -94,56 +72,6 @@ type Attributes
 type AttributeSelector
     = Attribute1
     | Attribute2
-
-init : () -> (Model, Cmd Msg)
-init _ =
-  ( Loading
-  , Http.get
-      { url = "https://cors-anywhere.herokuapp.com/https://cloud.informatik.uni-halle.de/s/pSKk3izyLRQ84C9/download/supermarket_sales%20-%20Sheet1.csv"
-      , expect = Http.expectString GotText
-      }
-  )
-
-
-
-view : Model -> Html Msg
-view model =
-  case model of
-    Failure ->
-      text "I was unable to load your book."
-
-    Loading ->
-      text "Loading..."
-
-    Success fullText ->
-          let 
-              salesData: List Sale
-              salesData =  Result.withDefault [] (Decode.decodeCsv  Decode.FieldNamesFromFirstRow salesDecoder fullText)
-
-          in 
-              List.map
-                (\data ->
-                    Html.li []
-                        [ Html.text data.invoice_ID]
-                )
-                salesData
-                |> Html.ul []
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-  Sub.none
-
-
-update : Msg -> Model -> (Model, Cmd Msg)
-update msg model =
-  case msg of
-    GotText result ->
-      case result of
-        Ok fullText ->
-          (Success fullText, Cmd.none)
-
-        Err _ ->
-          (Failure, Cmd.none)
 
 salesDecoder : Decoder Sale
 salesDecoder =

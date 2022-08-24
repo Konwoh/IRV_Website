@@ -74,7 +74,22 @@ view model =
       text "Loading..."
 
     Success ->
-          div [] [scatterplot (filterSales model.data)]
+          let
+            data = model.data
+            xFloat = attributeFilter data model.attribute1
+            yFloat = attributeFilter data model.attribute2
+
+            pointsList: List Point
+            pointsList = List.map3 Vis1.toPoint (List.map .invoice_ID data) (xFloat) (yFloat)
+
+            xyData:XYdatapoint
+            xyData = XYdatapoint (Data.attrToString model.attribute1) (Data.attrToString model.attribute2) pointsList
+          
+          in
+          
+          div [] [ buttonAttribut1
+                 , buttonAttribut2
+                 , scatterplot xyData]
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =

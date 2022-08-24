@@ -11,7 +11,7 @@ type alias Sale =
   , gender : Gender
   , product_line : Product_line
   , unit_price : Float
-  , quantity : Int
+  , quantity : Float
   , tax : Float
   , total : Float
   , date : String
@@ -31,7 +31,7 @@ type alias SaleCopy =
   , gender : String
   , product_line : String
   , unit_price : Float
-  , quantity : Int
+  , quantity : Float
   , tax : Float
   , total : Float
   , date : String
@@ -89,6 +89,7 @@ type Attributes
     | Gross_margin_percentage
     | Gross_income
     | Rating
+    | NoAttribute
 
 type AttributeSelector
     = Attribute1
@@ -104,7 +105,7 @@ salesCopyDecoder =
         |> Decode.pipeline (Decode.column 4  Decode.string)
         |> Decode.pipeline (Decode.column 5  Decode.string)
         |> Decode.pipeline (Decode.column 6  Decode.float)
-        |> Decode.pipeline (Decode.column 7  Decode.int)
+        |> Decode.pipeline (Decode.column 7  Decode.float)
         |> Decode.pipeline (Decode.column 8  Decode.float)
         |> Decode.pipeline (Decode.column 9  Decode.float)
         |> Decode.pipeline (Decode.column 10 Decode.string)
@@ -126,7 +127,7 @@ salesDecoder =
         |> Decode.pipeline (Decode.column 4  (Decode.map decodeGender Decode.string))
         |> Decode.pipeline (Decode.column 5  (Decode.map decodeProductLine Decode.string))
         |> Decode.pipeline (Decode.column 6  Decode.float)
-        |> Decode.pipeline (Decode.column 7  Decode.int)
+        |> Decode.pipeline (Decode.column 7  Decode.float)
         |> Decode.pipeline (Decode.column 8  Decode.float)
         |> Decode.pipeline (Decode.column 9  Decode.float)
         |> Decode.pipeline (Decode.column 10 Decode.string)
@@ -209,3 +210,70 @@ decodePayment str =
             Credit_card
         _ ->
             NoPayment
+
+attributeFilter: List Sale -> Attributes -> List Float
+attributeFilter sales attr =
+    case attr of
+        Unit_price ->
+            List.map .unit_price sales
+        Quantity ->
+            List.map .quantity sales
+        Tax ->
+            List.map .tax sales
+        Total_price ->
+            List.map .total sales
+        Cogs ->
+            List.map .cogs sales
+        Gross_margin_percentage ->
+            List.map .gross_margin_percentage sales
+        Gross_income ->
+            List.map .gross_income sales
+        Rating ->
+            List.map .rating sales
+        NoAttribute ->
+            []
+
+attrToString: Attributes -> String
+attrToString attr =
+    case attr of 
+        Unit_price ->
+            "Unit price"
+        Quantity ->
+            "Quantity"
+        Tax ->
+            "Tax"
+        Total_price ->
+            "Total price"
+        Cogs ->
+            "cogs"
+        Gross_margin_percentage ->
+            "gross margin percentage"
+        Gross_income ->
+            "gross income"
+        Rating ->
+            "rating"
+        NoAttribute ->
+            "NoAttribute"
+
+stringToAttr: String -> Attributes
+stringToAttr str =
+    case str of
+        "Unit price" ->
+            Unit_price
+        "Quantity" ->
+            Quantity
+        "Tax" ->
+            Tax
+        "Total price" ->
+            Total_price
+        "Cogs" ->
+            Cogs
+        "gross margin percentage" ->
+            Gross_margin_percentage
+        "gross income" ->
+            Gross_income
+        "rating" ->
+            Rating
+        _ ->
+            NoAttribute
+

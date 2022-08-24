@@ -5,7 +5,7 @@ import Html exposing (Html, text)
 import Http
 import Csv.Decode as Decode
 import Vis1 exposing (..)
-import Data exposing(Sale, salesDecoder)
+import Data exposing(Sale, salesCopyDecoder)
 import Html exposing (div)
 
 
@@ -26,7 +26,7 @@ type Msg
 
 type alias Model = 
     { loadingState: LoadingState
-    , data: List Sale
+    , data: List Data.SaleCopy
     , branch: Data.Branch
     , city: Data.City
     , customer_type: Data.Customer_type
@@ -85,7 +85,7 @@ update msg model =
     GotText result ->
       case result of
         Ok fullText ->
-          ({model | loadingState = Success, data = (Result.withDefault [] (Decode.decodeCsv  Decode.FieldNamesFromFirstRow Data.salesDecoder fullText))}, Cmd.none)
+          ({model | loadingState = Success, data = (Result.withDefault [] (Decode.decodeCsv  Decode.FieldNamesFromFirstRow Data.salesCopyDecoder fullText))}, Cmd.none)
         Err _ ->
           ({model | loadingState = Failure}, Cmd.none)
     SelectBranch branch ->

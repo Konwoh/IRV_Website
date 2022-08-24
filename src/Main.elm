@@ -26,7 +26,7 @@ type Msg
 
 type alias Model = 
     { loadingState: LoadingState
-    , data: List Data.SaleCopy
+    , data: List Data.Sale
     , branch: Data.Branch
     , city: Data.City
     , customer_type: Data.Customer_type
@@ -85,7 +85,7 @@ update msg model =
     GotText result ->
       case result of
         Ok fullText ->
-          ({model | loadingState = Success, data = (Result.withDefault [] (Decode.decodeCsv  Decode.FieldNamesFromFirstRow Data.salesCopyDecoder fullText))}, Cmd.none)
+          ({model | loadingState = Success, data = (Result.withDefault [] (Decode.decodeCsv  Decode.FieldNamesFromFirstRow Data.salesDecoder fullText))}, Cmd.none)
         Err _ ->
           ({model | loadingState = Failure}, Cmd.none)
     SelectBranch branch ->

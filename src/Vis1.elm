@@ -155,12 +155,12 @@ toPoint invoiceID unitPrice quantity=
     Point invoiceID unitPrice (toFloat quantity)
 
 -- toPoint Funktion die wählbaren Parameter übergeben --
-salesPoint: Data.SaleCopy -> Point
+salesPoint: Data.Sale -> Point
 salesPoint sale =
     toPoint sale.invoice_ID sale.unit_price sale.quantity 
 
 -- XYdatapoint Datenstrukutr erstellt mit anwenden der salespointFunktion auf den sales Parameter --
-filterSales: List Data.SaleCopy -> XYdatapoint
+filterSales: List Data.Sale -> XYdatapoint
 filterSales sales =
     XYdatapoint "Unit price" "quantity" (List.map salesPoint sales)
 

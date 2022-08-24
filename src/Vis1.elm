@@ -150,19 +150,19 @@ yAxis values =
     Axis.left [ Axis.tickCount tickCount ] (yScale values)
 
 -- Point Datenstrukutr Grundgerüst --
-toPoint : String -> Float -> Int -> Point
-toPoint invoiceID unitPrice quantity=
-    Point invoiceID unitPrice (toFloat quantity)
+toPoint : String -> Float -> Float -> Point
+toPoint pointName x y=
+    Point pointName x y
 
 -- toPoint Funktion die wählbaren Parameter übergeben --
-salesPoint: Data.Sale -> Point
-salesPoint sale =
-    toPoint sale.invoice_ID sale.unit_price sale.quantity 
+salesPoint: String -> Float -> Float -> Point
+salesPoint saleName xValues yValues=
+    toPoint saleName xValues yValues 
 
 -- XYdatapoint Datenstrukutr erstellt mit anwenden der salespointFunktion auf den sales Parameter --
-filterSales: List Data.Sale -> XYdatapoint
-filterSales sales =
-    XYdatapoint "Unit price" "quantity" (List.map salesPoint sales)
+filterSales: List Data.Sale -> (Data.Sale -> Point) -> XYdatapoint
+filterSales saleList salesFunc =
+    XYdatapoint "Unit price" "quantity" (List.map salesFunc saleList)
 
 
 --main: Html msg

@@ -5,8 +5,10 @@ import Html exposing (Html, text)
 import Http
 import Csv.Decode as Decode
 import Vis1 exposing (..)
-import Data exposing(Sale, salesCopyDecoder)
+import Data exposing(Sale, salesCopyDecoder, attributeFilter, attrToString, stringToAttr)
 import Html exposing (div)
+import Html.Events exposing (onInput)
+import Html.Attributes exposing (value)
 
 
 type LoadingState
@@ -54,8 +56,8 @@ init _ =
     , gender= Data.Male
     , product_line= Data.Electronic_accessories
     , payment= Data.Ewallet
-    , attribute1= Data.Quantity
-    , attribute2= Data.Rating }
+    , attribute1= Data.Unit_price
+    , attribute2= Data.Quantity }
   , Http.get
       { url = "https://cors-anywhere.herokuapp.com/https://cloud.informatik.uni-halle.de/s/pSKk3izyLRQ84C9/download/supermarket_sales%20-%20Sheet1.csv"
       , expect = Http.expectString GotText
@@ -107,3 +109,30 @@ update msg model =
             Data.Attribute2 ->
                     ({model | attribute2 = attribute}, Cmd.none)
 
+buttonAttribut1 : Html Msg
+buttonAttribut1 =
+    Html.select
+        [ onInput (\at -> Data.stringToAttr at |> SelectAttribute Data.Attribute1) ]
+        [ Html.option [ value "Unit price" ] [ Html.text "Unit price" ]
+        , Html.option [ value "Quantity" ] [ Html.text "Quantity" ]
+        , Html.option [ value "Tax" ] [ Html.text "Tax" ]
+        , Html.option [ value "Total price" ] [ Html.text "Total price" ]
+        , Html.option [ value "Cogs" ] [ Html.text "Cogs" ]
+        , Html.option [ value "gross margin percentage" ] [ Html.text "gross margin percentage" ]
+        , Html.option [ value "gross income" ] [ Html.text "gross income" ]
+        , Html.option [ value "rating" ] [ Html.text "rating" ]
+        ]
+
+buttonAttribut2 : Html Msg
+buttonAttribut2 =
+    Html.select
+        [ onInput (\at -> Data.stringToAttr at |> SelectAttribute Data.Attribute2) ]
+        [ Html.option [ value "Unit price" ] [ Html.text "Unit price" ]
+        , Html.option [ value "Quantity" ] [ Html.text "Quantity" ]
+        , Html.option [ value "Tax" ] [ Html.text "Tax" ]
+        , Html.option [ value "Total price" ] [ Html.text "Totalprice" ]
+        , Html.option [ value "Cogs" ] [ Html.text "Cogs" ]
+        , Html.option [ value "gross margin percentage" ] [ Html.text "gross margin percentage" ]
+        , Html.option [ value "gross income" ] [ Html.text "gross income" ]
+        , Html.option [ value "rating" ] [ Html.text "rating" ]
+        ]

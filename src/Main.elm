@@ -50,7 +50,7 @@ init : () -> (Model, Cmd Msg)
 init _ =
   ( { loadingState = Loading
     , data = []
-    , branch = Data.A
+    , branch = Data.NoBranch
     , city = Data.Naypyitaw
     , customer_type = Data.Normal
     , gender= Data.Male
@@ -76,8 +76,9 @@ view model =
     Success ->
           let
             data = model.data
-            xFloat = attributeFilter data model.attribute1
-            yFloat = attributeFilter data model.attribute2
+            filteredBranchData = filterBranch data model.branch 
+            xFloat = attributeFilter filteredBranchData model.attribute1
+            yFloat = attributeFilter filteredBranchData model.attribute2
 
             pointsList: List Point
             pointsList = List.map3 Vis1.toPoint (List.map .invoice_ID data) (xFloat) (yFloat)
@@ -89,6 +90,7 @@ view model =
           
           div [] [ buttonAttribut1
                  , buttonAttribut2
+                 , buttonBranch
                  , scatterplot xyData]
 
 subscriptions : Model -> Sub Msg
@@ -127,7 +129,7 @@ update msg model =
 buttonAttribut1 : Html Msg
 buttonAttribut1 =
     Html.select
-        [ onInput (\at -> Data.stringToAttr at |> SelectAttribute Data.Attribute1) ]
+        [ onInput (\at -> SelectAttribute Data.Attribute1 (Data.stringToAttr at)) ]
         [ Html.option [ value "Unit price" ] [ Html.text "Unit price" ]
         , Html.option [ value "Quantity" ] [ Html.text "Quantity" ]
         , Html.option [ value "Tax" ] [ Html.text "Tax" ]
@@ -141,7 +143,7 @@ buttonAttribut1 =
 buttonAttribut2 : Html Msg
 buttonAttribut2 =
     Html.select
-        [ onInput (\at -> Data.stringToAttr at |> SelectAttribute Data.Attribute2) ]
+        [ onInput (\i -> SelectAttribute Data.Attribute2 (Data.stringToAttr i)) ]
         [ Html.option [ value "Unit price" ] [ Html.text "Unit price" ]
         , Html.option [ value "Quantity" ] [ Html.text "Quantity" ]
         , Html.option [ value "Tax" ] [ Html.text "Tax" ]
@@ -151,3 +153,12 @@ buttonAttribut2 =
         , Html.option [ value "gross income" ] [ Html.text "gross income" ]
         , Html.option [ value "rating" ] [ Html.text "rating" ]
         ]
+
+buttonBranch : Html Msg
+buttonBranch =
+    Html.select 
+        [ onInput(\i -> SelectBranch (Data.stringToBranch i))]
+        [ Html.option [ value "A"] [Html.text "A"]
+        , Html.option [ value "B"] [Html.text "B"]
+        , Html.option [ value "C"] [Html.text "C"]
+        , Html.option [ value "AllBranch"] [Html.text "All Branches"]]

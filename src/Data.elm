@@ -47,6 +47,7 @@ type Branch
     = A
     | B
     | C
+    | AllBranch
     | NoBranch
 
 
@@ -54,16 +55,19 @@ type City
     = Yangon
     | Naypyitaw
     | Mandalay
+    | AllCity
     | NoCity
 
 type Customer_type
     = Normal
     | Member
+    | AllCustomer
     | NoCustomer
 
 type Gender 
     = Male
     | Female
+    | AllGenderA
     | NoGender
 
 type Product_line
@@ -72,12 +76,14 @@ type Product_line
     | Home_and_lifestyle
     | Sports_and_travel
     | Food_and_beverages
+    | AllProductLine
     | NoProductLine
 
 type Payment 
     = Ewallet
     | Cash
     | Credit_card
+    | AllPayment
     | NoPayment
 
 type Attributes
@@ -148,6 +154,8 @@ decodeBranch str =
             B
         "C" ->
             C
+        "AllBranch" ->
+            AllBranch
         _ ->
             NoBranch
 
@@ -277,3 +285,15 @@ stringToAttr str =
         _ ->
             NoAttribute
 
+stringToBranch str =
+    case str of
+        "A" ->
+            A
+        "B" ->
+            B
+        "C" ->
+            C
+        "AllBranch" ->
+            AllBranch
+        _ ->
+            NoBranch

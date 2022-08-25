@@ -168,6 +168,8 @@ decodeCity str =
             Naypyitaw
         "Mandalay" -> 
             Mandalay
+        "AllCity" ->
+            AllCity
         _ -> 
             NoCity
 
@@ -178,6 +180,8 @@ decodeCustomerType str =
             Normal
         "Member" ->
             Member
+        "AllCostumer" ->
+            AllCostumer
         _ -> 
             NoCustomer
 
@@ -188,6 +192,8 @@ decodeGender str =
             Male
         "Female" ->
             Female
+        "AllGender" ->
+            AllGender
         _ ->
             NoGender
 
@@ -204,6 +210,8 @@ decodeProductLine str =
             Sports_and_travel
        "Food and beverages" ->
             Food_and_beverages
+       "AllProductLine" ->
+            AllProductLine
        _ -> 
             NoProductLine
 
@@ -216,6 +224,8 @@ decodePayment str =
             Cash
         "Credit card" ->
             Credit_card
+        "AllPayment" ->
+            AllPayment
         _ ->
             NoPayment
 

@@ -112,18 +112,18 @@ update msg model =
           ({model | loadingState = Success, data = (Result.withDefault [] (Decode.decodeCsv  Decode.FieldNamesFromFirstRow Data.salesDecoder fullText))}, Cmd.none)
         Err _ ->
           ({model | loadingState = Failure}, Cmd.none)
-    SelectBranch branch ->
-            ({model | branch = branch}, Cmd.none)
-    SelectCity city ->
-            ({model | city = city}, Cmd.none)
-    SelectCustomerType customer_type ->
-            ({model | customer_type = customer_type}, Cmd.none)
-    SelectGender gender -> 
-            ({model | gender = gender}, Cmd.none)
-    SelectProductLine product_line -> 
-            ({model | product_line = product_line}, Cmd.none)
-    SelectPayment payment ->
-            ({model | payment = payment}, Cmd.none)
+    SelectBranch select branch ->
+            ({model | branch = branch, selector = select}, Cmd.none)
+    SelectCity select city ->
+            ({model | city = city, selector = select}, Cmd.none)
+    SelectCustomerType select customer_type ->
+            ({model | customer_type = customer_type, selector = select}, Cmd.none)
+    SelectGender select gender -> 
+            ({model | gender = gender, selector = select}, Cmd.none)
+    SelectProductLine select product_line -> 
+            ({model | product_line = product_line, selector = select}, Cmd.none)
+    SelectPayment select payment ->
+            ({model | payment = payment, selector = select}, Cmd.none)
     SelectAttribute attributeSelector attribute ->
         case attributeSelector of
             Data.Attribute1 ->

@@ -18,12 +18,12 @@ type LoadingState
 
 type Msg
   = GotText (Result Http.Error String)
-  | SelectBranch Data.Branch
-  | SelectCity Data.City
-  | SelectCustomerType Data.Customer_type
-  | SelectGender Data.Gender
-  | SelectProductLine Data.Product_line
-  | SelectPayment Data.Payment
+  | SelectBranch Data.Selector Data.Branch
+  | SelectCity Data.Selector Data.City
+  | SelectCustomerType Data.Selector Data.Customer_type
+  | SelectGender Data.Selector Data.Gender
+  | SelectProductLine Data.Selector Data.Product_line
+  | SelectPayment Data.Selector Data.Payment
   | SelectAttribute Data.AttributeSelector Data.Attributes
 
 type alias Model = 
@@ -35,8 +35,10 @@ type alias Model =
     , gender: Data.Gender
     , product_line: Data.Product_line
     , payment: Data.Payment
+    , selector: Data.Selector
     , attribute1: Data.Attributes
     , attribute2: Data.Attributes}--}}
+
 main : Program () Model Msg
 main =
   Browser.element
@@ -51,11 +53,12 @@ init _ =
   ( { loadingState = Loading
     , data = []
     , branch = Data.NoBranch
-    , city = Data.Naypyitaw
+    , city = Data.NoCity
     , customer_type = Data.Normal
     , gender= Data.Male
     , product_line= Data.Electronic_accessories
     , payment= Data.Ewallet
+    , selector = Data.Branch 
     , attribute1= Data.Unit_price
     , attribute2= Data.Quantity }
   , Http.get
@@ -77,6 +80,7 @@ view model =
           let
             data = model.data
             filteredBranchData = filterBranch data model.branch 
+            filteredSalesData = filterSalesData (Data.selectorToStr model.selector) (Data.branchToStr model.branch) data
             xFloat = attributeFilter filteredBranchData model.attribute1
             yFloat = attributeFilter filteredBranchData model.attribute2
 

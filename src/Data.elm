@@ -67,7 +67,7 @@ type Customer_type
 type Gender 
     = Male
     | Female
-    | AllGenderA
+    | AllGender
     | NoGender
 
 type Product_line
@@ -297,3 +297,86 @@ stringToBranch str =
             AllBranch
         _ ->
             NoBranch
+
+brancToStr : Branch -> String
+brancToStr branch =
+    case branch of
+        A ->
+            "A"
+        B ->
+            "B"
+        C -> 
+            "C"
+        AllBranch ->
+            "AllBranch"
+        _ ->
+            "None"
+
+cityToStr : City -> String
+cityToStr city =
+    case city of
+        Yangon ->
+            "Yangon"
+        Naypyitaw ->
+            "Naypyitaw"
+        Mandalay ->
+            "Mandalay"
+        AllCity ->
+            "AllCity"
+        _ ->
+            "None"
+customerToStr : Customer_type -> String
+customerToStr customer =
+    case customer of
+        Member ->
+            "Member"
+        Normal ->
+            "Normal"
+        AllCustomer ->
+            "AllCustomer"
+        _ ->
+            "None"
+
+genderToStr : Gender -> String
+genderToStr gender =
+    case gender of 
+        Male ->
+            "Male"
+        Female ->
+            "Female"
+        AllGenderA ->
+            "AllGender"
+        _ ->
+            None
+
+
+productLineToStr : Product_line -> String
+productLineToStr product_line
+    case product of
+        Health_and_beauty ->
+            "Health_and_beauty"
+        Sports_and_travel ->
+            "Sports_and_travel"
+        Electronic_accessories ->
+            "Electronic_accessories"
+        Home_and_lifestyle ->
+            "Home_and_lifestyle"
+        Food_and_beverages ->
+            "Food_and_beverages"
+        AllProductLine ->
+            "AllProductLine"
+        _ ->
+            "None"
+paymentToStr : Payment -> String
+paymentToStr payment =
+    case payment of
+        Ewallet ->
+            "Ewallet"
+        Cash ->
+            "Cash"
+        Credit_card ->
+            "Credit_card"
+        AllPayment ->
+            "AllPayment"
+        _ ->
+            "None"

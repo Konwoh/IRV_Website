@@ -101,6 +101,15 @@ type AttributeSelector
     = Attribute1
     | Attribute2
 
+type Selector
+    = Branch
+    | City
+    | Customer_type
+    | Gender
+    | Product_line
+    | Payment
+    | NoSelector
+
 salesCopyDecoder : Decoder SaleCopy
 salesCopyDecoder =
     Decode.into SaleCopy
@@ -180,8 +189,8 @@ decodeCustomerType str =
             Normal
         "Member" ->
             Member
-        "AllCostumer" ->
-            AllCostumer
+        "AllCustomer" ->
+            AllCustomer
         _ -> 
             NoCustomer
 
@@ -390,3 +399,39 @@ paymentToStr payment =
             "AllPayment"
         _ ->
             "None"
+
+selectorToStr : Selector -> String
+selectorToStr selector =
+    case selector of
+        Branch ->
+            "Branch"
+        City ->
+            "City"
+        Customer_type ->
+            "Customer_type"
+        Product_line ->
+            "Product_line"
+        Gender ->
+            "Gender"
+        Payment ->
+            "Payment"
+        NoSelector ->
+            "NoSelector"
+
+strToSelector : String -> Selector
+strToSelector str =
+    case str of
+        "Branch" ->
+            Branch
+        "City" ->
+            City
+        "Customer_type" ->
+            Customer_type
+        "Product_line" ->
+            Product_line
+        "Gender" ->
+            Gender
+        "Payment" ->
+            Payment
+        _ ->
+            NoSelector

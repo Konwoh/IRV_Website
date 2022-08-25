@@ -118,6 +118,14 @@ view model =
                  , buttonAttribut2
                  , buttonBranch
                  , buttonCity
+                 , buttonCustomer
+                 , buttonProduct
+                 , buttonGender
+                 , buttonPayment
+                 , Html.br [][]
+                 , Html.text "Angwendeter Filter:"
+                 , Html.text (" " ++ (selectorToStr model.selector))
+                 , Html.text (" " ++ nominalAttrSelector)
                  , scatterplot xyData]
 
 subscriptions : Model -> Sub Msg
@@ -184,7 +192,7 @@ buttonAttribut2 =
 buttonBranch : Html Msg
 buttonBranch =
     Html.select 
-        [ onInput(\i -> SelectBranch (Data.strToSelector "Branch") (Data.stringToBranch i))]
+        [ onInput(\i -> SelectBranch (Data.strToSelector "Branch") (Data.decodeBranch i))]
         [ Html.option [ value "A"] [Html.text "A"]
         , Html.option [ value "B"] [Html.text "B"]
         , Html.option [ value "C"] [Html.text "C"]
@@ -199,3 +207,39 @@ buttonCity =
         , Html.option [ value "Naypyitaw"] [Html.text "Naypyitaw"]
         , Html.option [ value "Mandalay"] [Html.text "Mandalay"]
         , Html.option [ value "AllCity"] [Html.text "AllCity"]]
+
+buttonCustomer : Html Msg
+buttonCustomer =
+    Html.select 
+        [ onInput(\i -> SelectCustomerType (Data.strToSelector "Customer_type") (Data.decodeCustomerType i))]
+        [ Html.option [ value "Member"] [Html.text "Member"]
+        , Html.option [ value "Normal"] [Html.text "Normal"]
+        , Html.option [ value "AllCustomer"] [Html.text "AllCustomer"]]
+
+buttonProduct : Html Msg
+buttonProduct =
+    Html.select 
+        [ onInput(\i -> SelectProductLine (Data.strToSelector "Product_line") (Data.strToProductLine i))]
+        [ Html.option [ value "Health_and_beauty"] [Html.text "Health_and_beauty"]
+        , Html.option [ value "Electronic_accessories"] [Html.text "Electronic_accessories"]
+        , Html.option [ value "Home_and_lifestyle"] [Html.text "Home_and_lifestyle"]
+        , Html.option [ value "Sports_and_travel"] [Html.text "Sports_and_travel"]
+        , Html.option [ value "Food_and_beverages"] [Html.text "Food_and_beverages"]
+        , Html.option [ value "AllProductLine"] [Html.text "AllProductLine"]]
+
+buttonGender : Html Msg
+buttonGender =
+    Html.select 
+        [ onInput(\i -> SelectGender (Data.strToSelector "Gender") (Data.decodeGender i))]
+        [ Html.option [ value "Male"] [Html.text "Male"]
+        , Html.option [ value "Female"] [Html.text "Female"]
+        , Html.option [ value "AllGender"] [Html.text "AllGender"]]
+
+buttonPayment : Html Msg
+buttonPayment =
+    Html.select 
+        [ onInput(\i -> SelectPayment (Data.strToSelector "Payment") (Data.strToPayment2 i))]
+        [ Html.option [ value "Ewallet"] [Html.text "Ewallet"]
+        , Html.option [ value "Cash"] [Html.text "Cash"]
+        , Html.option [ value "Credit_card"] [Html.text "Credit_card"]
+        , Html.option [ value "AllPayment"] [Html.text "AllPayment"]]

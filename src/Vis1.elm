@@ -155,9 +155,10 @@ toPoint pointName x y=
     Point pointName x y
 
 -- toPoint Funktion die wählbaren Parameter übergeben --
-salesPoint: String -> Float -> Float -> Point
-salesPoint saleName xValues yValues=
-    toPoint saleName xValues yValues 
+{--salesPoint: Data.Sale -> String -> String-> Point
+salesPoint m attr1 attr2 =
+    toPoint m.invoice_ID attr1 attr2 --}
+
 
 -- XYdatapoint Datenstrukutr erstellt mit anwenden der salespointFunktion auf den sales Parameter --
 filterSales: List Data.Sale -> (Data.Sale -> Point) -> XYdatapoint

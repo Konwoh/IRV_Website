@@ -79,11 +79,31 @@ view model =
     Success ->
           let
             data = model.data
-            filteredBranchData = filterBranch data model.branch 
-            filteredSalesData = filterSalesData (Data.selectorToStr model.selector) (Data.branchToStr model.branch) data
-            xFloat = attributeFilter filteredBranchData model.attribute1
-            yFloat = attributeFilter filteredBranchData model.attribute2
+            --filteredBranchData = filterBranch data model.branch 
+            nominalAttrSelector =
+                if model.selector == Data.Branch then
+                    Data.branchToStr model.branch
+                else if model.selector == Data.City then
+                    Data.cityToStr model.city
+                else if model.selector == Data.Customer_type then
+                    Data.customerToStr model.customer_type
+                else if model.selector == Data.Product_line then
+                    Data.productLineToStr model.product_line
+                else if model.selector == Data.Gender then
+                    Data.genderToStr model.gender
+                else
+                    Data.paymentToStr model.payment
+                
+            invoiceData = List.map .invoice_ID data
+            filteredSalesData = filterSalesData (Data.selectorToStr model.selector) (nominalAttrSelector) data
 
+            -- x Werte der Koordinaten und Invoice ID als Tuple --
+            xFloat : List (String, Float)
+            xFloat = attributeFilter filteredSalesData model.attribute1
+            -- y Werte der Koordinaten und Invoice ID als Tuple --
+            yFloat : List (String, Float)
+            yFloat = attributeFilter filteredSalesData model.attribute2
+            -- Point Name wird durch Tuple.first rausgezogen und die x- und y-Koordinaten über Tuple.second --
             pointsList: List Point
             pointsList = List.map3 Vis1.toPoint (List.map .invoice_ID data) (xFloat) (yFloat)
 

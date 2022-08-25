@@ -172,5 +172,74 @@ filterSales saleList salesFunc =
 
 
 filterBranch: List Data.Sale -> Data.Branch -> List Data.Sale
-filterBranch salesList branch=
-    List.filter (\a -> a.branch == branch) salesList
+filterBranch data branch1=
+    if branch1 == Data.A then
+        List.filter (\a -> a.branch == branch1) data
+    else if branch1 == Data.B then
+        List.filter (\a -> a.branch == branch1) data
+    else if branch1 == Data.C then
+        List.filter (\a -> a.branch == branch1) data
+    else
+        data
+filterSalesData : String -> String -> List Data.Sale -> List Data.Sale
+filterSalesData filterAttr filterAttr2 data =
+    case filterAttr of
+        "Branch" ->
+            if filterAttr2 == (Data.branchToStr Data.A) then
+                List.filter (\a -> a.branch == (Data.decodeBranch filterAttr2)) data
+            else if filterAttr2 == (Data.branchToStr Data.B) then
+                List.filter (\a -> a.branch == (Data.decodeBranch filterAttr2)) data
+            else if filterAttr2 == (Data.branchToStr Data.C)then
+                List.filter (\a -> a.branch == (Data.decodeBranch filterAttr2)) data
+            else
+                data
+        "City" ->
+            if filterAttr2 == (Data.cityToStr Data.Yangon) then
+                List.filter(\a -> a.city == Data.decodeCity filterAttr2) data
+            else if filterAttr2 == (Data.cityToStr Data.Naypyitaw) then
+                List.filter(\a -> a.city == Data.decodeCity filterAttr2) data
+            else if filterAttr2 == (Data.cityToStr Data.Mandalay) then
+                List.filter(\a -> a.city == Data.decodeCity filterAttr2) data
+            else
+                data
+        "Customer_type" ->
+            if filterAttr2 == (Data.customerToStr Data.Normal) then
+                List.filter(\a -> a.customer_type == Data.decodeCustomerType filterAttr2) data
+            else if filterAttr2 == (Data.customerToStr Data.Member) then
+                List.filter(\a -> a.customer_type == Data.decodeCustomerType filterAttr2) data
+            else
+                data
+        "Gender" ->
+            if filterAttr2 == (Data.genderToStr Data.Male) then
+                List.filter(\a -> a.gender == Data.decodeGender filterAttr2) data
+            else if filterAttr2 == (Data.genderToStr Data.Female) then
+                List.filter(\a -> a.gender == Data.decodeGender filterAttr2) data
+            else
+                data
+        "Product_line" ->
+            if filterAttr2 == (Data.productLineToStr Data.Health_and_beauty) then
+                List.filter(\a -> a.product_line == Data.decodeProductLine filterAttr2) data
+            else if filterAttr2 == (Data.productLineToStr Data.Electronic_accessories) then
+                List.filter(\a -> a.product_line == Data.decodeProductLine filterAttr2) data
+            else if filterAttr2 == (Data.productLineToStr Data.Home_and_lifestyle) then
+                List.filter(\a -> a.product_line == Data.decodeProductLine filterAttr2) data
+            else if filterAttr2 == (Data.productLineToStr Data.Sports_and_travel) then
+                List.filter(\a -> a.product_line == Data.decodeProductLine filterAttr2) data
+            else if filterAttr2 == (Data.productLineToStr Data.Food_and_beverages) then
+                List.filter(\a -> a.product_line == Data.decodeProductLine filterAttr2) data
+            else
+                data
+        "Payment" ->
+            if filterAttr2 == (Data.paymentToStr Data.Ewallet) then
+                List.filter(\a -> a.payment == Data.decodePayment filterAttr2) data
+            else if filterAttr2 == (Data.paymentToStr Data.Cash) then
+                List.filter(\a -> a.payment == Data.decodePayment filterAttr2) data
+            else if filterAttr2 == (Data.paymentToStr Data.Credit_card) then
+                List.filter(\a -> a.payment == Data.decodePayment filterAttr2) data
+            else
+                data 
+        _ ->
+            data
+        
+            
+

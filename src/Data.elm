@@ -242,21 +242,21 @@ attributeFilter: List Sale -> Attributes -> List (String, Float)
 attributeFilter sales attr =
     case attr of
         Unit_price ->
-            List.map (\i -> (i.invoice_ID, i.unit_price)) sales
+            List.map (\i -> ("invoice_ID: " ++ i.invoice_ID, i.unit_price)) sales
         Quantity ->
-            List.map (\i -> (i.invoice_ID, i.quantity)) sales
+            List.map (\i -> ("invoice_ID: " ++ i.invoice_ID, i.quantity)) sales
         Tax ->
-            List.map (\i -> (i.invoice_ID, i.tax)) sales
+            List.map (\i -> ("invoice_ID: " ++ i.invoice_ID, i.tax)) sales
         Total_price ->
-            List.map (\i -> (i.invoice_ID, i.total)) sales
+            List.map (\i -> ("invoice_ID: " ++ i.invoice_ID, i.total)) sales
         Cogs ->
-            List.map (\i -> (i.invoice_ID, i.cogs)) sales
+            List.map (\i -> ("invoice_ID: " ++ i.invoice_ID, i.cogs)) sales
         Gross_margin_percentage ->
-            List.map (\i -> (i.invoice_ID, i.gross_margin_percentage)) sales
+            List.map (\i -> ("invoice_ID: " ++ i.invoice_ID, i.gross_margin_percentage)) sales
         Gross_income ->
-            List.map (\i -> (i.invoice_ID, i.gross_income)) sales
+            List.map (\i -> ("invoice_ID: " ++ i.invoice_ID, i.gross_income)) sales
         Rating ->
-            List.map (\i -> (i.invoice_ID, i.rating)) sales
+            List.map (\i -> ("invoice_ID: " ++ i.invoice_ID, i.rating)) sales
         NoAttribute ->
             []
 

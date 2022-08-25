@@ -231,32 +231,32 @@ decodePayment str =
             Ewallet
         "Cash" ->
             Cash
-        "Credit card" ->
+        "Credit.card" ->
             Credit_card
         "AllPayment" ->
             AllPayment
         _ ->
             NoPayment
 
-attributeFilter: List Sale -> Attributes -> List Float
+attributeFilter: List Sale -> Attributes -> List (String, Float)
 attributeFilter sales attr =
     case attr of
         Unit_price ->
-            List.map .unit_price sales
+            List.map (\i -> (i.invoice_ID, i.unit_price)) sales
         Quantity ->
-            List.map .quantity sales
+            List.map (\i -> (i.invoice_ID, i.quantity)) sales
         Tax ->
-            List.map .tax sales
+            List.map (\i -> (i.invoice_ID, i.tax)) sales
         Total_price ->
-            List.map .total sales
+            List.map (\i -> (i.invoice_ID, i.total)) sales
         Cogs ->
-            List.map .cogs sales
+            List.map (\i -> (i.invoice_ID, i.cogs)) sales
         Gross_margin_percentage ->
-            List.map .gross_margin_percentage sales
+            List.map (\i -> (i.invoice_ID, i.gross_margin_percentage)) sales
         Gross_income ->
-            List.map .gross_income sales
+            List.map (\i -> (i.invoice_ID, i.gross_income)) sales
         Rating ->
-            List.map .rating sales
+            List.map (\i -> (i.invoice_ID, i.rating)) sales
         NoAttribute ->
             []
 
@@ -304,18 +304,38 @@ stringToAttr str =
         _ ->
             NoAttribute
 
-stringToBranch str =
+strToPayment2: String -> Payment
+strToPayment2 str =
     case str of
-        "A" ->
-            A
-        "B" ->
-            B
-        "C" ->
-            C
-        "AllBranch" ->
-            AllBranch
+        "Ewallet" ->
+            Ewallet
+        "Cash" ->
+            Cash
+        "Credit_card" ->
+            Credit_card
+        "AllPayment" ->
+            AllPayment
         _ ->
-            NoBranch
+            NoPayment
+
+
+strToProductLine: String -> Product_line
+strToProductLine str =
+    case str of
+       "Health_and_beauty" ->
+            Health_and_beauty
+       "Electronic_accessories" ->
+            Electronic_accessories
+       "Home_and_lifestyle" ->
+            Home_and_lifestyle
+       "Sports_and_travel" ->
+            Sports_and_travel
+       "Food_and_beverages" ->
+            Food_and_beverages
+       "AllProductLine" ->
+            AllProductLine
+       _ -> 
+            NoProductLine
 
 branchToStr : Branch -> String
 branchToStr branch =
@@ -329,7 +349,7 @@ branchToStr branch =
         AllBranch ->
             "AllBranch"
         _ ->
-            "None"
+            "Nichts ausgewählt"
 
 cityToStr : City -> String
 cityToStr city =

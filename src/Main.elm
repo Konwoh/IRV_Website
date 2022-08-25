@@ -9,6 +9,8 @@ import Data exposing(Sale, salesCopyDecoder, attributeFilter, attrToString, stri
 import Html exposing (div)
 import Html.Events exposing (onInput)
 import Html.Attributes exposing (value)
+import Csv.Decode exposing (string)
+import Data exposing (selectorToStr)
 
 
 type LoadingState
@@ -52,17 +54,17 @@ init : () -> (Model, Cmd Msg)
 init _ =
   ( { loadingState = Loading
     , data = []
-    , branch = Data.NoBranch
+    , branch = Data.AllBranch
     , city = Data.NoCity
     , customer_type = Data.Normal
     , gender= Data.Male
-    , product_line= Data.Electronic_accessories
+    , product_line= Data.Health_and_beauty
     , payment= Data.Ewallet
     , selector = Data.Branch 
     , attribute1= Data.Unit_price
     , attribute2= Data.Quantity }
   , Http.get
-      { url = "https://cors-anywhere.herokuapp.com/https://cloud.informatik.uni-halle.de/s/pSKk3izyLRQ84C9/download/supermarket_sales%20-%20Sheet1.csv"
+      { url = "https://raw.githubusercontent.com/Konwoh/Information-Retrieveal/main/supermarket_sales%20gegegege.csv"
       , expect = Http.expectString GotText
       }
   )
@@ -105,8 +107,8 @@ view model =
             yFloat = attributeFilter filteredSalesData model.attribute2
             -- Point Name wird durch Tuple.first rausgezogen und die x- und y-Koordinaten über Tuple.second --
             pointsList: List Point
-            pointsList = List.map3 Vis1.toPoint (List.map .invoice_ID data) (xFloat) (yFloat)
-
+            pointsList = List.map3 Vis1.toPoint (List.map (Tuple.first) xFloat) (List.map (Tuple.second) xFloat) (List.map (Tuple.second) yFloat)
+            -- Daten werden hier in die XYdatapoint Datenstruktur geschrieben, um es der scatterplot Funktion zu übergeben --
             xyData:XYdatapoint
             xyData = XYdatapoint (Data.attrToString model.attribute1) (Data.attrToString model.attribute2) pointsList
           

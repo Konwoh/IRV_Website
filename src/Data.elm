@@ -317,8 +317,8 @@ stringToBranch str =
         _ ->
             NoBranch
 
-brancToStr : Branch -> String
-brancToStr branch =
+branchToStr : Branch -> String
+branchToStr branch =
     case branch of
         A ->
             "A"
@@ -363,14 +363,14 @@ genderToStr gender =
             "Male"
         Female ->
             "Female"
-        AllGenderA ->
+        AllGender ->
             "AllGender"
         _ ->
-            None
+            "None"
 
 
 productLineToStr : Product_line -> String
-productLineToStr product_line
+productLineToStr product =
     case product of
         Health_and_beauty ->
             "Health_and_beauty"

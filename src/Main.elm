@@ -95,6 +95,7 @@ view model =
           div [] [ buttonAttribut1
                  , buttonAttribut2
                  , buttonBranch
+                 , buttonCity
                  , scatterplot xyData]
 
 subscriptions : Model -> Sub Msg
@@ -161,8 +162,18 @@ buttonAttribut2 =
 buttonBranch : Html Msg
 buttonBranch =
     Html.select 
-        [ onInput(\i -> SelectBranch (Data.stringToBranch i))]
+        [ onInput(\i -> SelectBranch (Data.strToSelector "Branch") (Data.stringToBranch i))]
         [ Html.option [ value "A"] [Html.text "A"]
         , Html.option [ value "B"] [Html.text "B"]
         , Html.option [ value "C"] [Html.text "C"]
         , Html.option [ value "AllBranch"] [Html.text "All Branches"]]
+
+
+buttonCity : Html Msg
+buttonCity =
+    Html.select 
+        [ onInput(\i -> SelectCity (Data.strToSelector "City") (Data.decodeCity i))]
+        [ Html.option [ value "Yangon"] [Html.text "Yangon"]
+        , Html.option [ value "Naypyitaw"] [Html.text "Naypyitaw"]
+        , Html.option [ value "Mandalay"] [Html.text "Mandalay"]
+        , Html.option [ value "AllCity"] [Html.text "AllCity"]]

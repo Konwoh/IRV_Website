@@ -72,6 +72,7 @@ type Gender
 
 type Product_line
     = Health_and_beauty
+    | Fashion_accessories
     | Electronic_accessories
     | Home_and_lifestyle
     | Sports_and_travel
@@ -211,6 +212,8 @@ decodeProductLine str =
     case str of
        "Health and beauty" ->
             Health_and_beauty
+       "Fashion accessories" ->
+            Fashion_accessories
        "Electronic accessories" ->
             Electronic_accessories
        "Home and lifestyle" ->
@@ -322,15 +325,17 @@ strToPayment2 str =
 strToProductLine: String -> Product_line
 strToProductLine str =
     case str of
-       "Health_and_beauty" ->
+       "Health and beauty" ->
             Health_and_beauty
-       "Electronic_accessories" ->
+       "Fashion accessories" ->
+            Fashion_accessories
+       "Electronic accessories" ->
             Electronic_accessories
-       "Home_and_lifestyle" ->
+       "Home and lifestyle" ->
             Home_and_lifestyle
-       "Sports_and_travel" ->
+       "Sports and travel" ->
             Sports_and_travel
-       "Food_and_beverages" ->
+       "Food and beverages" ->
             Food_and_beverages
        "AllProductLine" ->
             AllProductLine
@@ -393,15 +398,17 @@ productLineToStr : Product_line -> String
 productLineToStr product =
     case product of
         Health_and_beauty ->
-            "Health_and_beauty"
+            "Health and beauty"
         Sports_and_travel ->
-            "Sports_and_travel"
+            "Sports and travel"
+        Fashion_accessories ->
+            "Fashion accessories"
         Electronic_accessories ->
-            "Electronic_accessories"
+            "Electronic accessories"
         Home_and_lifestyle ->
-            "Home_and_lifestyle"
+            "Home and lifestyle"
         Food_and_beverages ->
-            "Food_and_beverages"
+            "Food and beverages"
         AllProductLine ->
             "AllProductLine"
         _ ->

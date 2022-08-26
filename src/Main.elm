@@ -219,12 +219,13 @@ buttonCustomer =
 buttonProduct : Html Msg
 buttonProduct =
     Html.select 
-        [ onInput(\i -> SelectProductLine (Data.strToSelector "Product_line") (Data.strToProductLine i))]
-        [ Html.option [ value "Health_and_beauty"] [Html.text "Health_and_beauty"]
-        , Html.option [ value "Electronic_accessories"] [Html.text "Electronic_accessories"]
-        , Html.option [ value "Home_and_lifestyle"] [Html.text "Home_and_lifestyle"]
-        , Html.option [ value "Sports_and_travel"] [Html.text "Sports_and_travel"]
-        , Html.option [ value "Food_and_beverages"] [Html.text "Food_and_beverages"]
+        [ onInput(\i -> SelectProductLine (Data.strToSelector "Product_line") (Data.decodeProductLine i))]
+        [ Html.option [ value "Health and beauty"] [Html.text "Health_and_beauty"]
+        , Html.option [ value "Fashion accessories"] [Html.text "Fashion_accessories"]
+        , Html.option [ value "Electronic accessories"] [Html.text "Electronic_accessories"]
+        , Html.option [ value "Home and lifestyle"] [Html.text "Home_and_lifestyle"]
+        , Html.option [ value "Sports and travel"] [Html.text "Sports_and_travel"]
+        , Html.option [ value "Food and beverages"] [Html.text "Food_and_beverages"]
         , Html.option [ value "AllProductLine"] [Html.text "AllProductLine"]]
 
 buttonGender : Html Msg

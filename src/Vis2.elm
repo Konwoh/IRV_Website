@@ -85,7 +85,36 @@ parallelCoordinates w ar model saleList=
                             [ TypedSvg.Core.text desc ]
                     )
                     (swapListItem model.dimDescription indexA indexB)
-        ]
+        ] ++ (let
+                    drawPoint p =
+                        let
+                            linePath : Path.Path
+                            linePath =
+                                List.map3
+                                    (\desc s px ->
+                                        Just
+                                            ( Scale.convert scaleX <| toFloat desc
+                                            , Scale.convert s px
+                                            )
+                                    )
+                                    (List.range 1 (List.length model.dimDescription))
+                                    [scale1, scale2, scale3, scale4]
+                                    p
+                                    |> Shape.line Shape.linearCurve
+                        in
+                        Path.element linePath
+                            [ stroke <| Paint <| Color.rgba 0 0 0 0.8
+                            , strokeWidth <|  1
+                            , fill PaintNone
+                            ]
+                in
+                model.data
+                    |> List.map
+                        (\dataset ->
+                            g [ transform [ Translate (padding - 1) padding ] ]
+                                (List.map (.value >> drawPoint) dataset)
+                        )
+               )
         
     
     

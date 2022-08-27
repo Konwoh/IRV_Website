@@ -72,6 +72,19 @@ parallelCoordinates w ar model saleList=
                             [ axis ]
                     )
                     listAxis]
+        , g [ transform [ Translate (padding - 1) 0 ] ] <|
+                List.indexedMap
+                    (\i desc ->
+                        text_
+                            [ fontFamily [ "sans-serif" ]
+                            , fontSize (Px 10)
+                            , x <| Scale.convert scaleX (toFloat i + 1)
+                            , y <| padding * 7 / 8
+                            , textAnchor AnchorMiddle
+                            ]
+                            [ TypedSvg.Core.text desc ]
+                    )
+                    (swapListItem model.dimDescription indexA indexB)
         ]
         
     

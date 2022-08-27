@@ -24,10 +24,15 @@ indexA =
 indexB: Int
 indexB =
     0
+padding : Float
+padding =
+    60
 
-parallelCoordinates : Float -> Float -> MultiDimData -> Svg Msg
+parallelCoordinates : Float -> Float -> MultiDimData -> List Sale-> Svg msg
 parallelCoordinates w ar model saleList=
     let
+        h : Float 
+        h = w / ar 
         readModelList =
                 model.data
                     |> List.concat
@@ -42,27 +47,30 @@ parallelCoordinates w ar model saleList=
         cogsFloats = List.map .cogs saleList
         gross_margin_percentageFloats = List.map .gross_margin_percentage saleList
         gross_incomeFloats = List.map .gross_income saleList
+        ratingFloats = List.map .rating saleList
 
         scale1 =
-            Scale.linear (h, 0) (wideExtent unit_priceFloats)
+            Scale.linear (h, 0) (Vis1.wideExtent unit_priceFloats)
         scale2 =
-            Scale.linear (h, 0) (wideExtent quantityFloats)
+            Scale.linear (h, 0) (Vis1.wideExtent quantityFloats)
         scale3 =
-            Scale.linear (h, 0) (wideExtent taxFloats)
+            Scale.linear (h, 0) (Vis1.wideExtent taxFloats)
         scale4 =
-            Scale.linear (h, 0) (wideExtent totalFloats)
+            Scale.linear (h, 0) (Vis1.wideExtent totalFloats)
         scale5 =
-            Scale.linear (h, 0) (wideExtent cogsFloats)
+            Scale.linear (h, 0) (Vis1.wideExtent cogsFloats)
         scale6 =
-            Scale.linear (h, 0) (wideExtent gross_margin_percentageFloats)
+            Scale.linear (h, 0) (Vis1.wideExtent gross_margin_percentageFloats)
         scale7 =
-            Scale.linear (h, 0) (wideExtent gross_incomeFloats)
+            Scale.linear (h, 0) (Vis1.wideExtent gross_incomeFloats)
+        scale8 =
+            Scale.linear (h, 0) (Vis1.wideExtent ratingFloats)
         
         scaleX =
-            Scale.linear (0, w) ( 1, 7)
+            Scale.linear (0, w) ( 1, 8)
         
         scaleList =
-            [scale1, scale2, scale3, scale4, scale5, scale6, scale7]
+            [scale1, scale2, scale3, scale4, scale5, scale6, scale7, scale8]
         
         swapListItem l a b=
             List.Extra.swapAt a b l 
@@ -74,6 +82,8 @@ parallelCoordinates w ar model saleList=
 
     in
     svg [ viewBox 0 0 (w + 2 * padding) (h + 2 * padding), TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 
+        ]
+    <|
         [ style [] 
             []
         , g [ transform [ Translate (padding - 1) padding ] ] <|
@@ -86,7 +96,7 @@ parallelCoordinates w ar model saleList=
                             ]
                             [ axis ]
                     )
-                    listAxis]
+                    listAxis
         , g [ transform [ Translate (padding - 1) 0 ] ] <|
                 List.indexedMap
                     (\i desc ->
@@ -100,7 +110,8 @@ parallelCoordinates w ar model saleList=
                             [ TypedSvg.Core.text desc ]
                     )
                     (swapListItem model.dimDescription indexA indexB)
-        ] ++ (let
+        ] 
+        ++ (let
                     drawPoint p =
                         let
                             linePath : Path.Path
@@ -113,7 +124,7 @@ parallelCoordinates w ar model saleList=
                                             )
                                     )
                                     (List.range 1 (List.length model.dimDescription))
-                                    [scale1, scale2, scale3, scale4]
+                                    [scale1, scale2, scale3, scale4, scale5, scale6, scale7, scale8]
                                     p
                                     |> Shape.line Shape.linearCurve
                         in
@@ -131,16 +142,13 @@ parallelCoordinates w ar model saleList=
                         )
                )
         
-    
-    
-
 multiPoint : String -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> MultiDimPoint 
 multiPoint pointName unit_price quantity tax total cogs gross_margin_percentage gross_income rating =
     MultiDimPoint pointName [unit_price, quantity, tax, total, cogs, gross_margin_percentage, gross_income, rating]
 
-saleToMultiPoint: Sale -> MultiDimPoint
+saleToMultiPoint: Data.Sale -> MultiDimPoint
 saleToMultiPoint sale =
-    Maybe.map5 multiPoint (sale.unit_price) (sale.quantity) (sale.tax) (sale.total) (sale.cogs) (sale. gross_margin_percentage) (sale.gross_income) (sale.rating) 
+    multiPoint (sale.invoice_ID) (sale.unit_price) (sale.quantity) (sale.tax) (sale.total) (sale.cogs) (sale.gross_margin_percentage) (sale.gross_income) (sale.rating) 
 
 
 type alias MultiDimPoint =

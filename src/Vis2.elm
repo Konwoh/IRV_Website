@@ -59,6 +59,19 @@ parallelCoordinates w ar model saleList=
 
     in
     svg [ viewBox 0 0 (w + 2 * padding) (h + 2 * padding), TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 
+        [ style [] 
+            []
+        , g [ transform [ Translate (padding - 1) padding ] ] <|
+                List.indexedMap
+                    (\i axis ->
+                        g
+                            [ transform
+                                [ Translate (Scale.convert scaleX (toFloat i + 1)) 0
+                                ]
+                            ]
+                            [ axis ]
+                    )
+                    listAxis]
         ]
         
     

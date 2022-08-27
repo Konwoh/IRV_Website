@@ -64,7 +64,7 @@ init _ =
     , attribute1= Data.Unit_price
     , attribute2= Data.Quantity }
   , Http.get
-      { url = "https://raw.githubusercontent.com/Konwoh/Information-Retrieveal/main/supermarket_sales%20gegegege.csv"
+      { url = "https://raw.githubusercontent.com/Konwoh/Information-Retrieveal/main/supermarket_sales.csv"
       , expect = Http.expectString GotText
       }
   )

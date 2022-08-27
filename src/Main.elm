@@ -112,6 +112,13 @@ view model =
             -- Daten werden hier in die XYdatapoint Datenstruktur geschrieben, um es der scatterplot Funktion zu übergeben --
             xyData:XYdatapoint
             xyData = XYdatapoint (Data.attrToString model.attribute1) (Data.attrToString model.attribute2) pointsList
+
+            multiPointSale : List MultiDimPoint
+            multiPointSale = List.map Vis2.saleToMultiPoint data
+
+            multiDimData =
+              MultiDimData [ "unit_price", "quantity", "tax", "total", "cogs", "gross_margin_percentage", "gross_income", "rating" ]
+                [multiPointSale]
           
           in
           
@@ -127,7 +134,9 @@ view model =
                  , Html.text "Angwendeter Filter:"
                  , Html.text (" " ++ (selectorToStr model.selector))
                  , Html.text (" " ++ nominalAttrSelector)
-                 , scatterplot xyData]
+                 , scatterplot xyData
+                 , Vis2.parallelCoordinates 900 2 multiDimData data
+                 ]
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =

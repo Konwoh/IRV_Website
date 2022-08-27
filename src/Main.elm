@@ -5,6 +5,7 @@ import Html exposing (Html, text)
 import Http
 import Csv.Decode as Decode
 import Vis1 exposing (..)
+import Vis2 exposing (..)
 import Data exposing(Sale, salesCopyDecoder, attributeFilter, attrToString, stringToAttr)
 import Html exposing (div)
 import Html.Events exposing (onInput)

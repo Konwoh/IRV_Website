@@ -1,7 +1,22 @@
 module Vis2 exposing (..)
 import Data exposing (Attributes(..))
 import Data exposing (Sale)
-
+import Axis
+import Color
+import Html exposing (Html, text)
+import Scale exposing (ContinuousScale)
+import Statistics
+import List.Extra
+import TypedSvg exposing (circle, g, rect, style, svg, text_, ellipse, line)
+import TypedSvg.Attributes exposing (class, color, fill, fontFamily, fontSize, stroke, textAnchor, transform, viewBox, fontWeight)
+import TypedSvg.Attributes.InPx exposing (cx, cy, height, r, width, x, y, rx, ry, x1, x2, y1, y2, strokeWidth)
+import TypedSvg.Core exposing (Attribute, Svg)
+import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Paint(..), Transform(..), px, percent)
+import Tuple
+import List
+import Shape
+import Path
+import Vis1 exposing (wideExtent)
 indexA: Int
 indexA = 
     0

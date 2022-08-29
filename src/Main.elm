@@ -41,7 +41,9 @@ type alias Model =
     , payment: Data.Payment
     , selector: Data.Selector
     , attribute1: Data.Attributes
-    , attribute2: Data.Attributes}--}}
+    , attribute2: Data.Attributes
+    , indexSelector1: Data.AxisIndex
+    , indexSelector2: Data.AxisIndex}--}}
 
 main : Program () Model Msg
 main =
@@ -64,7 +66,9 @@ init _ =
     , payment= Data.Ewallet
     , selector = Data.Branch 
     , attribute1= Data.Unit_price
-    , attribute2= Data.Quantity }
+    , attribute2= Data.Quantity
+    , indexSelector1 = Data.Erste_Achse 
+    , indexSelector2 = Data.Erste_Achse}
   , Http.get
       { url = "https://raw.githubusercontent.com/Konwoh/Information-Retrieveal/main/supermarket_sales.csv"
       , expect = Http.expectString GotText

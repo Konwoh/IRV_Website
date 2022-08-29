@@ -149,7 +149,9 @@ view model =
                  , Html.text (" " ++ (selectorToStr model.selector))
                  , Html.text (" " ++ nominalAttrSelector)
                  , scatterplot xyData
-                 , Vis2.parallelCoordinates 900 2 multiDimData data
+                 , buttonIndex1
+                 , buttonIndex2
+                 , Vis2.parallelCoordinates 900 2 multiDimData data (Data.indexSelectorToInt model.indexSelector1) (Data.indexSelectorToInt model.indexSelector2)
                  ]
 
 subscriptions : Model -> Sub Msg
@@ -274,3 +276,30 @@ buttonPayment =
         , Html.option [ value "Cash"] [Html.text "Cash"]
         , Html.option [ value "Credit_card"] [Html.text "Credit_card"]
         , Html.option [ value "AllPayment"] [Html.text "AllPayment"]]
+
+
+buttonIndex1 : Html Msg
+buttonIndex1 =
+    Html.select 
+        [ onInput(\i -> SelectIndex Data.FirstIndex (Data.strToIndexSelector i))]
+        [ Html.option [ value "Erste Achse"] [Html.text "Erste Achse"]
+        , Html.option [ value "Zweite Achse"] [Html.text "Zweite Achse"]
+        , Html.option [ value "Dritte Achse"] [Html.text "Dritte Achse"]
+        , Html.option [ value "Vierte Achse"] [Html.text "Vierte Achse"]
+        , Html.option [ value "Fünfte Achse"] [Html.text "Fünfte Ache"]
+        , Html.option [ value "Sechste Achse"] [Html.text "Sechste Achse"]
+        , Html.option [ value "Siebte Achse"] [Html.text "Siebte Achse"]
+        , Html.option [ value "Achte Achse"] [Html.text "Achte Achse"]]
+
+buttonIndex2 : Html Msg
+buttonIndex2 =
+    Html.select 
+        [ onInput(\i -> SelectIndex Data.SecondIndex (Data.strToIndexSelector i))]
+        [ Html.option [ value "Erste Achse"] [Html.text "Erste Achse"]
+        , Html.option [ value "Zweite Achse"] [Html.text "Zweite Achse"]
+        , Html.option [ value "Dritte Achse"] [Html.text "Dritte Achse"]
+        , Html.option [ value "Vierte Achse"] [Html.text "Vierte Achse"]
+        , Html.option [ value "Fünfte Achse"] [Html.text "Fünfte Ache"]
+        , Html.option [ value "Sechste Achse"] [Html.text "Sechste Achse"]
+        , Html.option [ value "Siebte Achse"] [Html.text "Siebte Achse"]
+        , Html.option [ value "Achte Achse"] [Html.text "Achte Achse"]]

@@ -111,6 +111,21 @@ type Selector
     | Payment
     | NoSelector
 
+type AxisIndex 
+    = Erste_Achse
+    | Zweite_Achse
+    | Dritte_Achse
+    | Vierte_Achse
+    | Fünfte_Achse
+    | Sechste_Achse
+    | Siebte_Achse
+    | Achte_Achse
+
+type IndexSelector
+    = FirstIndex
+    | SecondIndex
+
+
 salesCopyDecoder : Decoder SaleCopy
 salesCopyDecoder =
     Decode.into SaleCopy

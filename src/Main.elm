@@ -29,6 +29,7 @@ type Msg
   | SelectProductLine Data.Selector Data.Product_line
   | SelectPayment Data.Selector Data.Payment
   | SelectAttribute Data.AttributeSelector Data.Attributes
+  | SelectIndex Data.IndexSelector Data.AxisIndex
 
 type alias Model = 
     { loadingState: LoadingState
@@ -175,6 +176,12 @@ update msg model =
                     ({model | attribute1 = attribute}, Cmd.none)
             Data.Attribute2 ->
                     ({model | attribute2 = attribute}, Cmd.none)
+    SelectIndex indexSelector index ->
+        case indexSelector of
+            Data.FirstIndex ->
+                    ({model | indexSelector1 = index}, Cmd.none)
+            Data.SecondIndex ->
+                    ({model | indexSelector2 = index}, Cmd.none)
 
 buttonAttribut1 : Html Msg
 buttonAttribut1 =

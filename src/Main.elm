@@ -119,8 +119,16 @@ view model =
             xyData:XYdatapoint
             xyData = XYdatapoint (Data.attrToString model.attribute1) (Data.attrToString model.attribute2) pointsList
 
+            multiPoint : String -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> MultiDimPoint 
+            multiPoint pointName unit_price quantity tax total cogs gross_margin_percentage gross_income rating =
+                MultiDimPoint pointName (List.Extra.swapAt (Data.indexSelectorToInt model.indexSelector1) (Data.indexSelectorToInt model.indexSelector2) [unit_price, quantity, tax, total, cogs, gross_margin_percentage, gross_income, rating])
+
+            saleToMultiPoint: Data.Sale -> MultiDimPoint
+            saleToMultiPoint sale =
+                multiPoint (sale.invoice_ID) (sale.unit_price) (sale.quantity) (sale.tax) (sale.total) (sale.cogs) (sale.gross_margin_percentage) (sale.gross_income) (sale.rating) 
+            
             multiPointSale : List MultiDimPoint
-            multiPointSale = List.map Vis2.saleToMultiPoint data
+            multiPointSale = List.map saleToMultiPoint filteredSalesData
 
             multiDimData =
               MultiDimData [ "unit_price", "quantity", "tax", "total", "cogs", "gross_margin_percentage", "gross_income", "rating" ]

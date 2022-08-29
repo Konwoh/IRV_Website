@@ -28,8 +28,8 @@ padding : Float
 padding =
     60
 
-parallelCoordinates : Float -> Float -> MultiDimData -> List Sale-> Svg msg
-parallelCoordinates w ar model saleList=
+parallelCoordinates : Float -> Float -> MultiDimData -> List Sale-> Int -> Int -> Svg msg
+parallelCoordinates w ar model saleList index1 index2=
     let
         h : Float 
         h = w / ar 
@@ -77,7 +77,7 @@ parallelCoordinates w ar model saleList=
 
 
         listAxis =
-            List.map (Axis.left [ Axis.tickCount 8 ]) (swapListItem scaleList indexA indexB)
+            List.map (Axis.left [ Axis.tickCount 8 ]) (swapListItem scaleList index1 index2)
 
 
     in
@@ -109,7 +109,7 @@ parallelCoordinates w ar model saleList=
                             ]
                             [ TypedSvg.Core.text desc ]
                     )
-                    (swapListItem model.dimDescription indexA indexB)
+                    (swapListItem model.dimDescription index1 index2)
         ] 
         ++ (let
                     drawPoint p =
@@ -124,7 +124,7 @@ parallelCoordinates w ar model saleList=
                                             )
                                     )
                                     (List.range 1 (List.length model.dimDescription))
-                                    [scale1, scale2, scale3, scale4, scale5, scale6, scale7, scale8]
+                                    (swapListItem [scale1, scale2, scale3, scale4, scale5, scale6, scale7, scale8] index1 index2)
                                     p
                                     |> Shape.line Shape.linearCurve
                         in
@@ -142,13 +142,6 @@ parallelCoordinates w ar model saleList=
                         )
                )
         
-multiPoint : String -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> MultiDimPoint 
-multiPoint pointName unit_price quantity tax total cogs gross_margin_percentage gross_income rating =
-    MultiDimPoint pointName [unit_price, quantity, tax, total, cogs, gross_margin_percentage, gross_income, rating]
-
-saleToMultiPoint: Data.Sale -> MultiDimPoint
-saleToMultiPoint sale =
-    multiPoint (sale.invoice_ID) (sale.unit_price) (sale.quantity) (sale.tax) (sale.total) (sale.cogs) (sale.gross_margin_percentage) (sale.gross_income) (sale.rating) 
 
 
 type alias MultiDimPoint =

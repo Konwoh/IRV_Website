@@ -477,3 +477,44 @@ strToSelector str =
             Payment
         _ ->
             NoSelector
+
+indexSelectorToInt: AxisIndex -> Int
+indexSelectorToInt idx =
+    case idx of
+        Erste_Achse ->
+            0
+        Zweite_Achse ->
+            1
+        Dritte_Achse ->
+            2
+        Vierte_Achse ->
+            3
+        Fünfte_Achse ->
+            4
+        Sechste_Achse ->
+            5
+        Siebte_Achse ->
+            6
+        Achte_Achse ->
+            7
+
+
+strToIndexSelector: String -> AxisIndex
+strToIndexSelector str =
+    case str of
+        "Erste Achse" ->
+            Erste_Achse
+        "Zweite Achse" ->
+            Zweite_Achse
+        "Dritte Achse" ->
+            Dritte_Achse
+        "Vierte Achse" ->
+            Vierte_Achse
+        "Fünfte Achse" ->
+            Fünfte_Achse
+        "Sechste Achse" ->
+            Sechste_Achse
+        "Siebte Achse" ->
+            Siebte_Achse
+        _ ->
+            Achte_Achse

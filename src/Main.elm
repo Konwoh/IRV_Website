@@ -12,6 +12,7 @@ import Html.Events exposing (onInput)
 import Html.Attributes exposing (value)
 import Csv.Decode exposing (string)
 import Data exposing (selectorToStr)
+import List.Extra
 
 
 type LoadingState

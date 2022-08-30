@@ -1,3 +1,8 @@
+import Html
+import Dict
+import Data exposing (CurrentRecordedData)
+import RecursivePattern exposing (..)
+
 recrusivePatternPlot model dateList totalList=
     let
         createDateDictNothing =
@@ -28,7 +33,7 @@ recrusivePatternPlot model dateList totalList=
                 
         ourData : List (CurrentRecordedData msg)
         ourData =
-            List.map2 (\a b -> RecordedData a b []) pixelList dateDataList
+            List.map2 (\a b -> RecursivePattern.RecordedData a b []) pixelList dateDataList
                 
         drawPosition : CurrentRecordedData msg -> CurrentRecordedData msg
         drawPosition (RecursivePattern.RecordedData pixelPosition value _) =
@@ -78,7 +83,7 @@ recrusivePatternPlot model dateList totalList=
                 attributeList
                 []
     in
-    
+    Html.div[[ g [] <| List.map (drawPosition >> drawStyle >> draw_neu) ourData ]]
 
 createDateList : List String
 createDateList =

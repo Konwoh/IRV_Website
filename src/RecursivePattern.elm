@@ -1,4 +1,5 @@
-module RecursivePattern exposing (..)module RecursivePattern exposing (Level(..), PixelPositon(..), RecordedData(..), augementLevel, createPixelMap, createPixelMapTopDown, createPixelMapZ, startPosition)
+module RecursivePattern exposing (..)
+
 
 {-| This library provides the option of creating a list of pixel positions based on a specific order
 

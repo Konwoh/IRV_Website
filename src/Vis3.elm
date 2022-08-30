@@ -25,6 +25,10 @@ recrusivePatternPlot model dateList totalList=
                 pixelList =
                     RecursivePattern.createPixelMap RecursivePattern.startPosition
                         (RecursivePattern.augementLevel level)
+                
+                ourData : List (CurrentRecordedData msg)
+                ourData =
+                    List.map2 (\a b -> RecordedData a b []) pixelList dateDataList
     in
     
 

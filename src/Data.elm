@@ -2,7 +2,7 @@
 module Data exposing (..)
 
 import Csv.Decode as Decode exposing (Decoder)
-
+import RecursivePattern as RP
 type alias Sale =
   { invoice_ID : String
   , branch : Branch
@@ -125,6 +125,8 @@ type IndexSelector
     = FirstIndex
     | SecondIndex
 
+type alias CurrentRecordedData msg =
+    RP.RecordedData ( String, Maybe Float ) (List (TypedSvg.Core.Attribute msg))
 
 salesCopyDecoder : Decoder SaleCopy
 salesCopyDecoder =

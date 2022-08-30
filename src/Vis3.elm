@@ -8,6 +8,23 @@ recrusivePatternPlot model dateList totalList=
                     Dict.union createDateDictReal createDateDictNothing
         dateDataList =
                     Dict.toList dateData
+        
+        ( w, h ) =
+                    ( 500, 500 )
+
+                level =
+                    [ RecursivePattern.Level 5 1
+                    , RecursivePattern.Level 1 12
+                    , RecursivePattern.Level 4 1
+                    , RecursivePattern.Level 2 3
+                    , RecursivePattern.Level 3 3
+                    , RecursivePattern.Level 1 1
+                    ]
+
+                pixelList : List RecursivePattern.PixelPositon
+                pixelList =
+                    RecursivePattern.createPixelMap RecursivePattern.startPosition
+                        (RecursivePattern.augementLevel level)
     in
     
 

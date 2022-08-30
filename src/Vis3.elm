@@ -1,3 +1,16 @@
+recrusivePatternPlot model dateList totalList=
+    let
+        createDateDictNothing =
+                    Dict.fromList createDateTuple
+        createDateDictReal =
+                    Dict.fromList (List.map2 Tuple.pair dateList totalList)
+        dateData =
+                    Dict.union createDateDictReal createDateDictNothing
+        dateDataList =
+                    Dict.toList dateData
+    in
+    
+
 createDateList : List String
 createDateList =
     let

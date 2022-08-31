@@ -153,6 +153,21 @@ view model =
             uniqueDates = List.map Tuple.first final
                           |> List.Extra.unique
 
+            dateSumList: List(String,Maybe Float)
+            dateSumList =
+              let
+                  indexList: List(List(Int))
+                  indexList = List.map(\a-> List.Extra.elemIndices a (List.map Tuple.first final) ) uniqueDates
+
+                  valueList: List (List(Float))
+                  valueList = List.map(\i-> List.map(\j-> Maybe.withDefault 0.0 (List.Extra.getAt j (List.map(\h -> (Tuple.second h)) final)))i ) indexList
+                  sumList: List Float
+                  sumList = List.map List.sum valueList
+
+              in
+                  List.Extra.zip uniqueDates sumList
+                    |> List.map(\(a,b) -> (a, String.fromFloat b))
+                    |> List.map(\(a,b) -> (a, String.toFloat b)) 
           in
           
           div [] [ buttonAttribut1

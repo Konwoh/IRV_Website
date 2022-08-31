@@ -390,3 +390,12 @@ buttonIndex2 =
         , Html.option [ value "Sechste Achse"] [Html.text "Sechste Achse"]
         , Html.option [ value "Siebte Achse"] [Html.text "Siebte Achse"]
         , Html.option [ value "Achte Achse"] [Html.text "Achte Achse"]]
+
+buttonPlot : Html Msg
+buttonPlot =
+    Html.select
+        [ onInput(\i -> SelectPage (Data.strToPageSelector i))]
+        [ Html.option [ value "Scatterplot"] [Html.text "Scatterplot"]
+        , Html.option [ value "ParallelCoordPlot"] [Html.text "ParallelCoordsPlot"]
+        , Html.option [ value "RecursivePatternPlot"] [Html.text "Recursive Pattern Plot"]
+        ]

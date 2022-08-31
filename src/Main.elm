@@ -34,6 +34,7 @@ type Msg
   | SelectPayment Data.Selector Data.Payment
   | SelectAttribute Data.AttributeSelector Data.Attributes
   | SelectIndex Data.IndexSelector Data.AxisIndex
+  | SelectPage Data.PageSelector
 
 type alias Model = 
     { loadingState: LoadingState
@@ -253,6 +254,8 @@ update msg model =
                     ({model | indexSelector1 = index}, Cmd.none)
             Data.SecondIndex ->
                     ({model | indexSelector2 = index}, Cmd.none)
+    SelectPage page ->
+          ({model | pageSelector = page}, Cmd.none)
 
 buttonAttribut1 : Html Msg
 buttonAttribut1 =

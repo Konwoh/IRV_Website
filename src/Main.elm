@@ -138,6 +138,12 @@ view model =
               MultiDimData [ "unit_price", "quantity", "tax", "total", "cogs", "gross_margin_percentage", "gross_income", "rating" ]
                 [multiPointSale]
           
+            dateStringList =
+              List.map .date filteredSalesData
+            tupleStringList: List (String,Float)
+            tupleStringList = List.map2 Tuple.pair dateStringList totalList
+            tupleDateList: List(Date, Float)
+            tupleDateList = List.map (\(a, b) -> (Result.withDefault (fromOrdinalDate 1970 1)(Date.fromIsoString a), b)) tupleStringList
           in
           
           div [] [ buttonAttribut1

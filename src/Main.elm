@@ -137,18 +137,20 @@ view model =
             multiDimData =
               MultiDimData [ "unit_price", "quantity", "tax", "total", "cogs", "gross_margin_percentage", "gross_income", "rating" ]
                 [multiPointSale]
-          
+            
             dateStringList =
               List.map .date filteredSalesData
             tupleStringList: List (String,Float)
             tupleStringList = List.map2 Tuple.pair dateStringList totalList
             tupleDateList: List(Date, Float)
             tupleDateList = List.map (\(a, b) -> (Result.withDefault (fromOrdinalDate 1970 1)(Date.fromIsoString a), b)) tupleStringList
+
             sortedTupleDateList =
                 List.sortWith (\t1 t2 -> Date.compare (Tuple.first t1) (Tuple.first t2)) tupleDateList
 
             final =
-              List.map(\(a,b) -> (Date.toIsoString a,b)) sortedTupleDateList
+              List.map(\(a,b) -> (Date.toIsoString a,b)) sortedTupleDateList       
+
             uniqueDates: List(String)
             uniqueDates = List.map Tuple.first final
                           |> List.Extra.unique
@@ -168,6 +170,12 @@ view model =
                   List.Extra.zip uniqueDates sumList
                     |> List.map(\(a,b) -> (a, String.fromFloat b))
                     |> List.map(\(a,b) -> (a, String.toFloat b)) 
+
+            totalList =
+              List.map .total filteredSalesData
+                --|> List.map String.fromFloat 
+                --|> List.map String.toFloat
+          
           in
           
           div [] [ buttonAttribut1
@@ -186,6 +194,23 @@ view model =
                  , buttonIndex1
                  , buttonIndex2
                  , Vis2.parallelCoordinates 900 2 multiDimData data (Data.indexSelectorToInt model.indexSelector1) (Data.indexSelectorToInt model.indexSelector2)
+                 , Html.br[][]
+                 , Vis3.recrusivePatternPlot dateSumList
+                 , Html.br[][]
+                 , List.map
+                    (\data2 ->
+                        Html.li []
+                            [ Html.text
+                                (Tuple.first data2
+                                    ++ ",  "
+                                    ++ (Tuple.second data2
+                                            |> String.fromFloat
+                                       )
+                                )
+                            ]
+                    )
+                    (List.map(\(a,b)-> (a, Maybe.withDefault 0.0 b)) dateSumList)
+                    |> Html.ul []
                  ]
 
 subscriptions : Model -> Sub Msg

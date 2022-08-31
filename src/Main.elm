@@ -144,6 +144,11 @@ view model =
             tupleStringList = List.map2 Tuple.pair dateStringList totalList
             tupleDateList: List(Date, Float)
             tupleDateList = List.map (\(a, b) -> (Result.withDefault (fromOrdinalDate 1970 1)(Date.fromIsoString a), b)) tupleStringList
+            sortedTupleDateList =
+                List.sortWith (\t1 t2 -> Date.compare (Tuple.first t1) (Tuple.first t2)) tupleDateList
+
+            final =
+              List.map(\(a,b) -> (Date.toIsoString a,b)) sortedTupleDateList
           in
           
           div [] [ buttonAttribut1

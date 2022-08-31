@@ -1,26 +1,32 @@
+module Vis3 exposing(..)
+
 import Html
 import Dict
 import Data exposing (CurrentRecordedData)
 import RecursivePattern exposing (..)
+import Helper
+import Scale
+import Scale.Color
+import Time exposing (Month(..))
+import TypedSvg exposing (g, rect, svg)
+import TypedSvg.Attributes exposing (height, preserveAspectRatio, viewBox, width)
+import TypedSvg.Core exposing (..)
+import TypedSvg.Types exposing (Length(..))
+import Date exposing (..)
+import Color
 
-recrusivePatternPlot model dateList totalList=
+recrusivePatternPlot tuple=
     let
-        createDateDictNothing =
-                    Dict.fromList createDateTuple
-        createDateDictReal =
-                    Dict.fromList (List.map2 Tuple.pair dateList totalList)
-        dateData =
-                    Dict.union createDateDictReal createDateDictNothing
         dateDataList =
-                    Dict.toList dateData
+                    tuple
         
         ( w, h ) =
                     ( 500, 500 )
 
         level =
-            [ RecursivePattern.Level 5 1
-            , RecursivePattern.Level 1 12
-            , RecursivePattern.Level 4 1
+            [ RecursivePattern.Level 1 1
+            , RecursivePattern.Level 1 1
+            , RecursivePattern.Level 1 1
             , RecursivePattern.Level 2 3
             , RecursivePattern.Level 3 3
             , RecursivePattern.Level 1 1
@@ -40,7 +46,7 @@ recrusivePatternPlot model dateList totalList=
             RecursivePattern.RecordedData
                 pixelPosition
                 value
-                (RecursivePattern.Helper.drawTuplePosition ( w, h ) level pixelPosition)
+                (Helper.drawTuplePosition ( w, h ) level pixelPosition)
 
         currentData : List Float
         currentData =
@@ -65,7 +71,7 @@ recrusivePatternPlot model dateList totalList=
                         Maybe.map
                             (Scale.Color.tealBluesInterpolator
                                 << Scale.convert
-                                    (RecursivePattern.Helper.normalizeFloat currentData)
+                                    (Helper.normalizeFloat currentData)
                             )
                             value
             ]
@@ -83,16 +89,21 @@ recrusivePatternPlot model dateList totalList=
                 attributeList
                 []
     in
-    Html.div[[ g [] <| List.map (drawPosition >> drawStyle >> draw_neu) ourData ]]
+    Html.div[][svg
+                [ viewBox 0 0 500 500
+                , width (Px 500.0)
+                , height (Px 500.0)
+                ]
+                [ g [] <| List.map (drawPosition >> drawStyle >> draw_neu) ourData ]]
 
 createDateList : List String
 createDateList =
     let
         start =
-            fromCalendarDate 2019 Jan 1
+            Date.fromCalendarDate 2019 Jan 1
 
         end =
-            fromCalendarDate 2019 Mar 30
+            Date.fromCalendarDate 2019 Mar 30
     in
     List.map Date.toIsoString (range Day 1 start end)
 

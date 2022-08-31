@@ -6,6 +6,7 @@ import Http
 import Csv.Decode as Decode
 import Vis1 exposing (..)
 import Vis2 exposing (..)
+import Vis3 exposing (..)
 import Data exposing(Sale, salesCopyDecoder, attributeFilter, attrToString, stringToAttr)
 import Html exposing (div)
 import Html.Events exposing (onInput)
@@ -13,7 +14,10 @@ import Html.Attributes exposing (value)
 import Csv.Decode exposing (string)
 import Data exposing (selectorToStr)
 import List.Extra
-
+import List exposing (filter)
+import Date exposing (..)
+import Time exposing (Month(..), Weekday(..))
+import Dict exposing (..)
 
 type LoadingState
   = Failure
@@ -71,7 +75,7 @@ init _ =
     , indexSelector1 = Data.Erste_Achse 
     , indexSelector2 = Data.Erste_Achse}
   , Http.get
-      { url = "https://raw.githubusercontent.com/Konwoh/Information-Retrieveal/main/supermarket_sales.csv"
+      { url = "https://raw.githubusercontent.com/Konwoh/Information-Retrieveal/main/supermarket_neu2.csv"
       , expect = Http.expectString GotText
       }
   )

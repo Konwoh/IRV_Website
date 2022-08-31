@@ -1,4 +1,4 @@
-module RecursivePattern.Helper exposing (drawTuplePosition, normalizeFloat, normalizeInt, scaleHeight, scaleWidth, getW, getH)
+module Helper exposing (drawTuplePosition, normalizeFloat, normalizeInt, scaleHeight, scaleWidth, getW, getH)
 
 
 {-| This library provides support for creating pixel-oriented visualizations

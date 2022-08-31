@@ -1,8 +1,9 @@
 
 module Data exposing (..)
-
 import Csv.Decode as Decode exposing (Decoder)
 import RecursivePattern as RP
+import TypedSvg.Core exposing (..)
+
 type alias Sale =
   { invoice_ID : String
   , branch : Branch

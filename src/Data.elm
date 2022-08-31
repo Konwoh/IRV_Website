@@ -526,3 +526,13 @@ strToIndexSelector str =
             Siebte_Achse
         _ ->
             Achte_Achse
+
+strToPageSelector : String -> PageSelector
+strToPageSelector str =
+    case str of
+        "Scatterplot" ->
+            Scatterplot
+        "ParallelCoordPlot" ->
+            ParallelCoordPlot
+        _ ->
+            RecursivePatternPlot

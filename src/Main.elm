@@ -93,7 +93,21 @@ view model =
       text "Loading..."
 
     Success ->
+            div [] [ buttonPlot
+                   , Html.br[][]
+                   , buttonBranch
+                   , buttonCity
+                   , buttonCustomer
+                   , buttonProduct
+                   , buttonGender
+                   , buttonPayment
+                   , Html.br [][]
+                   ,
+                   
+          div[][
+                   
           let
+            data : List Data.Sale
             data = model.data
             --filteredBranchData = filterBranch data model.branch 
             nominalAttrSelector =
@@ -112,109 +126,118 @@ view model =
                 
             invoiceData = List.map .invoice_ID data
             filteredSalesData = filterSalesData (Data.selectorToStr model.selector) (nominalAttrSelector) data
-
-            -- x Werte der Koordinaten und Invoice ID als Tuple --
-            xFloat : List (String, Float)
-            xFloat = attributeFilter filteredSalesData model.attribute1
-            -- y Werte der Koordinaten und Invoice ID als Tuple --
-            yFloat : List (String, Float)
-            yFloat = attributeFilter filteredSalesData model.attribute2
-            -- Point Name wird durch Tuple.first rausgezogen und die x- und y-Koordinaten über Tuple.second --
-            pointsList: List Point
-            pointsList = List.map3 Vis1.toPoint (List.map (Tuple.first) xFloat) (List.map (Tuple.second) xFloat) (List.map (Tuple.second) yFloat)
-            -- Daten werden hier in die XYdatapoint Datenstruktur geschrieben, um es der scatterplot Funktion zu übergeben --
-            xyData:XYdatapoint
-            xyData = XYdatapoint (Data.attrToString model.attribute1) (Data.attrToString model.attribute2) pointsList
-
-            multiPoint : String -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> MultiDimPoint 
-            multiPoint pointName unit_price quantity tax total cogs gross_margin_percentage gross_income rating =
-                MultiDimPoint pointName (List.Extra.swapAt (Data.indexSelectorToInt model.indexSelector1) (Data.indexSelectorToInt model.indexSelector2) [unit_price, quantity, tax, total, cogs, gross_margin_percentage, gross_income, rating])
-
-            saleToMultiPoint: Data.Sale -> MultiDimPoint
-            saleToMultiPoint sale =
-                multiPoint (sale.invoice_ID) (sale.unit_price) (sale.quantity) (sale.tax) (sale.total) (sale.cogs) (sale.gross_margin_percentage) (sale.gross_income) (sale.rating) 
-            
-            multiPointSale : List MultiDimPoint
-            multiPointSale = List.map saleToMultiPoint filteredSalesData
-
-            multiDimData =
-              MultiDimData [ "unit_price", "quantity", "tax", "total", "cogs", "gross_margin_percentage", "gross_income", "rating" ]
-                [multiPointSale]
-            
-            dateStringList =
-              List.map .date filteredSalesData
-            tupleStringList: List (String,Float)
-            tupleStringList = List.map2 Tuple.pair dateStringList totalList
-            tupleDateList: List(Date, Float)
-            tupleDateList = List.map (\(a, b) -> (Result.withDefault (fromOrdinalDate 1970 1)(Date.fromIsoString a), b)) tupleStringList
-
-            sortedTupleDateList =
-                List.sortWith (\t1 t2 -> Date.compare (Tuple.first t1) (Tuple.first t2)) tupleDateList
-
-            final =
-              List.map(\(a,b) -> (Date.toIsoString a,b)) sortedTupleDateList       
-
-            uniqueDates: List(String)
-            uniqueDates = List.map Tuple.first final
-                          |> List.Extra.unique
-
-            dateSumList: List(String,Maybe Float)
-            dateSumList =
-              let
-                  indexList: List(List(Int))
-                  indexList = List.map(\a-> List.Extra.elemIndices a (List.map Tuple.first final) ) uniqueDates
-
-                  valueList: List (List(Float))
-                  valueList = List.map(\i-> List.map(\j-> Maybe.withDefault 0.0 (List.Extra.getAt j (List.map(\h -> (Tuple.second h)) final)))i ) indexList
-                  sumList: List Float
-                  sumList = List.map List.sum valueList
-
-              in
-                  List.Extra.zip uniqueDates sumList
-                    |> List.map(\(a,b) -> (a, String.fromFloat b))
-                    |> List.map(\(a,b) -> (a, String.toFloat b)) 
-
-            totalList =
-              List.map .total filteredSalesData
-                --|> List.map String.fromFloat 
-                --|> List.map String.toFloat
           
           in
-          
-          div [] [ buttonAttribut1
-                 , buttonAttribut2
-                 , buttonBranch
-                 , buttonCity
-                 , buttonCustomer
-                 , buttonProduct
-                 , buttonGender
-                 , buttonPayment
-                 , Html.br [][]
-                 , Html.text "Angwendeter Filter:"
-                 , Html.text (" " ++ (selectorToStr model.selector))
-                 , Html.text (" " ++ nominalAttrSelector)
-                 , scatterplot xyData
-                 , buttonIndex1
-                 , buttonIndex2
-                 , Vis2.parallelCoordinates 900 2 multiDimData data (Data.indexSelectorToInt model.indexSelector1) (Data.indexSelectorToInt model.indexSelector2)
-                 , Html.br[][]
-                 , Vis3.recrusivePatternPlot dateSumList
-                 , Html.br[][]
-                 , List.map
-                    (\data2 ->
-                        Html.li []
-                            [ Html.text
-                                (Tuple.first data2
-                                    ++ ",  "
-                                    ++ (Tuple.second data2
-                                            |> String.fromFloat
-                                       )
-                                )
-                            ]
-                    )
-                    (List.map(\(a,b)-> (a, Maybe.withDefault 0.0 b)) dateSumList)
-                    |> Html.ul []
-                 ]
+          case model.pageSelector of
+            Data.Scatterplot ->
+              let
+                -- x Werte der Koordinaten und Invoice ID als Tuple --
+                xFloat : List (String, Float)
+                xFloat = attributeFilter filteredSalesData model.attribute1
+                -- y Werte der Koordinaten und Invoice ID als Tuple --
+                yFloat : List (String, Float)
+                yFloat = attributeFilter filteredSalesData model.attribute2
+                -- Point Name wird durch Tuple.first rausgezogen und die x- und y-Koordinaten über Tuple.second --
+                pointsList: List Point
+                pointsList = List.map3 Vis1.toPoint (List.map (Tuple.first) xFloat) (List.map (Tuple.second) xFloat) (List.map (Tuple.second) yFloat)
+                -- Daten werden hier in die XYdatapoint Datenstruktur geschrieben, um es der scatterplot Funktion zu übergeben --
+                xyData: XYdatapoint
+                xyData = XYdatapoint (Data.attrToString model.attribute1) (Data.attrToString model.attribute2) pointsList
+              in 
+                div[][ Html.text "Angwendeter Filter:"
+                     , Html.text (" " ++ (selectorToStr model.selector))
+                     , Html.text (" " ++ nominalAttrSelector)
+                     , Html.br[][]
+                     , buttonAttribut1
+                     , buttonAttribut2
+                     , scatterplot xyData]
+            Data.ParallelCoordPlot ->
+              let
+                  multiPoint : String -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> MultiDimPoint 
+                  multiPoint pointName unit_price quantity tax total cogs gross_margin_percentage gross_income rating =
+                      MultiDimPoint pointName (List.Extra.swapAt (Data.indexSelectorToInt model.indexSelector1) (Data.indexSelectorToInt model.indexSelector2) [unit_price, quantity, tax, total, cogs, gross_margin_percentage, gross_income, rating])
+
+                  saleToMultiPoint: Data.Sale -> MultiDimPoint
+                  saleToMultiPoint sale =
+                      multiPoint (sale.invoice_ID) (sale.unit_price) (sale.quantity) (sale.tax) (sale.total) (sale.cogs) (sale.gross_margin_percentage) (sale.gross_income) (sale.rating) 
+
+                  multiPointSale : List MultiDimPoint
+                  multiPointSale = List.map saleToMultiPoint filteredSalesData
+
+                  multiDimData =
+                    MultiDimData [ "unit_price", "quantity", "tax", "total", "cogs", "gross_margin_percentage", "gross_income", "rating" ]
+                      [multiPointSale]
+              in
+                div[][ Html.text "Angwendeter Filter:"
+                     , Html.text (" " ++ (selectorToStr model.selector))
+                     , Html.text (" " ++ nominalAttrSelector)
+                     , Html.br[][]
+                     , buttonIndex1
+                     , buttonIndex2
+                     , Vis2.parallelCoordinates 900 2 multiDimData data (Data.indexSelectorToInt model.indexSelector1) (Data.indexSelectorToInt model.indexSelector2)]
+                     
+            Data.RecursivePatternPlot ->
+              let
+                  dateStringList =
+                    List.map .date filteredSalesData
+
+                  totalList =
+                    List.map .total filteredSalesData
+                      --|> List.map String.fromFloat 
+                      --|> List.map String.toFloat
+
+                  tupleStringList: List (String,Float)
+                  tupleStringList = List.map2 Tuple.pair dateStringList totalList
+                  tupleDateList: List(Date, Float)
+                  tupleDateList = List.map (\(a, b) -> (Result.withDefault (fromOrdinalDate 1970 1)(Date.fromIsoString a), b)) tupleStringList
+
+                  sortedTupleDateList =
+                      List.sortWith (\t1 t2 -> Date.compare (Tuple.first t1) (Tuple.first t2)) tupleDateList
+
+                  final =
+                    List.map(\(a,b) -> (Date.toIsoString a,b)) sortedTupleDateList       
+
+                  uniqueDates: List(String)
+                  uniqueDates = List.map Tuple.first final
+                                |> List.Extra.unique
+
+                  dateSumList: List(String,Maybe Float)
+                  dateSumList =
+                    let
+                        indexList: List(List(Int))
+                        indexList = List.map(\a-> List.Extra.elemIndices a (List.map Tuple.first final) ) uniqueDates
+
+                        valueList: List (List(Float))
+                        valueList = List.map(\i-> List.map(\j-> Maybe.withDefault 0.0 (List.Extra.getAt j (List.map(\h -> (Tuple.second h)) final)))i ) indexList
+                        sumList: List Float
+                        sumList = List.map List.sum valueList
+
+                    in
+                        List.Extra.zip uniqueDates sumList
+                          |> List.map(\(a,b) -> (a, String.fromFloat b))
+                          |> List.map(\(a,b) -> (a, String.toFloat b)) 
+                        
+               in
+                  div[][ Html.text "Angwendeter Filter:"
+                       , Html.text (" " ++ (selectorToStr model.selector))
+                       , Html.text (" " ++ nominalAttrSelector)
+                       , Html.br[][]
+                       , Vis3.recrusivePatternPlot dateSumList
+                       , List.map
+                            (\data2 ->
+                                Html.li []
+                                    [ Html.text
+                                        (Tuple.first data2
+                                            ++ ",  "
+                                            ++ (Tuple.second data2
+                                                    |> String.fromFloat
+                                               )
+                                        )
+                                    ]
+                            )
+                            (List.map(\(a,b)-> (a, Maybe.withDefault 0.0 b)) dateSumList)
+                            |> Html.ul []]
+            ]]
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =

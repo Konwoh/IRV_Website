@@ -7,7 +7,7 @@ import Csv.Decode as Decode
 import Vis1 exposing (..)
 import Vis2 exposing (..)
 import Vis3 exposing (..)
-import Data exposing(Sale, salesCopyDecoder, attributeFilter, attrToString, stringToAttr)
+import Data exposing(Sale, attributeFilter, attrToString, stringToAttr)
 import Html exposing (div)
 import Html.Events exposing (onInput)
 import Html.Attributes exposing (value)
@@ -175,7 +175,7 @@ view model =
                      , buttonIndex1
                      , buttonIndex2
                      , Vis2.parallelCoordinates 900 2 multiDimData data (Data.indexSelectorToInt model.indexSelector1) (Data.indexSelectorToInt model.indexSelector2)]
-                     
+
             Data.RecursivePatternPlot ->
               let
                   dateStringList =

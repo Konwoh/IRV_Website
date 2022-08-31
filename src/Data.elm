@@ -24,26 +24,6 @@ type alias Sale =
   , rating : Float
   }
 
-type alias SaleCopy =
-  { invoice_ID : String
-  , branch : String
-  , city : String
-  , customer_type : String
-  , gender : String
-  , product_line : String
-  , unit_price : Float
-  , quantity : Float
-  , tax : Float
-  , total : Float
-  , date : String
-  , time : String
-  , payment : String
-  , cogs : Float
-  , gross_margin_percentage : Float
-  , gross_income : Float
-  , rating : Float
-  }
-
 type Branch
     = A
     | B
@@ -133,28 +113,6 @@ type PageSelector
     = Scatterplot
     | ParallelCoordPlot
     | RecursivePatternPlot
-
-salesCopyDecoder : Decoder SaleCopy
-salesCopyDecoder =
-    Decode.into SaleCopy
-        |> Decode.pipeline (Decode.column 0  Decode.string)
-        |> Decode.pipeline (Decode.column 1  Decode.string)
-        |> Decode.pipeline (Decode.column 2  Decode.string)
-        |> Decode.pipeline (Decode.column 3  Decode.string)
-        |> Decode.pipeline (Decode.column 4  Decode.string)
-        |> Decode.pipeline (Decode.column 5  Decode.string)
-        |> Decode.pipeline (Decode.column 6  Decode.float)
-        |> Decode.pipeline (Decode.column 7  Decode.float)
-        |> Decode.pipeline (Decode.column 8  Decode.float)
-        |> Decode.pipeline (Decode.column 9  Decode.float)
-        |> Decode.pipeline (Decode.column 10 Decode.string)
-        |> Decode.pipeline (Decode.column 11 Decode.string)
-        |> Decode.pipeline (Decode.column 12 Decode.string)
-        |> Decode.pipeline (Decode.column 13 Decode.float)
-        |> Decode.pipeline (Decode.column 14 Decode.float)
-        |> Decode.pipeline (Decode.column 15 Decode.float)
-        |> Decode.pipeline (Decode.column 16 Decode.float)
-
 
 salesDecoder : Decoder Sale
 salesDecoder =

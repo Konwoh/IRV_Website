@@ -129,6 +129,11 @@ type IndexSelector
 type alias CurrentRecordedData msg =
     RP.RecordedData ( String, Maybe Float ) (List (TypedSvg.Core.Attribute msg))
 
+type PageSelector
+    = Scatterplot
+    | ParallelCoordPlot
+    | RecursivePatternPlot
+
 salesCopyDecoder : Decoder SaleCopy
 salesCopyDecoder =
     Decode.into SaleCopy

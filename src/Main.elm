@@ -48,7 +48,8 @@ type alias Model =
     , attribute1: Data.Attributes
     , attribute2: Data.Attributes
     , indexSelector1: Data.AxisIndex
-    , indexSelector2: Data.AxisIndex}--}}
+    , indexSelector2: Data.AxisIndex
+    , pageSelector: Data.PageSelector}
 
 main : Program () Model Msg
 main =
@@ -73,7 +74,8 @@ init _ =
     , attribute1= Data.Unit_price
     , attribute2= Data.Quantity
     , indexSelector1 = Data.Erste_Achse 
-    , indexSelector2 = Data.Erste_Achse}
+    , indexSelector2 = Data.Erste_Achse
+    , pageSelector = Data.Scatterplot}
   , Http.get
       { url = "https://raw.githubusercontent.com/Konwoh/Information-Retrieveal/main/supermarket_neu2.csv"
       , expect = Http.expectString GotText

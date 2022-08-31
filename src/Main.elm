@@ -149,6 +149,10 @@ view model =
 
             final =
               List.map(\(a,b) -> (Date.toIsoString a,b)) sortedTupleDateList
+            uniqueDates: List(String)
+            uniqueDates = List.map Tuple.first final
+                          |> List.Extra.unique
+
           in
           
           div [] [ buttonAttribut1

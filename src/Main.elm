@@ -1,7 +1,8 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, text)
+import Html exposing (..)
+import Html.Attributes exposing (..)
 import Http
 import Csv.Decode as Decode
 import Vis1 exposing (..)
@@ -93,19 +94,22 @@ view model =
       text "Loading..."
 
     Success ->
-            div [] [ buttonPlot
-                   , Html.br[][]
-                   , buttonBranch
-                   , buttonCity
-                   , buttonCustomer
-                   , buttonProduct
-                   , buttonGender
-                   , buttonPayment
-                   , Html.br [][]
-                   ,
+            div [style "background" "LightBlue"] 
+                [ div [style "padding" "5px", style "font-size" "18px"] [strong[][text "Grafik auswählen: "], buttonPlot]
+                , Html.br[][]
+                , div[style "display" "flex", style "font-size" "18px"] 
+                    [ div [style "padding" "5px"][text "Branche auswählen: ", buttonBranch]
+                    , div [style "padding" "5px"][text "Stadt auswählen: ", buttonCity]
+                    , div [style "padding" "5px"][text "Kundenstatus auswählen: ", buttonCustomer]
+                    , div [style "padding" "5px"][text "Produktlinie auswählen: ", buttonProduct]
+                    , div [style "padding" "5px"][text "Geschlecht auswählen: ", buttonGender]
+                    , div [style "padding" "5px"][text "Zahlungsart auswählen: ", buttonPayment]
+                    ]
+                , Html.br [][]
+                ,
                    
-          div[][
-                   
+          div[ style "display" "flex", style "justify-content" "center", style "background" "LightBlue", style "height" "100vh" ][
+               div [ style "width" "1200px", style "padding" "60px", style "background" "white", style "overflow-x" "auto" ] [
           let
             data : List Data.Sale
             data = model.data
@@ -124,7 +128,8 @@ view model =
                 else
                     Data.paymentToStr model.payment
                 
-            invoiceData = List.map .invoice_ID data
+
+            filteredSalesData : List Data.Sale
             filteredSalesData = filterSalesData (Data.selectorToStr model.selector) (nominalAttrSelector) data
           
           in
@@ -144,12 +149,11 @@ view model =
                 xyData: XYdatapoint
                 xyData = XYdatapoint (Data.attrToString model.attribute1) (Data.attrToString model.attribute2) pointsList
               in 
-                div[][ Html.text "Angwendeter Filter:"
-                     , Html.text (" " ++ (selectorToStr model.selector))
-                     , Html.text (" " ++ nominalAttrSelector)
+                div[][ div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewählte Dimension: " ++ (selectorToStr model.selector))]]
+                     , div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewähltes Attribut: " ++ nominalAttrSelector)]]
                      , Html.br[][]
-                     , buttonAttribut1
-                     , buttonAttribut2
+                     , div [style "padding" "5px"][text "x-Achse auswählen: ", buttonAttribut1]
+                     , div [style "padding" "5px"] [text "y-Achse auswählen: ", buttonAttribut2]
                      , scatterplot xyData]
             Data.ParallelCoordPlot ->
               let
@@ -165,15 +169,14 @@ view model =
                   multiPointSale = List.map saleToMultiPoint filteredSalesData
 
                   multiDimData =
-                    MultiDimData [ "unit_price", "quantity", "tax", "total", "cogs", "gross_margin_percentage", "gross_income", "rating" ]
+                    MultiDimData [ "Verkaufspreis", "Anzahl gekaufter Produkte", "5 % Steuer", "Gesamtpreis", "Kosten", "prozentuale Gewinnspanne", "Bruttoeinkommen", "Bewertung" ]
                       [multiPointSale]
               in
-                div[][ Html.text "Angwendeter Filter:"
-                     , Html.text (" " ++ (selectorToStr model.selector))
-                     , Html.text (" " ++ nominalAttrSelector)
+                div[][ div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewählte Dimension: " ++ (selectorToStr model.selector))]]
+                     , div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewähltes Attribut: " ++ nominalAttrSelector)]]
                      , Html.br[][]
-                     , buttonIndex1
-                     , buttonIndex2
+                     , div [style "display" "flex"][ div [style "padding" "5px"][text "Tausche...: ", buttonIndex1]
+                            , div [style "padding" "5px"][text "mit: ", buttonIndex2]]
                      , Vis2.parallelCoordinates 900 2 multiDimData data (Data.indexSelectorToInt model.indexSelector1) (Data.indexSelectorToInt model.indexSelector2)]
 
             Data.RecursivePatternPlot ->
@@ -218,11 +221,12 @@ view model =
                           |> List.map(\(a,b) -> (a, String.toFloat b)) 
                         
                in
-                  div[][ Html.text "Angwendeter Filter:"
-                       , Html.text (" " ++ (selectorToStr model.selector))
-                       , Html.text (" " ++ nominalAttrSelector)
+                  div[][ div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewählte Dimension: " ++ (selectorToStr model.selector))]]
+                       , div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewähltes Attribut: " ++ nominalAttrSelector)]]
                        , Html.br[][]
                        , Vis3.recrusivePatternPlot dateSumList
+                       , Html.br[][]
+                       , div[style "font-size" "20px"] [strong [] [Html.text ("Dargestellte List: Datum und kumulierter Verkaufswert an diesem Tag")]]
                        , List.map
                             (\data2 ->
                                 Html.li []
@@ -237,7 +241,7 @@ view model =
                             )
                             (List.map(\(a,b)-> (a, Maybe.withDefault 0.0 b)) dateSumList)
                             |> Html.ul []]
-            ]]
+            ]]]
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
@@ -311,85 +315,85 @@ buttonAttribut2 =
 buttonBranch : Html Msg
 buttonBranch =
     Html.select 
-        [ onInput(\i -> SelectBranch (Data.strToSelector "Branch") (Data.decodeBranch i))]
+        [ onInput(\i -> SelectBranch (Data.strToSelector "Branche") (Data.decodeBranch i))]
         [ Html.option [ value "A"] [Html.text "A"]
         , Html.option [ value "B"] [Html.text "B"]
         , Html.option [ value "C"] [Html.text "C"]
-        , Html.option [ value "AllBranch"] [Html.text "All Branches"]]
+        , Html.option [ value "AllBranch"] [Html.text "Alle Branchen"]]
 
 
 buttonCity : Html Msg
 buttonCity =
     Html.select 
-        [ onInput(\i -> SelectCity (Data.strToSelector "City") (Data.decodeCity i))]
+        [ onInput(\i -> SelectCity (Data.strToSelector "Stadt") (Data.decodeCity i))]
         [ Html.option [ value "Yangon"] [Html.text "Yangon"]
         , Html.option [ value "Naypyitaw"] [Html.text "Naypyitaw"]
         , Html.option [ value "Mandalay"] [Html.text "Mandalay"]
-        , Html.option [ value "AllCity"] [Html.text "AllCity"]]
+        , Html.option [ value "AllCity"] [Html.text "Alle Städte"]]
 
 buttonCustomer : Html Msg
 buttonCustomer =
     Html.select 
-        [ onInput(\i -> SelectCustomerType (Data.strToSelector "Customer_type") (Data.decodeCustomerType i))]
-        [ Html.option [ value "Member"] [Html.text "Member"]
-        , Html.option [ value "Normal"] [Html.text "Normal"]
-        , Html.option [ value "AllCustomer"] [Html.text "AllCustomer"]]
+        [ onInput(\i -> SelectCustomerType (Data.strToSelector "Kundenart") (Data.decodeCustomerType i))]
+        [ Html.option [ value "Member"] [Html.text "Mitglied"]
+        , Html.option [ value "Normal"] [Html.text "Normaler Kunde"]
+        , Html.option [ value "AllCustomer"] [Html.text "Alle Kunden"]]
 
 buttonProduct : Html Msg
 buttonProduct =
     Html.select 
-        [ onInput(\i -> SelectProductLine (Data.strToSelector "Product_line") (Data.decodeProductLine i))]
+        [ onInput(\i -> SelectProductLine (Data.strToSelector "Produktlinie") (Data.decodeProductLine i))]
         [ Html.option [ value "Health and beauty"] [Html.text "Health_and_beauty"]
         , Html.option [ value "Fashion accessories"] [Html.text "Fashion_accessories"]
         , Html.option [ value "Electronic accessories"] [Html.text "Electronic_accessories"]
         , Html.option [ value "Home and lifestyle"] [Html.text "Home_and_lifestyle"]
         , Html.option [ value "Sports and travel"] [Html.text "Sports_and_travel"]
         , Html.option [ value "Food and beverages"] [Html.text "Food_and_beverages"]
-        , Html.option [ value "AllProductLine"] [Html.text "AllProductLine"]]
+        , Html.option [ value "AllProductLine"] [Html.text "Alle Produktlinien"]]
 
 buttonGender : Html Msg
 buttonGender =
     Html.select 
-        [ onInput(\i -> SelectGender (Data.strToSelector "Gender") (Data.decodeGender i))]
-        [ Html.option [ value "Male"] [Html.text "Male"]
-        , Html.option [ value "Female"] [Html.text "Female"]
-        , Html.option [ value "AllGender"] [Html.text "AllGender"]]
+        [ onInput(\i -> SelectGender (Data.strToSelector "Geschlecht") (Data.decodeGender i))]
+        [ Html.option [ value "Male"] [Html.text "Mann"]
+        , Html.option [ value "Female"] [Html.text "Frau"]
+        , Html.option [ value "AllGender"] [Html.text "Alle Geschlechter"]]
 
 buttonPayment : Html Msg
 buttonPayment =
     Html.select 
-        [ onInput(\i -> SelectPayment (Data.strToSelector "Payment") (Data.strToPayment2 i))]
-        [ Html.option [ value "Ewallet"] [Html.text "Ewallet"]
-        , Html.option [ value "Cash"] [Html.text "Cash"]
-        , Html.option [ value "Credit_card"] [Html.text "Credit_card"]
-        , Html.option [ value "AllPayment"] [Html.text "AllPayment"]]
+        [ onInput(\i -> SelectPayment (Data.strToSelector "Zahlungsart") (Data.decodePayment i))]
+        [ Html.option [ value "Ewallet"] [Html.text "E-Wallet"]
+        , Html.option [ value "Cash"] [Html.text "Bargeld"]
+        , Html.option [ value "Credit.card"] [Html.text "Kreditkarte"]
+        , Html.option [ value "AllPayment"] [Html.text "Alle Zahlungsarten"]]
 
 
 buttonIndex1 : Html Msg
 buttonIndex1 =
     Html.select 
         [ onInput(\i -> SelectIndex Data.FirstIndex (Data.strToIndexSelector i))]
-        [ Html.option [ value "Erste Achse"] [Html.text "Erste Achse"]
-        , Html.option [ value "Zweite Achse"] [Html.text "Zweite Achse"]
-        , Html.option [ value "Dritte Achse"] [Html.text "Dritte Achse"]
-        , Html.option [ value "Vierte Achse"] [Html.text "Vierte Achse"]
-        , Html.option [ value "Fünfte Achse"] [Html.text "Fünfte Ache"]
-        , Html.option [ value "Sechste Achse"] [Html.text "Sechste Achse"]
-        , Html.option [ value "Siebte Achse"] [Html.text "Siebte Achse"]
-        , Html.option [ value "Achte Achse"] [Html.text "Achte Achse"]]
+        [ Html.option [ value "Erste Achse"] [Html.text "Verkaufspreis"]
+        , Html.option [ value "Zweite Achse"] [Html.text "Anzahl gekaufter Produkte"]
+        , Html.option [ value "Dritte Achse"] [Html.text "5 % Steuer"]
+        , Html.option [ value "Vierte Achse"] [Html.text "Gesamtpreis"]
+        , Html.option [ value "Fünfte Achse"] [Html.text "Kosten"]
+        , Html.option [ value "Sechste Achse"] [Html.text "prozentuale Gewinnspanne"]
+        , Html.option [ value "Siebte Achse"] [Html.text "Bruttoeinkommen"]
+        , Html.option [ value "Achte Achse"] [Html.text "Bewertung"]]
 
 buttonIndex2 : Html Msg
 buttonIndex2 =
     Html.select 
         [ onInput(\i -> SelectIndex Data.SecondIndex (Data.strToIndexSelector i))]
-        [ Html.option [ value "Erste Achse"] [Html.text "Erste Achse"]
-        , Html.option [ value "Zweite Achse"] [Html.text "Zweite Achse"]
-        , Html.option [ value "Dritte Achse"] [Html.text "Dritte Achse"]
-        , Html.option [ value "Vierte Achse"] [Html.text "Vierte Achse"]
-        , Html.option [ value "Fünfte Achse"] [Html.text "Fünfte Ache"]
-        , Html.option [ value "Sechste Achse"] [Html.text "Sechste Achse"]
-        , Html.option [ value "Siebte Achse"] [Html.text "Siebte Achse"]
-        , Html.option [ value "Achte Achse"] [Html.text "Achte Achse"]]
+        [ Html.option [ value "Erste Achse"] [Html.text "Verkaufspreis"]
+        , Html.option [ value "Zweite Achse"] [Html.text "Anzahl gekaufter Produkte"]
+        , Html.option [ value "Dritte Achse"] [Html.text "5 % Steuer"]
+        , Html.option [ value "Vierte Achse"] [Html.text "Gesamtpreis"]
+        , Html.option [ value "Fünfte Achse"] [Html.text "Kosten"]
+        , Html.option [ value "Sechste Achse"] [Html.text "prozentuale Gewinnspanne"]
+        , Html.option [ value "Siebte Achse"] [Html.text "Bruttoeinkommen"]
+        , Html.option [ value "Achte Achse"] [Html.text "Bewertung"]]
 
 buttonPlot : Html Msg
 buttonPlot =

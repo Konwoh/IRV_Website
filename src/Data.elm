@@ -173,6 +173,12 @@ decodeCustomerType str =
             Member
         "AllCustomer" ->
             AllCustomer
+        "Normaler Kunde" ->
+            Normal
+        "Mitglied" ->
+            Member
+        "Alle Kunden" ->
+            AllCustomer
         _ -> 
             NoCustomer
 
@@ -184,6 +190,12 @@ decodeGender str =
         "Female" ->
             Female
         "AllGender" ->
+            AllGender
+        "Mann" ->
+            Male
+        "Frau" ->
+            Female
+        "Alle Geschlechter" ->
             AllGender
         _ ->
             NoGender
@@ -215,12 +227,16 @@ decodePayment str =
             Ewallet
         "Cash" ->
             Cash
-        "Credit.card" ->
-            Credit_card
         "AllPayment" ->
             AllPayment
+        "Bargeld" ->
+            Cash
+        "Kreditkarte" ->
+            Credit_card
+        "Alle Zahlungsarten" ->
+            AllPayment
         _ ->
-            NoPayment
+            Credit_card
 
 attributeFilter: List Sale -> Attributes -> List (String, Float)
 attributeFilter sales attr =
@@ -288,21 +304,6 @@ stringToAttr str =
         _ ->
             NoAttribute
 
-strToPayment2: String -> Payment
-strToPayment2 str =
-    case str of
-        "Ewallet" ->
-            Ewallet
-        "Cash" ->
-            Cash
-        "Credit_card" ->
-            Credit_card
-        "AllPayment" ->
-            AllPayment
-        _ ->
-            NoPayment
-
-
 strToProductLine: String -> Product_line
 strToProductLine str =
     case str of
@@ -318,7 +319,7 @@ strToProductLine str =
             Sports_and_travel
        "Food and beverages" ->
             Food_and_beverages
-       "AllProductLine" ->
+       "Alle Produktlinien" ->
             AllProductLine
        _ -> 
             NoProductLine
@@ -347,18 +348,18 @@ cityToStr city =
         Mandalay ->
             "Mandalay"
         AllCity ->
-            "AllCity"
+            "Alle Städte"
         _ ->
             "None"
 customerToStr : Customer_type -> String
 customerToStr customer =
     case customer of
         Member ->
-            "Member"
+            "Mitglied"
         Normal ->
-            "Normal"
+            "Normaler Kunde"
         AllCustomer ->
-            "AllCustomer"
+            "Alle Kunden"
         _ ->
             "None"
 
@@ -366,11 +367,11 @@ genderToStr : Gender -> String
 genderToStr gender =
     case gender of 
         Male ->
-            "Male"
+            "Mann"
         Female ->
-            "Female"
+            "Frau"
         AllGender ->
-            "AllGender"
+            "Alle Geschlechter"
         _ ->
             "None"
 
@@ -391,7 +392,7 @@ productLineToStr product =
         Food_and_beverages ->
             "Food and beverages"
         AllProductLine ->
-            "AllProductLine"
+            "Alle Produktlinien"
         _ ->
             "None"
 paymentToStr : Payment -> String
@@ -400,11 +401,11 @@ paymentToStr payment =
         Ewallet ->
             "Ewallet"
         Cash ->
-            "Cash"
+            "Bargeld"
         Credit_card ->
-            "Credit_card"
+            "Kreditkarte"
         AllPayment ->
-            "AllPayment"
+            "Alle Zahlungsarten"
         _ ->
             "None"
 
@@ -412,34 +413,34 @@ selectorToStr : Selector -> String
 selectorToStr selector =
     case selector of
         Branch ->
-            "Branch"
+            "Branche"
         City ->
-            "City"
+            "Stadt"
         Customer_type ->
-            "Customer_type"
+            "Kundenart"
         Product_line ->
-            "Product_line"
+            "Produktlinie"
         Gender ->
-            "Gender"
+            "Geschlecht"
         Payment ->
-            "Payment"
+            "Zahlungsart"
         NoSelector ->
             "NoSelector"
 
 strToSelector : String -> Selector
 strToSelector str =
     case str of
-        "Branch" ->
+        "Branche" ->
             Branch
-        "City" ->
+        "Stadt" ->
             City
-        "Customer_type" ->
+        "Kundenart" ->
             Customer_type
-        "Product_line" ->
+        "Produktlinie" ->
             Product_line
-        "Gender" ->
+        "Geschlecht" ->
             Gender
-        "Payment" ->
+        "Zahlungsart" ->
             Payment
         _ ->
             NoSelector

@@ -263,7 +263,7 @@ filterBranch data branch1 =
 filterSalesData : String -> String -> List Data.Sale -> List Data.Sale
 filterSalesData filterAttr filterAttr2 data =
     case filterAttr of
-        "Branch" ->
+        "Branche" ->
             if filterAttr2 == Data.branchToStr Data.A then
                 List.filter (\a -> a.branch == Data.decodeBranch filterAttr2) data
 
@@ -276,7 +276,7 @@ filterSalesData filterAttr filterAttr2 data =
             else
                 data
 
-        "City" ->
+        "Stadt" ->
             if filterAttr2 == Data.cityToStr Data.Yangon then
                 List.filter (\a -> a.city == Data.decodeCity filterAttr2) data
 
@@ -289,7 +289,7 @@ filterSalesData filterAttr filterAttr2 data =
             else
                 data
 
-        "Customer_type" ->
+        "Kundenart" ->
             if filterAttr2 == Data.customerToStr Data.Normal then
                 List.filter (\a -> a.customer_type == Data.decodeCustomerType filterAttr2) data
 
@@ -299,7 +299,7 @@ filterSalesData filterAttr filterAttr2 data =
             else
                 data
 
-        "Gender" ->
+        "Geschlecht" ->
             if filterAttr2 == Data.genderToStr Data.Male then
                 List.filter (\a -> a.gender == Data.decodeGender filterAttr2) data
 
@@ -309,7 +309,7 @@ filterSalesData filterAttr filterAttr2 data =
             else
                 data
 
-        "Product_line" ->
+        "Produktlinie" ->
             if filterAttr2 == Data.productLineToStr Data.Health_and_beauty then
                 List.filter (\a -> a.product_line == Data.decodeProductLine filterAttr2) data
 
@@ -331,7 +331,7 @@ filterSalesData filterAttr filterAttr2 data =
             else
                 data
 
-        "Payment" ->
+        "Zahlungsart" ->
             if filterAttr2 == Data.paymentToStr Data.Ewallet then
                 List.filter (\a -> a.payment == Data.decodePayment filterAttr2) data
 

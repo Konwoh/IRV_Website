@@ -21,15 +21,12 @@ recrusivePatternPlot tuple=
                     tuple
         
         ( w, h ) =
-                    ( 500, 500 )
+                    ( 700, 500 )
 
         level =
-            [ RecursivePattern.Level 1 1
-            , RecursivePattern.Level 1 1
-            , RecursivePattern.Level 1 1
-            , RecursivePattern.Level 2 3
-            , RecursivePattern.Level 3 3
-            , RecursivePattern.Level 1 1
+            [ RecursivePattern.Level 89 1
+
+            
             ]
 
         pixelList : List RecursivePattern.PixelPositon
@@ -90,10 +87,7 @@ recrusivePatternPlot tuple=
                 []
     in
     Html.div[][svg
-                [ viewBox 0 0 500 500
-                , width (Px 500.0)
-                , height (Px 500.0)
-                ]
+                [ viewBox -100 0 900 350, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ]
                 [ g [] <| List.map (drawPosition >> drawStyle >> draw_neu) ourData ]]
 
 createDateList : List String

@@ -142,10 +142,27 @@ view model =
                     Data.genderToStr model.gender
                 else
                     Data.paymentToStr model.payment
+
+            nominalAttrSelector2 =
+                if model.selector2 == Data.Branch then
+                    Data.branchToStr model.branch
+                else if model.selector2 == Data.City then
+                    Data.cityToStr model.city
+                else if model.selector2 == Data.Customer_type then
+                    Data.customerToStr model.customer_type
+                else if model.selector2 == Data.Product_line then
+                    Data.productLineToStr model.product_line
+                else if model.selector2 == Data.Gender then
+                    Data.genderToStr model.gender
+                else
+                    Data.paymentToStr model.payment
                 
 
             filteredSalesData : List Data.Sale
             filteredSalesData = filterSalesData (Data.selectorToStr model.selector) (nominalAttrSelector) data
+
+            filteredSalesData2: List Data.Sale
+            filteredSalesData2= filterSalesData (Data.selectorToStr model.selector2) (nominalAttrSelector2) filteredSalesData
           
           in
           case model.pageSelector of
@@ -153,10 +170,10 @@ view model =
               let
                 -- x Werte der Koordinaten und Invoice ID als Tuple --
                 xFloat : List (String, Float)
-                xFloat = attributeFilter filteredSalesData model.attribute1
+                xFloat = attributeFilter filteredSalesData2 model.attribute1
                 -- y Werte der Koordinaten und Invoice ID als Tuple --
                 yFloat : List (String, Float)
-                yFloat = attributeFilter filteredSalesData model.attribute2
+                yFloat = attributeFilter filteredSalesData2 model.attribute2
                 -- Point Name wird durch Tuple.first rausgezogen und die x- und y-Koordinaten über Tuple.second --
                 pointsList: List Point
                 pointsList = List.map3 Vis1.toPoint (List.map (Tuple.first) xFloat) (List.map (Tuple.second) xFloat) (List.map (Tuple.second) yFloat)
@@ -197,10 +214,10 @@ view model =
             Data.RecursivePatternPlot ->
               let
                   dateStringList =
-                    List.map .date filteredSalesData
+                    List.map .date filteredSalesData2
 
                   totalList =
-                    List.map .total filteredSalesData
+                    List.map .total filteredSalesData2
                       --|> List.map String.fromFloat 
                       --|> List.map String.toFloat
 

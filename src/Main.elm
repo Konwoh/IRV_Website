@@ -11,7 +11,7 @@ import Vis3 exposing (..)
 import Data exposing(Sale, attributeFilter, attrToString, stringToAttr)
 import Html exposing (div)
 import Html.Events exposing (onInput)
-import Html.Attributes exposing (value)
+import Html.Attributes exposing (value, style)
 import Csv.Decode exposing (string)
 import Data exposing (selectorToStr)
 import List.Extra
@@ -19,7 +19,12 @@ import List exposing (filter)
 import Date exposing (..)
 import Time exposing (Month(..), Weekday(..))
 import Dict exposing (..)
-
+import TypedSvg exposing (rect, svg)
+import TypedSvg.Types exposing (Length(..), Paint(..))
+import TypedSvg.Attributes exposing (x, strokeWidth, stroke)
+import Scale
+import Scale.Color
+import Color
 type LoadingState
   = Failure
   | Loading
@@ -94,22 +99,24 @@ view model =
       text "Loading..."
 
     Success ->
-            div [style "background" "LightBlue"] 
-                [ div [style "padding" "5px", style "font-size" "18px"] [strong[][text "Grafik auswählen: "], buttonPlot]
-                , Html.br[][]
-                , div[style "display" "flex", style "font-size" "18px"] 
-                    [ div [style "padding" "5px"][text "Branche auswählen: ", buttonBranch]
-                    , div [style "padding" "5px"][text "Stadt auswählen: ", buttonCity]
-                    , div [style "padding" "5px"][text "Kundenstatus auswählen: ", buttonCustomer]
-                    , div [style "padding" "5px"][text "Produktlinie auswählen: ", buttonProduct]
-                    , div [style "padding" "5px"][text "Geschlecht auswählen: ", buttonGender]
-                    , div [style "padding" "5px"][text "Zahlungsart auswählen: ", buttonPayment]
-                    ]
-                , Html.br [][]
-                ,
+            div [style "background" "#80b3ff"] 
+                [ div[style "border-color" "black", style "border-width" "3px", style "border-style" "solid" ] 
+                     [ div [style "padding" "5px", style "font-size" "18px" ] 
+                           [strong[][text "Grafik auswählen: "], buttonPlot]
+                     , Html.br[][]
+                     , div[style "display" "flex", style "font-size" "18px"] 
+                         [ div [style "padding" "5px"][text "Branche auswählen: ", buttonBranch]
+                         , div [style "padding" "5px"][text "Stadt auswählen: ", buttonCity]
+                         , div [style "padding" "5px"][text "Kundenstatus auswählen: ", buttonCustomer]
+                         , div [style "padding" "5px"][text "Produktlinie auswählen: ", buttonProduct]
+                         , div [style "padding" "5px"][text "Geschlecht auswählen: ", buttonGender]
+                         , div [style "padding" "5px"][text "Zahlungsart auswählen: ", buttonPayment]
+                         ]
+                     , Html.br [][]]
+                
                    
-          div[ style "display" "flex", style "justify-content" "center", style "background" "LightBlue", style "height" "100vh" ][
-               div [ style "width" "1200px", style "padding" "60px", style "background" "white", style "overflow-x" "auto" ] [
+                , div[ style "display" "flex", style "justify-content" "center", style "background" "#b3d1ff", style "height" "100vh" ][
+                      div [ style "width" "1200px", style "padding" "60px", style "background" "white", style "overflow-x" "auto", style "border-color" "black", style "border-width" "3px", style "border-style" "solid", style "border-top-style" "none" ] [
           let
             data : List Data.Sale
             data = model.data

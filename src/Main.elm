@@ -460,3 +460,59 @@ buttonPlot =
         , Html.option [ value "ParallelCoordPlot"] [Html.text "ParallelCoordsPlot"]
         , Html.option [ value "RecursivePatternPlot"] [Html.text "Recursive Pattern Plot"]
         ]
+
+buttonBranch2 : Html Msg
+buttonBranch2 =
+    Html.select 
+        [ onInput(\i -> SelectBranch2 (Data.strToSelector "Branche") (Data.decodeBranch i))]
+        [ Html.option [ value "A"] [Html.text "A"]
+        , Html.option [ value "B"] [Html.text "B"]
+        , Html.option [ value "C"] [Html.text "C"]
+        , Html.option [ value "AllBranch"] [Html.text "Alle Branchen"]]
+
+
+buttonCity2 : Html Msg
+buttonCity2 =
+    Html.select 
+        [ onInput(\i -> SelectCity2 (Data.strToSelector "Stadt") (Data.decodeCity i))]
+        [ Html.option [ value "Yangon"] [Html.text "Yangon"]
+        , Html.option [ value "Naypyitaw"] [Html.text "Naypyitaw"]
+        , Html.option [ value "Mandalay"] [Html.text "Mandalay"]
+        , Html.option [ value "AllCity"] [Html.text "Alle Städte"]]
+
+buttonCustomer2 : Html Msg
+buttonCustomer2 =
+    Html.select 
+        [ onInput(\i -> SelectCustomerType2 (Data.strToSelector "Kundenart") (Data.decodeCustomerType i))]
+        [ Html.option [ value "Member"] [Html.text "Mitglied"]
+        , Html.option [ value "Normal"] [Html.text "Normaler Kunde"]
+        , Html.option [ value "AllCustomer"] [Html.text "Alle Kunden"]]
+
+buttonProduct2 : Html Msg
+buttonProduct2 =
+    Html.select 
+        [ onInput(\i -> SelectProductLine2 (Data.strToSelector "Produktlinie") (Data.decodeProductLine i))]
+        [ Html.option [ value "Health and beauty"] [Html.text "Health_and_beauty"]
+        , Html.option [ value "Fashion accessories"] [Html.text "Fashion_accessories"]
+        , Html.option [ value "Electronic accessories"] [Html.text "Electronic_accessories"]
+        , Html.option [ value "Home and lifestyle"] [Html.text "Home_and_lifestyle"]
+        , Html.option [ value "Sports and travel"] [Html.text "Sports_and_travel"]
+        , Html.option [ value "Food and beverages"] [Html.text "Food_and_beverages"]
+        , Html.option [ value "AllProductLine"] [Html.text "Alle Produktlinien"]]
+
+buttonGender2 : Html Msg
+buttonGender2 =
+    Html.select 
+        [ onInput(\i -> SelectGender2 (Data.strToSelector "Geschlecht") (Data.decodeGender i))]
+        [ Html.option [ value "Male"] [Html.text "Mann"]
+        , Html.option [ value "Female"] [Html.text "Frau"]
+        , Html.option [ value "AllGender"] [Html.text "Alle Geschlechter"]]
+
+buttonPayment2 : Html Msg
+buttonPayment2 =
+    Html.select 
+        [ onInput(\i -> SelectPayment2 (Data.strToSelector "Zahlungsart") (Data.decodePayment i))]
+        [ Html.option [ value "Ewallet"] [Html.text "E-Wallet"]
+        , Html.option [ value "Cash"] [Html.text "Bargeld"]
+        , Html.option [ value "Credit.card"] [Html.text "Kreditkarte"]
+        , Html.option [ value "AllPayment"] [Html.text "Alle Zahlungsarten"]]

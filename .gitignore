@@ -2,6 +2,7 @@
 repl-temp-*
 elm-stuff
 Data/
+*.bib
 *.aux
 *.lof
 *.log

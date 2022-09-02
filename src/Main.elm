@@ -118,8 +118,16 @@ view model =
                          , div [style "padding" "5px"][text "Kundenstatus auswählen: ", buttonCustomer]
                          , div [style "padding" "5px"][text "Produktlinie auswählen: ", buttonProduct]
                          , div [style "padding" "5px"][text "Geschlecht auswählen: ", buttonGender]
-                         , div [style "padding" "5px"][text "Zahlungsart auswählen: ", buttonPayment]
-                         ]
+                         , div [style "padding" "5px"][text "Zahlungsart auswählen: ", buttonPayment]]
+                         , div [style "display" "flex", style "font-size" "18px"] 
+                                  [ div [style "padding" "5px"][text "Branche auswählen: ", buttonBranch2]
+                                  , div [style "padding" "5px"][text "Stadt auswählen: ", buttonCity2]
+                                  , div [style "padding" "5px"][text "Kundenstatus auswählen: ", buttonCustomer2]
+                                  , div [style "padding" "5px"][text "Produktlinie auswählen: ", buttonProduct2]
+                                  , div [style "padding" "5px"][text "Geschlecht auswählen: ", buttonGender2]
+                                  , div [style "padding" "5px"][text "Zahlungsart auswählen: ", buttonPayment2]
+                                  ]
+                         
                      , Html.br [][]]
                 
                    

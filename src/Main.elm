@@ -58,6 +58,7 @@ type alias Model =
     , product_line: Data.Product_line
     , payment: Data.Payment
     , selector: Data.Selector
+    , selector2: Data.Selector
     , attribute1: Data.Attributes
     , attribute2: Data.Attributes
     , indexSelector1: Data.AxisIndex
@@ -78,12 +79,13 @@ init _ =
   ( { loadingState = Loading
     , data = []
     , branch = Data.AllBranch
-    , city = Data.NoCity
-    , customer_type = Data.Normal
-    , gender= Data.Male
-    , product_line= Data.Health_and_beauty
-    , payment= Data.Ewallet
-    , selector = Data.Branch 
+    , city = Data.AllCity
+    , customer_type = Data.AllCustomer
+    , gender= Data.AllGender
+    , product_line= Data.AllProductLine
+    , payment= Data.AllPayment
+    , selector = Data.Branch
+    , selector2 = Data.City 
     , attribute1= Data.Unit_price
     , attribute2= Data.Quantity
     , indexSelector1 = Data.Erste_Achse 
@@ -295,6 +297,18 @@ update msg model =
             ({model | product_line = product_line, selector = select}, Cmd.none)
     SelectPayment select payment ->
             ({model | payment = payment, selector = select}, Cmd.none)
+    SelectBranch2 select branch ->
+            ({model | branch = branch, selector2 = select}, Cmd.none)
+    SelectCity2 select city ->
+            ({model | city = city, selector2 = select}, Cmd.none) 
+    SelectCustomerType2 select customer_type ->
+            ({model | customer_type = customer_type, selector2 = select}, Cmd.none)
+    SelectGender2 select gender ->
+            ({model | gender = gender, selector2 = select}, Cmd.none)
+    SelectProductLine2 select product_line ->
+            ({model | product_line = product_line, selector2 = select}, Cmd.none)
+    SelectPayment2 select payment ->
+            ({model | payment = payment, selector2 = select}, Cmd.none)
     SelectAttribute attributeSelector attribute ->
         case attributeSelector of
             Data.Attribute1 ->

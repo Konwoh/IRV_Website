@@ -1,6 +1,5 @@
 *.pdf
 repl-temp-*
 elm-stuff
-elm.json
 Data/
 

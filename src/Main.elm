@@ -229,8 +229,21 @@ view model =
                         
                in
                   div[][ div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewählte Dimension: " ++ (selectorToStr model.selector))]]
-                       , div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewähltes Attribut: " ++ nominalAttrSelector)]]
-                       , Html.br[][]
+                       , div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewähltes Attribut: " ++ nominalAttrSelector)]]                         
+                       , div [ style "display" "flex", style "padding" "5px"]
+                             [ text "Legende: "
+                             , div [style "padding" "5px"] [colorContext 100 dateSumList, text "100"]
+                             , div [style "padding" "5px"] [colorContext 200 dateSumList, text "200"]
+                             , div [style "padding" "5px"] [colorContext 500 dateSumList, text "500"]
+                             , div [style "padding" "5px"] [colorContext 1000 dateSumList, text "1000"]
+                             , div [style "padding" "5px"] [colorContext 1500 dateSumList, text "1500"]
+                             , div [style "padding" "5px"] [colorContext 2000 dateSumList, text "2000"]
+                             , div [style "padding" "5px"] [colorContext 3000 dateSumList, text "3000"]
+                             , div [style "padding" "5px"] [colorContext 4000 dateSumList, text "4000"]
+                             , div [style "padding" "5px"] [colorContext 5000 dateSumList, text "5000"]
+                             , div [style "padding" "5px"] [colorContext 6000 dateSumList, text "6000"]
+                             , div [style "padding" "5px"] [colorContext 8000 dateSumList, text "8000"]
+                             ]
                        , Vis3.recrusivePatternPlot dateSumList
                        , Html.br[][]
                        , div[style "font-size" "20px"] [strong [] [Html.text ("Dargestellte List: Datum und kumulierter Verkaufswert an diesem Tag")]]

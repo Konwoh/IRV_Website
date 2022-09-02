@@ -41,6 +41,12 @@ type Msg
   | SelectAttribute Data.AttributeSelector Data.Attributes
   | SelectIndex Data.IndexSelector Data.AxisIndex
   | SelectPage Data.PageSelector
+  | SelectBranch2 Data.Selector Data.Branch
+  | SelectCity2 Data.Selector Data.City
+  | SelectCustomerType2 Data.Selector Data.Customer_type
+  | SelectGender2 Data.Selector Data.Gender
+  | SelectProductLine2 Data.Selector Data.Product_line
+  | SelectPayment2 Data.Selector Data.Payment 
 
 type alias Model = 
     { loadingState: LoadingState

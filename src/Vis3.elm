@@ -9,12 +9,14 @@ import Scale
 import Scale.Color
 import Time exposing (Month(..))
 import TypedSvg exposing (g, rect, svg)
-import TypedSvg.Attributes exposing (height, preserveAspectRatio, viewBox, width)
+import TypedSvg.Attributes exposing (height, preserveAspectRatio, viewBox, width, x, strokeWidth, stroke)
 import TypedSvg.Core exposing (..)
-import TypedSvg.Types exposing (Length(..))
 import Date exposing (..)
+import TypedSvg.Types exposing (Length(..), Paint(..), Length(..))
+import Scale
+import Scale.Color
 import Color
-
+import Statistics
 recrusivePatternPlot tuple=
     let
         dateDataList =
@@ -66,7 +68,7 @@ recrusivePatternPlot tuple=
                 TypedSvg.Types.Paint <|
                     Maybe.withDefault Color.darkGray <|
                         Maybe.map
-                            (Scale.Color.tealBluesInterpolator
+                            (Scale.Color.lightMultiInterpolator 
                                 << Scale.convert
                                     (Helper.normalizeFloat currentData)
                             )
@@ -103,3 +105,32 @@ createDateList =
 
 createDateTuple =
     List.map (\x -> Tuple.pair x Nothing) createDateList
+
+colorContext value data =
+    let
+        floatList = List.map (\(a,b)-> Maybe.withDefault 0.0 b) data
+        colorList = floatList
+                        |> Statistics.extent
+                        |> Maybe.withDefault ( 0, 1 )
+                        |> Scale.linear ( 0, 1 )
+
+    in
+    
+
+    svg
+        [ width (Px 11), height (Px 11)
+        ]
+        [
+          rect
+              [ TypedSvg.Attributes.x <| TypedSvg.Types.Px <| 0
+              , TypedSvg.Attributes.y <| TypedSvg.Types.Px <| 0
+              , TypedSvg.Attributes.width <| TypedSvg.Types.Px <| 50
+              , TypedSvg.Attributes.height <| TypedSvg.Types.Px <| 50
+              , TypedSvg.Attributes.fill <|
+                  TypedSvg.Types.Paint <|
+                      (Scale.Color.lightMultiInterpolator << Scale.convert colorList) value
+              , strokeWidth (Px 1)
+              , stroke <| Paint <| Color.rgba 0 0 0 0.4
+              ]
+              []
+        ]

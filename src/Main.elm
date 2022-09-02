@@ -189,8 +189,10 @@ view model =
                 xyData: XYdatapoint
                 xyData = XYdatapoint (Data.attrToString model.attribute1) (Data.attrToString model.attribute2) pointsList
               in 
-                div[][ div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewählte Dimension: " ++ (selectorToStr model.selector))]]
-                     , div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewähltes Attribut: " ++ nominalAttrSelector)]]
+                div[][ div[style "font-size" "20px"] [Html.text " Ausgewählte Dimension1: ", strong [] [Html.text (selectorToStr model.selector)]]
+                     , div[style "font-size" "20px"] [Html.text " Ausgewähltes Attribut1: ", strong [] [Html.text (nominalAttrSelector)]]
+                     , div[style "font-size" "20px"] [Html.text "Ausgewählte Dimension2: ", strong []  [Html.text (selectorToStr model.selector2)]]
+                     , div[style "font-size" "20px"] [Html.text " Ausgewähltes Attribut2: ", strong [] [Html.text (nominalAttrSelector2)]]
                      , Html.br[][]
                      , div [style "padding" "5px"][text "x-Achse auswählen: ", buttonAttribut1]
                      , div [style "padding" "5px"] [text "y-Achse auswählen: ", buttonAttribut2]
@@ -206,14 +208,16 @@ view model =
                       multiPoint (sale.invoice_ID) (sale.unit_price) (sale.quantity) (sale.tax) (sale.total) (sale.cogs) (sale.gross_margin_percentage) (sale.gross_income) (sale.rating) 
 
                   multiPointSale : List MultiDimPoint
-                  multiPointSale = List.map saleToMultiPoint filteredSalesData
+                  multiPointSale = List.map saleToMultiPoint filteredSalesData2
 
                   multiDimData =
                     MultiDimData [ "Verkaufspreis", "Anzahl gekaufter Produkte", "5 % Steuer", "Gesamtpreis", "Kosten", "prozentuale Gewinnspanne", "Bruttoeinkommen", "Bewertung" ]
                       [multiPointSale]
               in
-                div[][ div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewählte Dimension: " ++ (selectorToStr model.selector))]]
-                     , div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewähltes Attribut: " ++ nominalAttrSelector)]]
+                div[][ div[style "font-size" "20px"] [Html.text " Ausgewählte Dimension1: ", strong [] [Html.text (selectorToStr model.selector)]]
+                     , div[style "font-size" "20px"] [Html.text " Ausgewähltes Attribut1: ", strong [] [Html.text (nominalAttrSelector)]]
+                     , div[style "font-size" "20px"] [Html.text "Ausgewählte Dimension2: ", strong []  [Html.text (selectorToStr model.selector2)]]
+                     , div[style "font-size" "20px"] [Html.text " Ausgewähltes Attribut2: ", strong [] [Html.text (nominalAttrSelector2)]]
                      , Html.br[][]
                      , div [style "display" "flex"][ div [style "padding" "5px"][text "Tausche...: ", buttonIndex1]
                             , div [style "padding" "5px"][text "mit: ", buttonIndex2]]
@@ -261,8 +265,10 @@ view model =
                           |> List.map(\(a,b) -> (a, String.toFloat b)) 
                         
                in
-                  div[][ div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewählte Dimension: " ++ (selectorToStr model.selector))]]
-                       , div[style "font-size" "20px"] [strong [] [Html.text (" Ausgewähltes Attribut: " ++ nominalAttrSelector)]]                         
+                  div[][ div[style "font-size" "20px"] [Html.text " Ausgewählte Dimension1: ", strong [] [Html.text (selectorToStr model.selector)]]
+                       , div[style "font-size" "20px"] [Html.text " Ausgewähltes Attribut1: ", strong [] [Html.text (nominalAttrSelector)]]
+                       , div[style "font-size" "20px"] [Html.text "Ausgewählte Dimension2: ", strong []  [Html.text (selectorToStr model.selector2)]]
+                       , div[style "font-size" "20px"] [Html.text " Ausgewähltes Attribut2: ", strong [] [Html.text (nominalAttrSelector2)]]                       
                        , div [ style "display" "flex", style "padding" "5px"]
                              [ text "Legende: "
                              , div [style "padding" "5px"] [colorContext 100 dateSumList, text "100"]

@@ -95,10 +95,21 @@ Zielgruppen, welche bereits definiert wurden, mit den geeigneten Informationen z
 
 \subsection{Technische Bereitstellung der Daten}
 Der Datensatz ist auf der Website von kaggle unter den Link: \url{https://bit.ly/3eco5mX} zu finden. Dieser ist dort als csv-Datei frei verfügbar. Die csv-Datei wurde im
-folgenden repository: \url{https://github.com/Konwoh/Information-Retrieveal} auf GitHub gespeichert. Anschließend wurde die raw-Version der csv-Datei durch eine HTTP-Anfrage 
-in das Programm geladen, um dort weiterverarbeitet zu werden. Der Datensatz wurde auch zusätzlich in dem finalen repository auf GitLab zur Überprüfung bereitgestellt.  
+folgenden repository: \url{https://github.com/Konwoh/Information-Retrieveal} auf GitHub gespeichert. Anschließend wurde die raw-Version der csv-Datei durch eine HTTP-Anfrage
+in das Programm geladen, um dort weiterverarbeitet zu werden. Der Datensatz wurde auch zusätzlich in dem finalen repository auf GitLab zur Überprüfung bereitgestellt.
 
 \subsection{Datenvorverarbeitung}
+Da der Datensatz in einer einzigen csv-Datei bereits vorlag, ersparte dies etliche Schritte der Datenvorverarbeitung. Einzig allein die Datumsspalte wurde vor dem Einladen
+in das Programm mithilfe der Python Bibliothek Pandas verändert. Dabei wurde das Datum, dass in der csv-Datei als String in der Form YYYY/MM/DD gespeichert war, in ein
+Datumobjekt der Form YYYY-MM-DD geändert. Dieser Schritt war notwendig, da das ELM-Paket Date (\url{https://package.elm-lang.org/packages/justinmimbs/date/latest/Date}),
+nur Datumsangaben in der Form YYYY-MM-DD akzeptiert. Der beschriebene Schritt war auch gleichzeitig der einzige Schritt der nicht in ELM programmiert wurde.
+
+\noindent Da die csv-Datei nun im ELM-Programm zur Verfügung steht, mussten nun Datentypen definiert werden, in denen die Zeileninhalte des Datensatzes überschrieben werden.
+Hierfür gab es den primären Datentyp Sale und mehrere Unterdatentypen wie z.B. das Geschlecht oder die Produktlinie. Nichtsdestotrotz waren die Unterdatentypen trotzdem ein
+Bestandteil des primären Datentyps Sale. Damit die Überschreibung der Daten von der csv-Datei in die gewünschten Datentypen erfolgreich stattfindet, musste ein Decoder
+geschrieben werden. Die salesDecoder-Funktion, die Funktionalitäten des Elm-Pakets elm-csv (\url{https://package.elm-lang.org/packages/BrianHicks/elm-csv/latest/}) benutzt, war
+dafür verantwortlich. Mit Anwenden dieser Funktion auf den geladenen Datensatz, war die Datenvorverarbeitung nun abgeschlossen.
+
 
 
 \newpage

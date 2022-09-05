@@ -2,6 +2,7 @@
 repl-temp-*
 elm-stuff
 Data/
+*.gz
 *.bib
 *.aux
 *.lof

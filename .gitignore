@@ -2,6 +2,8 @@
 repl-temp-*
 elm-stuff
 Data/
+Bericht/IMG/
+*.html
 *.gz
 *.bib
 *.aux

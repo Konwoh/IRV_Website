@@ -9,7 +9,8 @@
 \usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm, bindingoffset=1cm, includeheadfoot]{geometry}
 %Zeilenabstand bitte nicht ändern
 \usepackage[onehalfspacing]{setspace}
-
+\usepackage{graphicx}
+\usepackage{float}
 \usepackage[backend=biber,style=numeric,]{biblatex}\addbibresource{literatur.bib}
 
 \begin{document}
@@ -129,7 +130,23 @@ Produkt kaufen, aber dafür nur die billligsten. Andererseits gibt es Kunden, di
 durch diese textlich beschriebenen Vebrindungen und Abhängigkeiten nur sehr schwer bilden, weshalb es umso wichtiger ist, dies in der visuellen Form dazustellen.
 
 \subsection{Anforderungen an die Visualisierungen}
-\newpage
+Laut Schumann und Müller sollen Visualisierungen expressiv, effektiv und angemessen sein. \cite[9]{schumann2013visualisierung} Genau diese grundlegenden Anforderungen bestehen
+auch bei der Visualisierung der hier verwendeten Daten.
+
+\noindent Um die zu Beginn aufgestellten Fragestellungen zu beantworten ist auch die Existenz von spezifischeren Anforderungen notwendig. Als erstes wäre da eine Filterung der
+Daten nach den gewünschten Kriterien zu nennen. Denn um eine Antwort auf die Frage: "Wer sind die profitabelsten Kunden?" zu finden, muss erstmal eine Filterung nach Kundengruppen
+möglich sein. Das gleiche gilt auch für die Frage bezüglich der Produkte und der anschließenden FIlterung nach Produktgruppen. Die Filterung nach den gewünschten Kriterien
+sollte der Anwender dann auch selbst durch Buttons oder Textfelder vollziehen können.
+
+\noindent Desweiteren muss eine Visualisierungstechnik auch ermöglichen, Zusammenhänge zwischen Attributen in den Kontext des gesamten Datensatzes zu setzen. Wenn in einer Frage,
+die Profitabilität behandelt wird, können z.B. mehrere Attribute für die Profitabilität stehen und nicht nur der Verkaufspreis eines Produkts, sondern auch die
+Anzahl, wie oft es gekauft wurde oder die Kosten, die der Supermarkt für dieses Produkt zahlen musste. Durch den Einfluss mehrere Attribute auf die Beantwortung einer Frage, muss
+es daher möglich sein, die Daten mehrdimensional darzustellen.
+
+\noindent Als letzte Anforderung wäre noch die Identifikation von Ausreißern in den Daten zu nennen. Hier sollte es möglich sein, Daten, die sich deutlich von der Norm abheben,
+auszumachen und Details zu ihnen einsehen können.
+
+
 \printbibliography
 
 

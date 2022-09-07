@@ -234,6 +234,48 @@ der Icons kann der Anwender leicht viele Informationen extrahieren. Die bekannte
 Datensatz zu erhalten, da die Visualisierung der Attribute auf den Icons, sich nur schwer unterscheiden lassen. Nur mit einer sehr detaillierten Legende kann dem Anwender
 genug Hintergrundwissen zur Verfügung gestellt werden, um diese Technik sinnvoll zu nutze. Der damit verbundene Aufwand ist allerdings weit größer im Vergleich zu den parallelen
 Koordinaten, weshalb sich letztendlich nicht für die Visualisierung durch Icons entschieden wurde.
+
+\subsubsection{Visualisierung Drei - Pixelorientierte Darstellung}
+Die dritte gewählte Visualisierungstechnik ist die Pixelorientierte Darstellung. Bei dieser Technik werden ausgewählte Attribute durch einen farbigen Pixel dargestellt. Diese
+farbigen Pixel werden anschließend durch die sogenannte Recursive Pattern Technik in eine strukturierte Anordnung gebracht, sodass dem Anwender das Lesen und Verstehen dieser
+Daten einfacher gelingt. \cite[5]{Kriegel1996Visua-5711} Hierbei ist es unteranderem möglich die Pixel von links nach rechts, Zeile für Zeile anzuordnen oder auch von oben nach
+unten, Spalte für Spalte.\cite[2]{485140} Im Zuge dieses Projekts wurde die Variante von links nach rechts genommen, da dies der Lesegewohnheit entspricht. \\
+
+\noindent Diese Technik erfüllt die letzte Anforderung im Abschnitt \ref{Anforderung}. Sie stellt sicher, dass Ausreißer in den Daten sofort erkennbar sind. Dies wird durch
+eine deutliche farbliche Hervorhebung gewährleistet. Für den Anwender ist zudem eine Legende über der Visualisierung eingefügt, die ihm dabei helfen die verwendeten Farben im
+Kontext des Datensatzes richtig einschätzen zu können. In diesem Projekt wurde deshalb eine Farbskala genommen, die verhältnismäßig kleine Werte kälteren Farben zuordnet und höhere
+Werte wärmeren Farben zuordnet.\\
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=15cm]{IMG/LegendePixel.png}
+		\caption{Legende der Pixelorientierten Darstellung}
+		\label{fig:LegendePixel}
+	\end{center}
+\end{figure}
+
+\noindent Die Effektivität bei der Pixelorientierten Darstellung ist sehr gut, da die farblichen Pixel sehr gut mit der menschlichen Wahrnehmung synergieren und hohe Werte mit ihren
+dazugehörigen warmen Farben sehr schnell ins Auge fallen. Zudem wurde für das weitere Verständnis die zu visualisierende Zeitreihe mit dem ausgewählten Attribut unter der
+Visualisierung dargestellt. Somit kann der Anwender schnell die Farben in der Darstellung mit den Werten aus der Liste verknüpfen und hat zusätzlich noch das Datum, wann dieser
+Wert entstanden ist.\\
+
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=11cm]{IMG/Zeitreihe}
+		\caption{Ausschnitt der Zeitreihe mit zugehörigen Werten}
+		\label{fig:Zeitreihe}
+	\end{center}
+\end{figure}
+
+\noindent Die Expressivität profitiert von dieser besagten Liste, da wie vorher bereits beschrieben, das Verständnis dadurch verbessert wird und der Betrachter zu jedem Pixel den zugehörigen
+Wert einsehen kann. Auch die Legende unterstützt die Pixelorientierte Darstellung in ihrem Ausdruck und trägt zur Verständigung der Aussagen bei, die diese Technik liefert. Ohne
+die beiden vorher genannten Dinge, müssten bei der Expressivität Abstriche gemacht werden. \\
+
+\noindent Eine Alternative für die Pixelorientierte Darstellung gibt es nicht, da die Darstellung der Attribute auf Farbwerte nur eimalig vorhanden ist. Vielmehr könnte eine
+Variation in der Anordnung der Pixel gefunden werden. So gibt es neben der Recursive Pattern Technik noch weitere Techniken, wie z.B. die Darstellung in Kreissegmenten oder
+raumfüllende Kurven. \cite[5]{yeqiang2017visualizing} Allerdings sind diese Variationen für die Darstellung von Zeitreihen, wie sie in diesem Datensatz vorliegen, nicht besonders
+gut geeignet, da z.b. die Darstellung in Kreissegmenten kein intuitives Lesen ermöglicht, weil Anfang und Ende der Zeitreihe nicht gut ersichtlich sind. Diese Alternativen würden
+zu einer Abnahme bezüglich der Effektivität und Expressivität führen und wurden deswegen verworfen.
+
 \printbibliography
 
 

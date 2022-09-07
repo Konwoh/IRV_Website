@@ -171,24 +171,69 @@ Datenpunkt, gewährleistet. Der Scatterplot ist effektiv, weil er ohne großen A
 es eine der trivialsten Möglichkeiten ist, um zwei numerische Attribute aufeinander darzustellen. Daten-Ausreißer sind bei dieser Visualisierungstechnik ebenfalls leicht zu
 identifizieren, da die Entfernung von Punktelinien oder Punktewolken sehr gut erkennbar ist.
 werden.\\
-
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=15cm]{IMG/Scatterplot}
+		\caption{Visualisierung Eins - Scatterplot}
+		\label{fig:Scatterplot}
+	\end{center}
+\end{figure}
 \noindent Die Scatterplot-Technik ist für den zu untersuchenden Datensatz perfekt geeignet, weil für die Beantwortung einiger Fragestellungen immer eine Betrachtung von
 zwei Variablen in verschiedenen Kombinationen notwendig ist. Damit es möglich z.B die Beziehung von der Variable \textit{Anzahl gekaufter Produkt} mit der Variable
 \textit{Bruttoeinkommen} oder die Beziehung der Variablen \textit{Rating} und \textit{Gesamtpreis} zu vergleichen. Hierbei kann der Anwender nach belieben die ihn interessierenden
 Attribute miteinander kombinieren.
 Des Weiteren kann durch die eindeutige Zuweisung der Datenpunkte zu ihren Datenreihen, zusätzliche Analysen bzgl.
-des gewählten Datenpunktes stattfinden. Diese Analysen könnten im weitern Verlauf dazu genutzt werden, um an weitere Erkenntnisse zu gelangen. 
+des gewählten Datenpunktes stattfinden. Diese Analysen könnten im weitern Verlauf dazu genutzt werden, um an weitere Erkenntnisse zu gelangen.
 \noindent Ebenbürtige Alternativen zum Scatterplot sind kaum verfügbar. So sagten unteranderem schon Friendly und Denis in ihrem Werk über Scatterplots:
 \begin{quote}"Indeed, among all the forms of statistical
 	graphics, the humble scatterplot may be considered
 	the most versatile, polymorphic, and generally useful invention in the entire history of statistical graphics."\cite[103]{Friendly2005}
 \end{quote}
 
-Diese Aussage unterstreicht nochmal die Bedeutung die Scatterplots in der statistischen Analyse besitzen. 
-Die einzige Alternative, die in Erwägung gezogen werden kann, ist der Quantil-Quantil-Plot. Hierbei werden ebenfalls zwei numerische Attribute auf Achsen skaliert und 
+Diese Aussage unterstreicht nochmal die Bedeutung die Scatterplots in der statistischen Analyse besitzen.
+Die einzige Alternative, die in Erwägung gezogen werden kann, ist der Quantil-Quantil-Plot. Hierbei werden ebenfalls zwei numerische Attribute auf Achsen skaliert und
 miteinander verglichen, allerdings beschränkt sich hier der Vergleich auf die Verteilungen der beiden Variablen. Aus diesem Grund ist diese Visualisierungstechnik nicht wirklich
 für die Anwendung im Rahmen dieses Projekts geeignet, da die Verteilungen der Variablen für die Beantwortung der Problemstellungen keine Rolle spielen.
 
+\subsubsection{Visualisierung 2: Parallele Koordinaten}
+Die zweite gewählte Visualisierungstechnik sind die Parallelen Koordinaten. Hierbei werden die Attribute einer Datenreihe durch einen Linienzug entlang vertikaler zueinander
+paralleler Achsen dargestellt. \cite[594]{Lehmann2010} Dadurch wird die Problematik der Scatterplots, nur zwei Dimensionen anstatt multivariater Daten darstellen zu können,
+behoben.\cite[1]{Wegman1990} Auf den verschiedenen Achsen können nun alle numerischen Attribute skaliert und nebeneinander angeordnet werden. Der Anwender hat zusätzlich die
+Möglichkeit die verschiedenen Achsen miteinander zu tauschen, um andere mehrdimensionale Zusammenhänge betrachten zu können.
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=15cm]{IMG/Achsentausch.png}
+		\caption{Buttons für Achsentausch}
+		\label{fig:Achsentausch}
+	\end{center}
+\end{figure}
+\noindent Dadurch wird auch eine der zu Beginn definierten Anforderungen an die Visualisierungen, erfüllt. Bei Datensätzen, die Kunden- und Kaufverhalten beinhalten, ist es essenziell
+auch die Zusammenhänge mehrerer Variablen gleichzeitig betrachten zu können. So kann es nicht nur interessant sein, die Beziehung der Variablen Bruttoeinkommen und Gesamtpreis
+zu betrachten, sondern noch zusätzlich das Rating des Kaufes miteinzubeziehen.\\
+Die Expressivität ist bei den parallelen Koordinaten ein bisschen niedriger einzuordnen als bei
+dem Scatterplot, da für einen Laien Parallele Koordinaten auf den ersten Blick schwieriger zu verstehen sind. Des Weiteren können Darstellungen in dieser Form schnell unübersichtlich
+werden, da Linien verschiedener Datenreihen sich überschneiden können und somit unklar ist, welche Linie wohin führt. Aus diesem Grund wurden, wie im Abschnitt
+\ref{Visualisierung1} bereits beschrieben, die zwei Filterungsstufen eingeführt, um die zu betrachtende Stichprobe zu verkleinern und dadruch so übersichtlich wie
+möglich zu halten. \\
+Die Effektivität dieser Visualisierungstechnik ist dagegen umso besser, da durch einen übersichtlichen Parallele Koordinaten-Plot viel mehr Informationen zum
+Anwender transferiert werden können als es z.B. bei einem Scatterplot der Fall ist. Dieser kann, wie zu Beginn dieses Abschnitts, sehr schnell die Zusammenhänge von mehreren
+Variablen begutachten und anschließend seine Analysen vollziehen. Einzig allein die Kombinationsmöglichkeiten bezüglich der Anordnung der Achsen kann ein Problem darstellen.
+Denn es ist zu beachten, dass bei k Variablen k! Achsenreihenfolgen möglich sind.\cite[594]{Lehmann2010}
+
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=15cm]{IMG/ParCoord}
+		\caption{Visualisierung Zwei - Parallele Koordinaten}
+		\label{fig:ParCoord}
+	\end{center}
+\end{figure}
+Als Alternative zu den Parallelen Koordinaten ist die Visualisierung mittels Icon zu nennen. Hierbei wird jede Datenreihe von einen sogenannten Icon repräsentiert. Die
+Attribute der Datenreihe werden durch Farbe, Form oder Ausrichtung an den Icons visualisiert. \cite[14]{a3096a239a3d49e49e8ffde9a34d754a} Durch das unterschiedliche Aussehen
+der Icons kann der Anwender leicht viele Informationen extrahieren. Die bekanntesten Beispiele für Icons sind Stick Figues, Chernoff-Gesichter, Colour Icons und Glyphen.
+\cite[14-16]{a3096a239a3d49e49e8ffde9a34d754a} Allerdings gestaltet es sich in manchen Fällen als äußerst schwer heraus durch die Icon-TEchnik Informationen über den gesamten
+Datensatz zu erhalten, da die Visualisierung der Attribute auf den Icons, sich nur schwer unterscheiden lassen. Nur mit einer sehr detaillierten Legende kann dem Anwender
+genug Hintergrundwissen zur Verfügung gestellt werden, um diese Technik sinnvoll zu nutze. Der damit verbundene Aufwand ist allerdings weit größer im Vergleich zu den parallelen
+Koordinaten, weshalb sich letztendlich nicht für die Visualisierung durch Icons entschieden wurde.
 \printbibliography
 
 

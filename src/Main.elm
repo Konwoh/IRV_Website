@@ -219,7 +219,7 @@ view model =
                      , div[style "font-size" "20px"] [Html.text "Ausgewählte Dimension2: ", strong []  [Html.text (selectorToStr model.selector2)]]
                      , div[style "font-size" "20px"] [Html.text " Ausgewähltes Attribut2: ", strong [] [Html.text (nominalAttrSelector2)]]
                      , Html.br[][]
-                     , div [style "display" "flex"][ div [style "padding" "5px"][text "Tausche...: ", buttonIndex1]
+                     , div [style "display" "flex"][ div [style "padding" "5px"][text "Tausche: ", buttonIndex1]
                             , div [style "padding" "5px"][text "mit: ", buttonIndex2]]
                      , Vis2.parallelCoordinates 900 2 multiDimData data (Data.indexSelectorToInt model.indexSelector1) (Data.indexSelectorToInt model.indexSelector2)]
 

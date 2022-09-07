@@ -11,6 +11,7 @@
 \usepackage[onehalfspacing]{setspace}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{prettyref}
 \usepackage[backend=biber,style=numeric,]{biblatex}\addbibresource{literatur.bib}
 
 \begin{document}
@@ -129,7 +130,7 @@ keine einfache Antwort zu geben sei ohne alle Zusammenhänge sowie Beziehungen d
 Produkt kaufen, aber dafür nur die billligsten. Andererseits gibt es Kunden, die nur wenige Produkte kaufen, die dafür aber sehr teuer sind. Mentale Modelle lassen sich jedoch
 durch diese textlich beschriebenen Vebrindungen und Abhängigkeiten nur sehr schwer bilden, weshalb es umso wichtiger ist, dies in der visuellen Form dazustellen.
 
-\subsection{Anforderungen an die Visualisierungen}
+\subsection{Anforderungen an die Visualisierungen}\label{Anforderung}
 Laut Schumann und Müller sollen Visualisierungen expressiv, effektiv und angemessen sein. \cite[9]{schumann2013visualisierung} Genau diese grundlegenden Anforderungen bestehen
 auch bei der Visualisierung der hier verwendeten Daten.
 
@@ -147,17 +148,19 @@ es daher möglich sein, die Daten mehrdimensional darzustellen.
 auszumachen und Details zu ihnen einsehen können.
 
 \subsection{Präsentation der Visualisierungen}
-\subsubsection{Visualisierung 1: Scatterplot}
+\subsubsection{Visualisierung 1: Scatterplot}\label{Visualisierung1}
 Die erste gewählte Visualisierungstechnik ist ein Scatterplot oder auch Streudiagramm. Bei einem Scatterplot werden zwei numerische Attribute mittels zwei Achsen skaliert und die
 jeweiligen Datenwerte einem x- sowie y-Wert zugewiesen. Diese x- und y-Werte werden dann in einem Punkt zusammengefasst und in dem Scatterplot gezeichnet. Sinn eines Scatterplot
 ist es Zusammenhänge oder andere auffällige Muster zwischen numerischen Attributen festzustellen. \cite[103]{Friendly2005} Welches numerische Attribut auf welcher Achse
 abgebildet wird ist im Zuge dieses Projekts vom Anwender frei wählbar. Zudem werden nur die Datenpunkte dargestellt, die zuvor vom Anwender nach gewünschten nominalen
-Attributen herausgefiltert wurden.
+Attributen herausgefiltert wurden. Die Filterung der Daten kann durch zwei unterschiedliche Filter angewendet werde. Daher ist es möglich den kompletten Datensatz z.B. nach
+dem Geschlecht oder der Produktgruppe zu filtern oder beide Kriterien gleichzeitig anwenden und somit nur die Dateneinträge bekommen, die dem ausgewählten Geschlecht und der
+ausgewählten Produktgruppe entsprechen. Dies ermöglicht eine erweiterte Einkrenzung, der zu betrachteten Stichprobe. \\
 \begin{figure} [H]
 	\begin{center}
-		\includegraphics[width=15cm]{IMG/Scatterplot}
-		\caption{Visualisierung Eins - Scatterplot}
-		\label{fig:Scatterplot}
+		\includegraphics[width=15cm]{IMG/Filterung}
+		\caption{Filterungsbuttons der DAten}
+		\label{fig:Filterung}
 	\end{center}
 \end{figure}
 

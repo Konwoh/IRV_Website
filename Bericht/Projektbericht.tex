@@ -15,14 +15,17 @@
 \usepackage[backend=biber,style=numeric,]{biblatex}\addbibresource{literatur.bib}
 
 \begin{document}
-
+\pagenumbering{gobble}
 \subject{Projektbericht zum Modul Information Retrieval und Visualisierung Sommersemester 2022}
 \title{Analyse des Kaufverhaltens in Einkaufsläden}
 %\subtitle{Untertitel}% optional
 \author{Konstantin Wohllaub}% obligatorisch
 %\date{10.9.2022}
 \maketitle% verwendet die zuvor gemachte Angaben zur Gestaltung eines Titels
-
+\newpage
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
 \section{Einleitung}
 Seit jeher gibt es zwischen Unternehmen in der Wirtschaft einen Kampf um steigende Gewinne und zahlende Kunden.
 In Zuge dessen wird von Seiten der Unternehmensleitungen versucht, einen Vorteil gegenüber ihren Konkurrenten zu erreichen.
@@ -117,7 +120,7 @@ dafür verantwortlich. Mit Anwenden dieser Funktion auf den geladenen Datensatz,
 Die Anwendungsaufgaben der Anwender und Anwenderinnen ergeben sich zunächst aus der bloßen Betrachtung und den damit verbundenen Verstehen der einzelnen Visualisierungstechniken.
 Danach sollen durch die verfügbaren Variationen, die von den Visualisierungstools zur Verfügung gestellt werden, genau die Attribute betrachtet werden, die für den Anwender
 interessant und wichtig erscheinen. Dadruch sollte es den Betrachter möglich sein, die in der Einleitung aufgestellten Fragestellungen zu beantworten. Dabei ist auch wichitg zu
-erwähnen, dass die betrachtete Stichprobe von den Betrachter eingekrenzt werden kann. Dies kann z.B. nach Geschlecht oder Art der Zahlung erfolgen, was sich ebenfalls positiv
+erwähnen, dass die betrachtete Stichprobe von den Betrachter eingegrenzt werden kann. Dies kann z.B. nach Geschlecht oder Art der Zahlung erfolgen, was sich ebenfalls positiv
 auf die Beanwortung der Fragestellungen auswirken sollte.
 
 \noindent Die Visualisierungen zeigen den Betrachtern bestimmte Zusammenhänge zwischen den gewählten Attributen auf, was unter anderem Rückschlüsse auf Korrelation
@@ -155,11 +158,11 @@ ist es Zusammenhänge oder andere auffällige Muster zwischen numerischen Attrib
 abgebildet wird ist im Zuge dieses Projekts vom Anwender frei wählbar. Zudem werden nur die Datenpunkte dargestellt, die zuvor vom Anwender nach gewünschten nominalen
 Attributen herausgefiltert wurden. Die Filterung der Daten kann durch zwei unterschiedliche Filter angewendet werde. Daher ist es möglich den kompletten Datensatz z.B. nach
 dem Geschlecht oder der Produktgruppe zu filtern oder beide Kriterien gleichzeitig anwenden und somit nur die Dateneinträge bekommen, die dem ausgewählten Geschlecht und der
-ausgewählten Produktgruppe entsprechen. Dies ermöglicht eine erweiterte Einkrenzung, der zu betrachteten Stichprobe. \\
+ausgewählten Produktgruppe entsprechen. Dies ermöglicht eine erweiterte Eingrenzung, der zu betrachteten Stichprobe. \\
 \begin{figure} [H]
 	\begin{center}
-		\includegraphics[width=15cm]{IMG/Filterung}
-		\caption{Filterungsbuttons der DAten}
+		\includegraphics[width=16cm]{IMG/Filterung}
+		\caption{Filterungsbuttons der Daten}
 		\label{fig:Filterung}
 	\end{center}
 \end{figure}
@@ -173,7 +176,7 @@ identifizieren, da die Entfernung von Punktelinien oder Punktewolken sehr gut er
 werden.\\
 \begin{figure} [H]
 	\begin{center}
-		\includegraphics[width=15cm]{IMG/Scatterplot}
+		\includegraphics[width=13cm]{IMG/Scatterplot}
 		\caption{Visualisierung Eins - Scatterplot}
 		\label{fig:Scatterplot}
 	\end{center}
@@ -195,7 +198,7 @@ Die einzige Alternative, die in Erwägung gezogen werden kann, ist der Quantil-Q
 miteinander verglichen, allerdings beschränkt sich hier der Vergleich auf die Verteilungen der beiden Variablen. Aus diesem Grund ist diese Visualisierungstechnik nicht wirklich
 für die Anwendung im Rahmen dieses Projekts geeignet, da die Verteilungen der Variablen für die Beantwortung der Problemstellungen keine Rolle spielen.
 
-\subsubsection{Visualisierung 2: Parallele Koordinaten}
+\subsubsection{Visualisierung 2: Parallele Koordinaten}\label{Visualisierung2}
 Die zweite gewählte Visualisierungstechnik sind die Parallelen Koordinaten. Hierbei werden die Attribute einer Datenreihe durch einen Linienzug entlang vertikaler zueinander
 paralleler Achsen dargestellt. \cite[594]{Lehmann2010} Dadurch wird die Problematik der Scatterplots, nur zwei Dimensionen anstatt multivariater Daten darstellen zu können,
 behoben.\cite[1]{Wegman1990} Auf den verschiedenen Achsen können nun alle numerischen Attribute skaliert und nebeneinander angeordnet werden. Der Anwender hat zusätzlich die
@@ -211,14 +214,14 @@ Möglichkeit die verschiedenen Achsen miteinander zu tauschen, um andere mehrdim
 auch die Zusammenhänge mehrerer Variablen gleichzeitig betrachten zu können. So kann es nicht nur interessant sein, die Beziehung der Variablen Bruttoeinkommen und Gesamtpreis
 zu betrachten, sondern noch zusätzlich das Rating des Kaufes miteinzubeziehen.\\
 Die Expressivität ist bei den parallelen Koordinaten ein bisschen niedriger einzuordnen als bei
-dem Scatterplot, da für einen Laien Parallele Koordinaten auf den ersten Blick schwieriger zu verstehen sind. Des Weiteren können Darstellungen in dieser Form schnell unübersichtlich
+dem Scatterplot, da für einen Beginner Parallele Koordinaten auf den ersten Blick schwieriger zu verstehen sind. Des Weiteren können Darstellungen in dieser Form schnell unübersichtlich
 werden, da Linien verschiedener Datenreihen sich überschneiden können und somit unklar ist, welche Linie wohin führt. Aus diesem Grund wurden, wie im Abschnitt
 \ref{Visualisierung1} bereits beschrieben, die zwei Filterungsstufen eingeführt, um die zu betrachtende Stichprobe zu verkleinern und dadruch so übersichtlich wie
 möglich zu halten. \\
 Die Effektivität dieser Visualisierungstechnik ist dagegen umso besser, da durch einen übersichtlichen Parallele Koordinaten-Plot viel mehr Informationen zum
-Anwender transferiert werden können als es z.B. bei einem Scatterplot der Fall ist. Dieser kann, wie zu Beginn dieses Abschnitts, sehr schnell die Zusammenhänge von mehreren
-Variablen begutachten und anschließend seine Analysen vollziehen. Einzig allein die Kombinationsmöglichkeiten bezüglich der Anordnung der Achsen kann ein Problem darstellen.
-Denn es ist zu beachten, dass bei k Variablen k! Achsenreihenfolgen möglich sind.\cite[594]{Lehmann2010}
+Anwender transferiert werden können als es z.B. bei einem Scatterplot der Fall ist. Dieser kann, wie zu Beginn dieses Abschnitts beschrieben, sehr schnell die Zusammenhänge von
+mehreren Variablen begutachten und anschließend seine Analysen vollziehen. Einzig allein die Kombinationsmöglichkeiten bezüglich der Anordnung der Achsen kann ein Problem
+darstellen. Denn es ist zu beachten, dass bei k Variablen k! Achsenreihenfolgen möglich sind.\cite[594]{Lehmann2010}
 
 \begin{figure} [H]
 	\begin{center}
@@ -240,8 +243,7 @@ Die dritte gewählte Visualisierungstechnik ist die Pixelorientierte Darstellung
 farbigen Pixel werden anschließend durch die sogenannte Recursive Pattern Technik in eine strukturierte Anordnung gebracht, sodass dem Anwender das Lesen und Verstehen dieser
 Daten einfacher gelingt. \cite[5]{Kriegel1996Visua-5711} Hierbei ist es unteranderem möglich die Pixel von links nach rechts, Zeile für Zeile anzuordnen oder auch von oben nach
 unten, Spalte für Spalte.\cite[2]{485140} Im Zuge dieses Projekts wurde die Variante von links nach rechts genommen, da dies der Lesegewohnheit entspricht. \\
-
-\noindent Diese Technik erfüllt die letzte Anforderung im Abschnitt \ref{Anforderung}. Sie stellt sicher, dass Ausreißer in den Daten sofort erkennbar sind. Dies wird durch
+Diese Technik erfüllt die letzte Anforderung im Abschnitt \ref{Anforderung}. Sie stellt sicher, dass Ausreißer in den Daten sofort erkennbar sind. Dies wird durch
 eine deutliche farbliche Hervorhebung gewährleistet. Für den Anwender ist zudem eine Legende über der Visualisierung eingefügt, die ihm dabei helfen die verwendeten Farben im
 Kontext des Datensatzes richtig einschätzen zu können. In diesem Projekt wurde deshalb eine Farbskala genommen, die verhältnismäßig kleine Werte kälteren Farben zuordnet und höhere
 Werte wärmeren Farben zuordnet.\\

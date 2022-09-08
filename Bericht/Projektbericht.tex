@@ -307,6 +307,59 @@ festgelegt werden kann. Dieses Features ermöglicht die verschiedenen Variablen 
 Bei den Parallelen Koordinaten gibt es ebenfalls zwei Dropdown-Menüs, die für den Tausch zweier Achsen verantwortlich sind. Da von einer Achse immer nur die Zusammenhänge zu
 ihren beiden benachtbaren Achsen angezeigt werden können, ist es daher wichtig die Reihenfolge der Achsen ändern zu können.
 
+\section{Implementierung}
+\subsection{Gesamtaufbau}
+Das Projekt wurde grundsätzlich in fünf verschiedenen Modulen entwickelt. Darunter zählen Main.elm, Data.elm, Vis1.elm, Vis2.elm und Vis3.elm. Ergänzend zu diesen fünf Modulen
+gibt es drei Hilfsmodule, die für die Datenvorverarbeitung oder für das Funktionieren bestimmter Funktionen notwendig sind. Hierunter zählen preparation.py, ein kleines
+Python-Programm zur Umwandlung der Datum-Spalte in ein anderes Format. RecursivePattern.elm mit dem Zusatzmodul Helper.elm zählen ebenfalls zu den Hilfsmodulen, wobei diese beiden
+Module von Alexander Kampf geschrieben wurden und lokal im Projektordner gespeichert werden mussten, da sie noch nicht in der offiziellen Elm-Bibliothek veröffentlicht wurden.
+
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=7cm]{IMG/Modulgliederung}
+		\caption{Gliedrung des Elm-Programms}
+		\label{fig:Modulgliederung}
+	\end{center}
+\end{figure}
+
+\noindent In Main.elm wurde standardmäßig die klassische Elm-Architektur bestehend aus Model, View und Update implementiert. Das Model enthält alle Parameter, die für die Auswahl der
+Visualisierungen, der Achsen und der Attribute wichtig sind. Damit die Auswahl zwischen den gewählten Parametern auch klappt wurden viele verschiedene Msg definiert, welche dann
+in der Update-Funktion aufgegriffen wurden und das Model mit den gewählten Parametern überschrieben haben. In der View-Funktion wurden alle sichtbaren Bestandteile, wie z.B.
+Buttons, eingefügt sowie die fertigen Funktionen aus den anderen Modulen mit ihren Parametern aufgerufen. Zudem wurde hier der verwendete Datensatz mittels einer HTTP-Anfrage
+eingeladen und in der init-Funktion neben all den anderen Parametern initialisiert. Diese eben beschriebenen Funktionalitäten machen das Modul Main.elm zum zentralen
+Bestandteil des Programms.\\
+In Data.elm wird alles behandelt was mit der Strukturierung und Verarbeitung der benötigten Daten zu tun hat.\\ Und in den drei Visualisierungs-Modulen
+wird der Quellcode zur Darstellung der verschiedenen Visualisierungen implementiert. Die Implementierung der Visualisierungen wird später noch genauer beschrieben.\\
+Zuvor müssen noch die für dieses Projekt erstellten Elm-Datenstrukturen behandelt werden. Im Zuge dieses Projekts wurde die Datenstruktur Sale erstellt. Diese besteht zum Teilen
+aus Strings und Floats, jedoch auch aus Custom Types, die ebenfalls definiert werden mussten. Diese Custom Types wurden nur bei nominalen, endlichen Attributen des Datensatzes
+eingeführt.
+
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=5cm]{IMG/SaleDatenstruktur}
+		\includegraphics[width=5cm]{IMG/ProductLine}
+		\caption{Sale Datenstruktur und Bsp. Custom Type}
+		\label{fig:Sale}
+	\end{center}
+\end{figure}
+
+\noindent Die Daten aus der eingeladenen csv-Datei wurden mittels Decodern in genau diese Datenstrukturen geschrieben, sodass am Ende der komplette Datensatz eine List von Sale
+Objekten war. Innerhalb dieser Sale Objekte gab es dann bestimmt Attribute, wie z.B. der Kundenstatus, die als Custom Types fungierten und nur bestimmte Ausprägungen annehmen
+konnten.\\ \\
+\noindent In weiten Teilen sind bei der Implementierung keine Schwierigkeiten aufgetreten, einzig allein das überschreiben der csv-Daten in die jeweiligen Datenstrukturen
+gestaltete sich zu Beginn etwas schwerer, da in dem Datensatz eine große Anzahl an nominalen DAten vorhanden war. Diese mussten dann alle in extra erstellte Datenstrukturen
+geschrieben werden, was sich als sehr zeitaufwendig herausstellte. Zudem war die Verknüpfung der verschiedenen Msg mit der update-Funktion und der Buttons zu Beginn aufwendig.
+Da die Buttons nur Strings akzeptierten musste zusätzlich für jeden erstellten Custom Type Funktionen geschrieben werden, die die Variants in Strings umwandeln und diese Strings auch
+wieder zurück in die jeweiligen Variants der Custom Types.
+
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=4cm]{IMG/StrToCity}
+		\includegraphics[width=4cm]{IMG/cityToStr}
+		\caption{Beispiel für Umformungs-Funktion}
+		\label{fig:Umformung}
+	\end{center}
+\end{figure}
 
 
 \printbibliography

@@ -276,7 +276,38 @@ die beiden vorher genannten Dinge, müssten bei der Expressivität Abstriche gem
 Variation in der Anordnung der Pixel gefunden werden. So gibt es neben der Recursive Pattern Technik noch weitere Techniken, wie z.B. die Darstellung in Kreissegmenten oder
 raumfüllende Kurven. \cite[5]{yeqiang2017visualizing} Allerdings sind diese Variationen für die Darstellung von Zeitreihen, wie sie in diesem Datensatz vorliegen, nicht besonders
 gut geeignet, da z.b. die Darstellung in Kreissegmenten kein intuitives Lesen ermöglicht, weil Anfang und Ende der Zeitreihe nicht gut ersichtlich sind. Diese Alternativen würden
-zu einer Abnahme bezüglich der Effektivität und Expressivität führen und wurden deswegen verworfen.
+zu einer Abnahme bezüglich der Effektivität und Expressivität führen und wurden deswegen nicht benutzt.
+
+\subsection{Interaktion}
+Eine grundlegende Interaktionsmöglichkeit, die in diesem Projekt implementiert wurde, ist die Auswahl der Attribute durch Filter. Dieser Filter wurde in zwei Ebenen implementiert.
+Die erste Ebene des Filter grenzt die Stichprobe hinsichtlich des gewählten Attributs ein. Durch die zweite Ebene des Filters kann die bereits eingegrenzte Stichprobe nochmals
+nach einen ausgewählten Attribut gefiltert werden, sodass letztendlich eine Stichprobe, mit zwei festen Attributen daraus resultiert. Die erste Ebene des Filters wird direkt
+unter dem Dropdown-Menü der Visualisierungstechniken angezeigt. Sie besteht aus den verschiedenen Dropdown-Menüs der verschiedenen Attribute und deren Ausprägungen. Die zweite
+Ebene des Filters wird direkt unter der ersten Ebene angezeigt und enthält ebenfalls die Dropdown-Menüs der verschiedenen Attribute und deren Ausprägungen.\\
+
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=16cm]{IMG/Filterung}
+		\caption{Beide Ebenen der Filterung}
+		\label{fig:Filterung}
+	\end{center}
+\end{figure}
+
+\noindent Die gefilterte Stichprobe bleibt auch erhalten, wenn zwischen den Visualisierungstechniken gewechselt wird. So ist es möglich sich von einer gefilterten Stichprobe den
+Scatterplot und im Nachgang auch noch die Pixelorientierte Darstellungen anzeigen zu lassen ohne die Filter wieder einzustellen. Dies garantiert einen flüßigen Vergleich
+zwischen den Visualisierungstechniken.\\
+Sinn der Implementierung dieser Filter ist auf der einen Seite eine übersichtliche Darstellung durch die Visualisierungstechniken zu gewährleisten,
+andererseits können durch verschiedene Filterkombinationen viele neue Erkenntnisse bezüglich des Kunden- und Kaufverhalten erlangt werden. Mit einem einfachen Filter könnte
+der Datensatz z.B. nur nach Geschlecht gefiltert werden, woduch zwar auch Erkenntnisse gewonnen werden, aber nicht reichlich. Mit der zusätzlichen Filter Ebene, ist es nun
+möglich z.B. nach dem männlichen Geschlecht und Zahlungsart Kreditkarte zu filtern. \\
+Zusätzlich zu den beiden Filter-Ebenen hätten die drei Visualisierungstechniken noch durch eine Farbauswahl miteinander verknüpft werden können. Hier wurde sich aber dagegen
+entschieden, da noch weitere Entscheidungsparameter in Form von Buttons oder Dropdown-Menüs die Übersichtlichkeit des Programms verschlechtert hätten.\\
+\noindent Innerhalb der Visualisierungstechniken gibt es ebenfalls Interaktionsmöglichkeiten. So wurde bei dem Scatterplot zwei Dropsdown-Menüs eingefügt, wo die Wahl der Achsen
+festgelegt werden kann. Dieses Features ermöglicht die verschiedenen Variablen miteinander zu vergleichen und diese nach Zusammenhängen zu untersuchen.\\
+Bei den Parallelen Koordinaten gibt es ebenfalls zwei Dropdown-Menüs, die für den Tausch zweier Achsen verantwortlich sind. Da von einer Achse immer nur die Zusammenhänge zu
+ihren beiden benachtbaren Achsen angezeigt werden können, ist es daher wichtig die Reihenfolge der Achsen ändern zu können.
+
+
 
 \printbibliography
 

@@ -224,42 +224,6 @@ toPoint : String -> Float -> Float -> Point
 toPoint pointName x y =
     Point pointName x y
 
-
-
--- toPoint Funktion die wählbaren Parameter übergeben --
-{--salesPoint: Data.Sale -> String -> String-> Point
-salesPoint m attr1 attr2 =
-    toPoint m.invoice_ID attr1 attr2 --}
--- XYdatapoint Datenstrukutr erstellt mit anwenden der salespointFunktion auf den sales Parameter --
-
-
-filterSales : List Data.Sale -> (Data.Sale -> Point) -> XYdatapoint
-filterSales saleList salesFunc =
-    XYdatapoint "Unit price" "quantity" (List.map salesFunc saleList)
-
-
-
---main: Html msg
---main=
---Html.div[]
---[scatterplot]
-
-
-filterBranch : List Data.Sale -> Data.Branch -> List Data.Sale
-filterBranch data branch1 =
-    if branch1 == Data.A then
-        List.filter (\a -> a.branch == branch1) data
-
-    else if branch1 == Data.B then
-        List.filter (\a -> a.branch == branch1) data
-
-    else if branch1 == Data.C then
-        List.filter (\a -> a.branch == branch1) data
-
-    else
-        data
-
-
 filterSalesData : String -> String -> List Data.Sale -> List Data.Sale
 filterSalesData filterAttr filterAttr2 data =
     case filterAttr of

@@ -271,7 +271,17 @@ Wert entstanden ist.\\
 
 \noindent Die Expressivität profitiert von dieser besagten Liste, da wie vorher bereits beschrieben, das Verständnis dadurch verbessert wird und der Betrachter zu jedem Pixel den zugehörigen
 Wert einsehen kann. Auch die Legende unterstützt die Pixelorientierte Darstellung in ihrem Ausdruck und trägt zur Verständigung der Aussagen bei, die diese Technik liefert. Ohne
-die beiden vorher genannten Dinge, müssten bei der Expressivität Abstriche gemacht werden. \\
+die beiden vorher genannten Dinge, müssten bei der Expressivität Abstriche gemacht werden. Zudem wurden die Datenwerte in nur einer Zeile und nicht, wie für das Recursive
+Pattern üblich, in mehrere Zeilen implementiert. DIes hat den eifnachen GRund der Lesbarkeit, da durch die beiden Filterebene die Länge der Stichprobe beliebig oft geändert werden
+kann, sodass die Pixel immer wieder aus ihren festen Muster verrutschen würden und damit viel Aussagekraft dieser Visualisierung verloren gehen würde. \\
+
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=10cm]{IMG/RecursivePattern.png}
+		\caption{Visualisierung Drei - Pixelorientierte Darstellung}
+		\label{fig:Zeitreihe}
+	\end{center}
+\end{figure}
 
 \noindent Eine Alternative für die Pixelorientierte Darstellung gibt es nicht, da die Darstellung der Attribute auf Farbwerte nur eimalig vorhanden ist. Vielmehr könnte eine
 Variation in der Anordnung der Pixel gefunden werden. So gibt es neben der Recursive Pattern Technik noch weitere Techniken, wie z.B. die Darstellung in Kreissegmenten oder

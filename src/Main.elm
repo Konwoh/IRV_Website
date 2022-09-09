@@ -135,7 +135,7 @@ view model =
                       div [ style "width" "1200px", style "padding" "60px", style "background" "white", style "overflow-x" "auto", style "border-color" "black", style "border-width" "3px", style "border-style" "solid", style "border-top-style" "none" ] [
           let
             data : List Data.Sale
-            data = model.data
+            data = model.data 
             --filteredBranchData = filterBranch data model.branch 
             nominalAttrSelector =
                 if model.selector == Data.Branch then
@@ -263,7 +263,7 @@ view model =
                         List.Extra.zip uniqueDates sumList
                           |> List.map(\(a,b) -> (a, String.fromFloat b))
                           |> List.map(\(a,b) -> (a, String.toFloat b)) 
-                        
+                         
                in
                   div[][ div[style "font-size" "20px"] [Html.text " Ausgewählte Dimension1: ", strong [] [Html.text (selectorToStr model.selector)]]
                        , div[style "font-size" "20px"] [Html.text " Ausgewähltes Attribut1: ", strong [] [Html.text (nominalAttrSelector)]]

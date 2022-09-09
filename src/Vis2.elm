@@ -3,16 +3,13 @@ import Data exposing (Attributes(..))
 import Data exposing (Sale)
 import Axis
 import Color
-import Html exposing (Html, text)
-import Scale exposing (ContinuousScale)
-import Statistics
+import Scale
 import List.Extra
-import TypedSvg exposing (circle, g, rect, style, svg, text_, ellipse, line)
-import TypedSvg.Attributes exposing (class, color, fill, fontFamily, fontSize, stroke, textAnchor, transform, viewBox, fontWeight)
-import TypedSvg.Attributes.InPx exposing (cx, cy, height, r, width, x, y, rx, ry, x1, x2, y1, y2, strokeWidth)
-import TypedSvg.Core exposing (Attribute, Svg)
-import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Paint(..), Transform(..), px, percent)
-import Tuple
+import TypedSvg exposing ( g, style, svg, text_)
+import TypedSvg.Attributes exposing (fill, fontFamily, fontSize, stroke, textAnchor, transform, viewBox)
+import TypedSvg.Attributes.InPx exposing ( x, y, strokeWidth)
+import TypedSvg.Core exposing ( Svg)
+import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Paint(..), Transform(..), px)
 import List
 import Shape
 import Path
@@ -33,13 +30,7 @@ parallelCoordinates w ar model saleList index1 index2=
     let
         h : Float 
         h = w / ar 
-        readModelList =
-                model.data
-                    |> List.concat
-                    |> List.map .value
-                    |> List.Extra.transpose
-        
-
+    
         unit_priceFloats = List.map .unit_price saleList
         quantityFloats = List.map .quantity saleList
         taxFloats = List.map .tax saleList

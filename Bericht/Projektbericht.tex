@@ -396,6 +396,33 @@ Visualisierung keine.
 
 
 \subsection{Implementierung Visualisierung 2}
+Bei der Implementierung der parallelen Koordinaten konnte, genau wie bei dem Scatterplot, ein Teil des Quellcodes aus der Übung übernommen werden. Im Unterschied zur ersten
+Visualisierung wurde hier nicht die XYdatapoint Datenstruktur verwendet, sondern die Datenstrukturen MultiDimPoint und MultiDimData verwendet. Erste besteht aus dem Namen als
+String und einer Liste von Floats, die die Werte auf den jeweiligen Achsen darstellen sollen. MultiDimData dagegen beinhaltet eine Liste von Strings, die als Achsenbeschriftungen
+dienen und als zweites eine Liste der MultiDimPoint Datenstruktur.
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=8cm]{IMG/MultiDimPoint.png}
+		\includegraphics[width=6cm]{IMG/MulitDimData.png}
+		\caption{MulitDimData und MultiDimPoint Datenstrukturen}
+		\label{fig:Datenstrukturen_ParCoord}
+	\end{center}
+\end{figure}
+
+\noindent Der eigentlichen parallelen Koordinaten werden in der Funktion \textit{parallelCoordinates} erstellt. Dazu werden zu Beginn Listen an Float Werten von jeden
+numerischen Attribut erstellet und in mehreren Variablen gespeichert. Diese Listen werden dann genutzt, um die Werte der verschiedenen Achsen richtig skalieren zu können.
+Anschließend wird dann über \textit{Shape.line} und \textit{Shape.linearCurve} die Punkte auf den verschiedenen Achsen miteinander verbunden, sodass erkennbar ist, welche Punkte
+zu einer Datenreihen gehören. \\
+
+\noindent Die Schwierigkeit hierbei war die Funktionalität des Achsentauschs zu implementieren. Dies wurde mithilfe von \textit{ListExtra.swapAt} gemacht. Diese Funktion sorgt dafür,
+dass zwei Elemente einer Liste durch ihre Indexe getauscht werden können. Da die Achsenreihenfolge in einer Liste festgelegt wurde, konnte dies dadurch vollzogen werden. Damit
+der Anwender entscheiden kann, welche Achse mit welcher anderen Achse getaucht wird, musste ein neuer Selector im Model implementiert werden. Dieser Selector in Form
+eines Custom Types hat Variants für die verschiedenen Achsen. Nun mussten die verschiedenen Variants nur noch ihren entsprechenden Index von der Liste zugeordnet werden.
+Dies geschah über die Funktion \textit{indexSelectorToInt}.
+
+\noindent Die zwei Filterungsebenen sind hier ebenfalls anwendbar. Da \textit{filteredSalesData} und \textit{filteredSalesData2} einmal zu Beginn des view definiert wurden,
+konnte diese Datenmenge auch in dieser Visualisierung wiederverwendet werden, was die Implementierung letztendlich vereinfachte.
+
 \subsection{Implementierung Visualisierung 3}
 \subsection{Implementierung der Interaktion}
 

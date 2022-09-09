@@ -388,15 +388,12 @@ Points wurde dann abschließend in eine \textit{XYdatapoint} Datenstruktur gesch
 		\label{fig:Point_XYdatapoint}
 	\end{center}
 \end{figure}
-\noindent Bei der Implementierung musste zusätzlich darauf geachtet werden, den Scatterplot so zu programmieren, dass die Interaktionsmöglichkeiten bestehen bleiben können.
-So genügt es nicht, wie in den Übungen, die Auswahl der Achsen statisch an einem Punkt des Programms zu definieren, sondern es musste aus dem Model abegerufen werden. Da das
-Model über Msg und die Interaktion mit den Buttons geändert werden kann, war somit die die Interaktivität gegeben. \\
-Die Erstellung der Funktion \textit{filterSalesData} gestaltete sich zu Beginn etwas schwierig, da zusätzlich noch die Funktion \textit{nominalAttrSelector} implementiert werden
-musste. Diese Funktion sorgt dafür, dass der Variant eines Custom Types, welcher gerade im Model steht, in einen String umgewandelt wird. Dies ist erforderlich, da in Elm es nur
-möglich ist Strings auf Gleichheit zu überprüfen. Diese Überprüfung der Gleichheit war für das Funktionieren der \textit{filterSalesData}-Funktion notwendig, da hier abhängig
-von dem mitgegebenen String, der Datensatz gefiltert wird. Zusätzlich wurde die \textit{filterSalesData}-Funktion nochmals verwendet, um die zweite Filterebene zu bekommen.
-Dafür wurden im Model extra ein Selector2 sowie die Funktion \textit{nominalAttrSelector2} definiert. Dies ermöglicht, wie mehrfach im Bericht schon beschrieben, eine weitere 
-Filterung der bereits gefilterten Daten.
+
+\noindent Bei der Implementierung musste darauf geachtet werden, den Scatterplot so zu programmieren, dass die Interaktionsmöglichkeiten bestehen bleiben können.
+So genügt es nicht, wie in den Übungen, die Auswahl der Achsen statisch an einem Punkt des Programms zu definieren, sondern es musste aus dem Model abgerufen werden. Da das
+Model über Msg und die Interaktion mit den Buttons geändert werden kann, war somit die Interaktivität gegeben. Schwierigkeiten gab es bei der Implementierung dieser 
+Visualisierung keine. 
+
 
 \subsection{Implementierung Visualisierung 2}
 \subsection{Implementierung Visualisierung 3}

@@ -92,8 +92,9 @@ weiterführende Forschungszwecke ökonomischer Natur einzusetzen.
 Wie oben bereits angedeutet, ist der in der Arbeit verwendete Datensatz eine Sammlung von Kunden- und Kaufdaten aus drei verschiedenen Zweigstellen eines Supermarkt
 Unternehmens in Myanmar. Die verschiedenen Zweigstellen befinden sich in den Städten Yangon, Naypyitaw und Mandalay. Mandalay und Naypyitaw haben knapp über 1 Million Einwohner,
 Yangon sogar über 5 Millionen Einwohner. Jede Zeile des Datensatzes besteht aus einer Computergenerierten Rechnungsnummer, zur eindeutigen Identifikation des Kaufes, sowie dem
-Produkt, dass gekauft wurde. Hinzu kommen Daten über den Kunden, wie Geschlecht, Kundenstatus, Einkommen des Kunden und Bewertung des Kaufes. Über das Produkt gibt es folgende
-Informationen: Verkaufspreis, Produktlinie, Kosten des Produkts für den Supermarkt, Anzahl gekaufter Produkte, Steuer, Preis inklusive Steuer und die prozentuale Gewinnspanne.
+Produkt, dass gekauft wurde. Hinzu kommen Daten über den Kunden, wie Geschlecht, Kundenstatus, Einkommen des Kunden und Bewertung des Kaufes sowie folgende Daten über das Produkt:
+Verkaufspreis, Produktlinie, Kosten des Produkts für den Supermarkt, Anzahl gekaufter Produkte, Gesamtausgaben(Verkaufspreis*Anzahl gekaufter Produkte), Steuer,
+Preis inklusive Steuer und die prozentuale Gewinnspanne.
 Dieser Umfang an Daten je getätigten Kauf stellt sicher, dass eine umfassende Analyse, bezüglich des Kaufverhaltens der Kunden sowie der Verkaufsperformance des Supermarkts,
 möglich ist. Alle in der Einleitung aufgestellten Fragen können somit beantwortet werden. Durch Daten auf Kunden- und Produktseite ist es zudem möglich die verschiedenen
 Zielgruppen, welche bereits definiert wurden, mit den geeigneten Informationen zu bedienen. Aus diesem Grund war es nicht nötig, den Datensatz mit zusätzlichen Daten zu erweitern.
@@ -244,9 +245,9 @@ farbigen Pixel werden anschließend durch die sogenannte Recursive Pattern Techn
 Daten einfacher gelingt. \cite[5]{Kriegel1996Visua-5711} Hierbei ist es unteranderem möglich die Pixel von links nach rechts, Zeile für Zeile anzuordnen oder auch von oben nach
 unten, Spalte für Spalte.\cite[2]{485140} Im Zuge dieses Projekts wurde die Variante von links nach rechts genommen, da dies der Lesegewohnheit entspricht. \\
 Diese Technik erfüllt die letzte Anforderung im Abschnitt \ref{Anforderung}. Sie stellt sicher, dass Ausreißer in den Daten sofort erkennbar sind. Dies wird durch
-eine deutliche farbliche Hervorhebung gewährleistet. Für den Anwender ist zudem eine Legende über der Visualisierung eingefügt, die ihm dabei helfen die verwendeten Farben im
+eine deutliche farbliche Hervorhebung gewährleistet. Für den Anwender ist zudem eine Legende über der Visualisierung eingefügt, die ihm dabei helfen, die verwendeten Farben im
 Kontext des Datensatzes richtig einschätzen zu können. In diesem Projekt wurde deshalb eine Farbskala genommen, die verhältnismäßig kleine Werte kälteren Farben zuordnet und höhere
-Werte wärmeren Farben zuordnet.\\
+Werte wärmeren Farben.\\
 \begin{figure} [H]
 	\begin{center}
 		\includegraphics[width=15cm]{IMG/LegendePixel.png}
@@ -262,7 +263,7 @@ Wert entstanden ist.\\
 
 \begin{figure} [H]
 	\begin{center}
-		\includegraphics[width=11cm]{IMG/Zeitreihe}
+		\includegraphics[width=10cm]{IMG/Zeitreihe}
 		\caption{Ausschnitt der Zeitreihe mit zugehörigen Werten}
 		\label{fig:Zeitreihe}
 	\end{center}
@@ -361,7 +362,7 @@ wieder zurück in die jeweiligen Variants der Custom Types.
 	\end{center}
 \end{figure}
 
-\subsection{Implementierung Visualisierung 1}
+\subsection{Implementierung Visualisierung 1}\label{Implementierung1}
 Bei der Implementierung der ersten Visualisierung konnte ein Großteil des erstellten Quellcodes aus der Übung verwendet werden. Da in der Übung allerdings keine Filter zum
 Einsatz kamen, musste bei dieser Implementierung zuvor die Funktion \textit{filterSalesData} geschrieben werden. Diese Funktion sorgt dafür, dass die Stichprobe, je nach
 Belieben des Anwenders, nach bis zu zwei Attributen gefiltert werden kann. Anschließend werden von der gefilterten Stichprobe, die x- und y-Werte der gewünschten numerischen

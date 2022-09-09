@@ -450,7 +450,34 @@ war sehr zeitaufwendig sowie kompliziert und stellte damit die größte Schwieri
 \end{figure}
 
 \subsection{Implementierung der Interaktion}
+Die Implementierung der Interaktion wurde zum Teil schon im Abschnitt \ref{Implementierung1} beschrieben. Hierfür wurden die Funktionen \textit{filterSalesData} und
+\textit{nominalAttrSelector} implementiert. Bei \textit{filterSalesData} wird durch den ersten Parameter geguckt, welches nominale Attribut ausgewählt wurde und durch den zweiten
+Parameter, welche Ausprägung des zuvor gewählten nominalen Attributs ausgewählt wurde.
 
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=14cm]{IMG/filterSalesData}
+		\caption{Auszug von Funktion \textit{filterSalesData}}
+		\label{fig:filterSalesData}
+	\end{center}
+\end{figure}
+
+\noindent Die Funktion \textit{nominalAttrSelector} stellt sicher, dass der zweite Parameter von \textit{filterSalesData} in einen String umgewandelt wird, da nur Strings miteinander
+auf Gleichheit überprüft werden können. Diese Funktion gibt es zudem noch in einer zweiten Variante für die zweite Filterebene.
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=12cm]{IMG/nominalAttrSelector}
+		\caption{Funktion \textit{nominalAttrSelector}}
+		\label{fig:filterSalesData}
+	\end{center}
+\end{figure}
+
+\noindent Für die zweite Filterebene wurde zudem ein Selector2 im Model implementiert. Um die beiden Filterebenen nun anzuwenden, wurde zuerst die Funktion \textit{filterSalesData} mit
+den gewählten Attributen über die Selector aufgerufen und in der Variable \textit{filteredSalesData} gespeichert. Diese Variable wurde dann wiederum nochmal in die Funktion
+\textit{filterSalesData} eingefügt, diesmal jedoch mit \textit{Selector2} und \textit{nominalAttrSelector2}. Dies ermöglichte eine weitere Filterung der Daten, die bereits
+einmal gefiltert waren.\\
+\noindent Die Schwierigkeit hierbei war die Funktionen \textit{filterSalesData} und \textit{nominalAttrSelector} zu implementieren, da es zunächst etwas kompliziert war die
+vielen Custom Types mit ihren Variants in Strings umzuwandeln und diese dann auf Gleichheit zu überprüfen. Allerdings wurde mit den genannten Funktionen alle Probleme behoben.
 \printbibliography
 
 

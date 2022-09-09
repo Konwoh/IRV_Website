@@ -424,6 +424,31 @@ Dies geschah über die Funktion \textit{indexSelectorToInt}.
 konnte diese Datenmenge auch in dieser Visualisierung wiederverwendet werden, was die Implementierung letztendlich vereinfachte.
 
 \subsection{Implementierung Visualisierung 3}
+Bei der Implementierung der Pixelorientierten Darstellung konnte ebenfalls auf dem Quellcode der Übungen aufgebaut werden. Allerdings wurde im Gegensatz zu der Übung hier nur
+ein Level des Recursive Pattern Algorithmus angewendet. Grund dafür sind die zwei Filterebenen, denn diese können die Stichprobe auf unterschiedliche Arten und Weisen eingrenzen,
+sodass immer unterschiedliche Längen der Stichprobe das Resultat sind. Aus diesem Grund ist es schwieriger die Datenwerte auf Pixel abzubilden, sodass es intuitiv von links nach
+rechts lesbar bleibt. Dies stellte auch gleichzeitig eine Schwierigkeit bei der Implementierung dar, da an dieser Stelle viel experimentiert und probiert wurde, jedoch kein
+zufriedenstellendes Ergebnis herauskam. Deswegen wurde sich letztendlich für die Darstellung in der Form entschieden, wie sie auch im finalen Programm vorzufinden ist.\\
+
+\noindent Eine weitere Schwierigkeit stellte die Addition aller Gesamtausgaben an ihren jeweiligen Tagen dar. Die Idee war die Werte der Spalte Gesamtausgaben die auf den gleichen Tag fallen
+zu addieren, um eine gute Übersicht zum Umsatz der Supermärlte an den jeweiligen Tagen zu geben. DAzu wurden zu erst alle Datumsangaben und alle Gesamtausgaben-Werte des Datensatzes
+in zwei unterschiedliche Listen gespeichert. Anschließend wurden diese beiden Listen zu einer Liste von Tuples (\textit{tupleDateList}) verbunden und dem Datum nach sortiert
+(\textit{(\textit{sortedTupleDateList})}). Nebenbei wurde noch eine Liste erstellt, wo jedes Datum nur einmal vorkommt und nicht, wie in der Tuple List, mehrmals
+(\textit{uniqueDates}). Von der Liste \textit{uniqueDates} wurden durch List.map die Datumsangaben genommen und mit List.Extra.elemIndices die Indexe der Datumsangaben von der
+Tuple Liste in einer neuen Liste \textit{indexList} gespeichert. Diese \textit{indexList} wurde dann schließlich dafür genutzt, um per List.Extra.getAt auf die Gesamtausgaben-Wert
+der Tuple Liste zuzugreifen und diese ebenfalls in getrennten Listen je nach Datum in einer großen Liste zu speichern. Zum Schluss wurden dann die verschiedenen Listen innerhalb
+der großen Liste durch List.sum addiert und das Resultat war am Ende eine Liste von Tuples, wo zu jedem Datum der dazugehörige kumulierte Gesamtausgaben-Wert stand
+(\textit{dateSumList}). Diese Liste wurde dann für die Funktion \textit{recrusivePatternPlot} verwendet um die Werte auf die Pixel zu zeichnen. Die eben beschriebene Implementierung
+war sehr zeitaufwendig sowie kompliziert und stellte damit die größte Schwierigkeit in dem gesamten Projekt dar.
+
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=17cm]{IMG/dateSumList}
+		\caption{Code für Implementierung der Datumsangaben mit kumulierten Gesamtausgaben}
+		\label{fig:Datum_Gesamtausgaben}
+	\end{center}
+\end{figure}
+
 \subsection{Implementierung der Interaktion}
 
 \printbibliography

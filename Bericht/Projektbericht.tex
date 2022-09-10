@@ -485,6 +485,26 @@ den gewählten Attributen über die Selector aufgerufen und in der Variable \tex
 einmal gefiltert waren.\\
 \noindent Die Schwierigkeit hierbei war die Funktionen \textit{filterSalesData} und \textit{nominalAttrSelector} zu implementieren, da es zunächst etwas kompliziert war die
 vielen Custom Types mit ihren Variants in Strings umzuwandeln und diese dann auf Gleichheit zu überprüfen. Allerdings wurde mit den genannten Funktionen alle Probleme behoben.
+
+\section{Anwendungsfälle}
+\subsection{Anwendung Visualisierung Eins: Scatterplot}
+Wie bereits bei der Vorstellung des Scatterplots erwähnt, ist diese Visualisierungstechnik besonders wertvoll, um Zusammenhänge zwischen Variablen feststellen zu können. So kann
+unteranderem festgestellt werden, inwiefern zwei numerische Attribute miteinander korrelieren und ob die Korrelation positiv oder negativ ist. Bei der Auswahl der Achsen auf
+Gesamtausgaben als y-Achse und Bruttoeinkommen als x-Achse ist eine solche Korrelation festzustellen.
+\begin{figure} [H]
+	\begin{center}
+		\includegraphics[width=15cm]{IMG/TotalPrice_GrossIncome.png}
+		\caption{Zusammenhang Gesamtausgaben und Bruttoeinkommen}
+		\label{fig:TotalPrice_Income}
+	\end{center}
+\end{figure}
+\noindent Bei Betrachtung dieser Grafik fällt sehr schnell die linear steigende Gerade auf. Dieser stetig steigende lineare Verlauf steht für eine sehr starke und positive
+Korrelation. Die Erklärung dafür ist, dass je höher das Bruttoeinkommen des Kunden ist, desto höher sind auch seine Ausgaben während eines Einkaufs im Supermarkt. Für die
+Zielgruppen, also die Unternehmensführungen oder die Marketing-Abteilung des Supermarkts, ist dieser Anwendungsfall von besonderer Bedeutung, da sie ihr Angebot nun aufbauend
+auf dieser Information anpassen können. Eine Möglichkeit wäre zum Beispiel, dass Produktangebot nach den Wünschen von Leuten mit einem hohen Bruttoeinkommen zu erweitern.
+Eine andere Möglichkeit wäre die Einführung von Rabatten oder Vergünstigungen, sodass Menschen mit einem niedrigeren Bruttoeinkommen auch mehr kaufen. \\
+\noindent Mit anderen Visualisierungstechniken wären diese Entdeckungen gar nicht oder nur sehr schwer rauszufinden gewesen. Bei der zuvor erwähnten Alternative für Scatterplots,
+dem QQ-Plot, der auf die Verteilungen beider Variablen vergleicht, wäre ein solcher Zusammenhang nicht zu erkennen gewesen.
 \printbibliography
 
 

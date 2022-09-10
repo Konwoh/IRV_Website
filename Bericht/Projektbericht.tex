@@ -21,6 +21,13 @@
 %\subtitle{Untertitel}% optional
 \author{Konstantin Wohllaub}% obligatorisch
 %\date{10.9.2022}
+\dedication{\normalsize\vfill\hrule\vspace{10pt}
+	Link zum GitLab-Repository:\\
+	\url{https://gitlab.informatik.uni-halle.de/amhvy/supermaket-sales}\\
+	\vspace{10pt}
+	Link zur öffentlich zugänglichen Webseite (GitHub Pages):\\
+	\url{--}}
+
 \maketitle% verwendet die zuvor gemachte Angaben zur Gestaltung eines Titels
 \newpage
 \tableofcontents
@@ -239,7 +246,7 @@ Datensatz zu erhalten, da die Visualisierung der Attribute auf den Icons, sich n
 genug Hintergrundwissen zur Verfügung gestellt werden, um diese Technik sinnvoll zu nutze. Der damit verbundene Aufwand ist allerdings weit größer im Vergleich zu den parallelen
 Koordinaten, weshalb sich letztendlich nicht für die Visualisierung durch Icons entschieden wurde.
 
-\subsubsection{Visualisierung Drei - Pixelorientierte Darstellung}
+\subsubsection{Visualisierung Drei - Pixelorientierte Darstellung}\label{Visualisierung3}
 Die dritte gewählte Visualisierungstechnik ist die Pixelorientierte Darstellung. Bei dieser Technik werden ausgewählte Attribute durch einen farbigen Pixel dargestellt. Diese
 farbigen Pixel werden anschließend durch die sogenannte Recursive Pattern Technik in eine strukturierte Anordnung gebracht, sodass dem Anwender das Lesen und Verstehen dieser
 Daten einfacher gelingt. \cite[5]{Kriegel1996Visua-5711} Hierbei ist es unteranderem möglich die Pixel von links nach rechts, Zeile für Zeile anzuordnen oder auch von oben nach
@@ -391,8 +398,8 @@ Points wurde dann abschließend in eine \textit{XYdatapoint} Datenstruktur gesch
 
 \noindent Bei der Implementierung musste darauf geachtet werden, den Scatterplot so zu programmieren, dass die Interaktionsmöglichkeiten bestehen bleiben können.
 So genügt es nicht, wie in den Übungen, die Auswahl der Achsen statisch an einem Punkt des Programms zu definieren, sondern es musste aus dem Model abgerufen werden. Da das
-Model über Msg und die Interaktion mit den Buttons geändert werden kann, war somit die Interaktivität gegeben. Schwierigkeiten gab es bei der Implementierung dieser 
-Visualisierung keine. 
+Model über Msg und die Interaktion mit den Buttons geändert werden kann, war somit die Interaktivität gegeben. Schwierigkeiten gab es bei der Implementierung dieser
+Visualisierung keine.
 
 
 \subsection{Implementierung Visualisierung 2}

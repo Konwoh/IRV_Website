@@ -13,7 +13,7 @@ import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Paint(..), Tran
 import List
 import Shape
 import Path
-import Vis1 exposing (wideExtent)
+import Vis1 
 indexA: Int
 indexA = 
     0

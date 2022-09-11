@@ -1,7 +1,6 @@
 module Vis3 exposing(..)
 
 import Html
-import Dict
 import Data exposing (CurrentRecordedData)
 import RecursivePattern exposing (..)
 import Helper
@@ -9,7 +8,7 @@ import Scale
 import Scale.Color
 import Time exposing (Month(..))
 import TypedSvg exposing (g, rect, svg)
-import TypedSvg.Attributes exposing (height, preserveAspectRatio, viewBox, width, x, strokeWidth, stroke)
+import TypedSvg.Attributes exposing (height, viewBox, width, x, strokeWidth, stroke)
 import TypedSvg.Core exposing (..)
 import Date exposing (..)
 import TypedSvg.Types exposing (Length(..), Paint(..), Length(..))

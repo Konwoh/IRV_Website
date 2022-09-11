@@ -8,23 +8,19 @@ import Csv.Decode as Decode
 import Vis1 exposing (..)
 import Vis2 exposing (..)
 import Vis3 exposing (..)
-import Data exposing(Sale, attributeFilter, attrToString, stringToAttr)
+import Data exposing(attributeFilter)
 import Html exposing (div)
 import Html.Events exposing (onInput)
 import Html.Attributes exposing (value, style)
-import Csv.Decode exposing (string)
 import Data exposing (selectorToStr)
 import List.Extra
-import List exposing (filter)
+import List
 import Date exposing (..)
 import Time exposing (Month(..), Weekday(..))
 import Dict exposing (..)
-import TypedSvg exposing (rect, svg)
 import TypedSvg.Types exposing (Length(..), Paint(..))
-import TypedSvg.Attributes exposing (x, strokeWidth, stroke)
-import Scale
-import Scale.Color
-import Color
+ 
+
 type LoadingState
   = Failure
   | Loading
@@ -137,6 +133,7 @@ view model =
             data : List Data.Sale
             data = model.data 
             --filteredBranchData = filterBranch data model.branch 
+            nominalAttrSelector: String
             nominalAttrSelector =
                 if model.selector == Data.Branch then
                     Data.branchToStr model.branch
@@ -151,6 +148,7 @@ view model =
                 else
                     Data.paymentToStr model.payment
 
+            nominalAttrSelector2: String
             nominalAttrSelector2 =
                 if model.selector2 == Data.Branch then
                     Data.branchToStr model.branch
